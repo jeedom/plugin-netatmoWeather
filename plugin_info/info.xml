@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<info>
+    <id>netatmoWeather</id>
+    <name>Netatmo</name>
+    <description>Plugin pour avoir les informations métérologiques des stations météo Netatmo</description>
+    <icon>fa fa-umbrella</icon>
+    <licence>AGPL</licence>
+    <author>Thomas MARTINEZ</author>
+    <installation>Aucune</installation>
+    <require>1.10</require>
+    <canBeAction>0</canBeAction>
+    <category>weather</category>
+</info>
+
