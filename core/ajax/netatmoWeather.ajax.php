@@ -44,6 +44,11 @@ try {
 		$return['cmd'] = $weather;
         
         ajax::success($return);
+    }else if (init('action') == 'saveDevicesList') {
+        $weather = netatmoWeather::saveDevicesList(init('id'));
+        $return['cmd'] = array();
+		$return['cmd'] = $weather;
+        ajax::success($return);
     }
 
     throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));

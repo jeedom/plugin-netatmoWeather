@@ -42,6 +42,204 @@ class netatmoWeather extends eqLogic {
 
     }
     
+	public function saveDevicesList($_options) {
+
+		$client = new NAApiClient(array("client_id" => $_POST['client_id'], "client_secret" => $_POST['client_secret'], "username" => $_POST['username'], "password" => $_POST['password'], "scope" => NAScopes::SCOPE_READ_STATION));
+        $helper = new NAApiHelper($client);
+		try {
+			$tokens = $client->getAccessToken();
+		} catch(NAClientException $ex) {
+ 			echo "An error happend while trying to retrieve your tokens\n";
+ 			exit(-1);
+		}
+		$user = $helper->api("getuser", "POST");
+        $devicelist = $helper->simplifyDeviceList();
+		$eqLogics = eqLogic::byType('netatmoWeather');
+		foreach ($eqLogics as $eqLogic) {
+			if($eqLogic->getConfiguration('station_id')==""){
+				$newEq=$eqLogic;
+			}
+		}
+		foreach ($devicelist['devices'] as $device) {
+			$eqLogics = eqLogic::byTypeAndSearhConfiguration('netatmoWeather',$device['_id']);
+			if(count($eqLogics) == 0){
+				log::add('netatmoWeather', 'info', 'Station non trouvée, création', 'config');
+				if($newEq){
+					$eqLogic = $newEq;
+				}else{
+				$eqLogic = new eqLogic();
+				}
+	            $eqLogic->setEqType_name('netatmoWeather');
+	            $eqLogic->setIsEnable(1);
+	            $eqLogic->setName($device['station_name']);
+	            $eqLogic->setConfiguration('client_id',$_POST['client_id']);
+				$eqLogic->setConfiguration('client_secret',$_POST['client_secret']);
+				$eqLogic->setConfiguration('username',$_POST['username']);
+	            $eqLogic->setConfiguration('password',$_POST['password']);
+	            $eqLogic->setConfiguration('station_id',$device['_id']);
+				$eqLogic->setConfiguration('type','Station');
+				$eqLogic->setCategory('heating', 1);
+	            $eqLogic->setIsVisible(1);
+	            $eqLogic->save();
+	            $eqLogic = self::byId($eqLogic->getId());
+	            $include_device = $eqLogic->getId();
+				
+				$weatherCmd = new weatherCmd();
+		        $weatherCmd->setName(__('Température', __FILE__));
+		        $weatherCmd->setEqLogic_id($include_device);
+		        $weatherCmd->setConfiguration('data', 'temp');
+		        $weatherCmd->setUnite('°C');
+		        $weatherCmd->setType('info');
+		        $weatherCmd->setSubType('numeric');
+				$weatherCmd->setIsHistorized(1);
+		        $weatherCmd->save();
+		
+		        $weatherCmd = new weatherCmd();
+		        $weatherCmd->setName(__('Humidité', __FILE__));
+		        $weatherCmd->setEqLogic_id($include_device);
+		        $weatherCmd->setConfiguration('data', 'humidity');
+		        $weatherCmd->setUnite('%');
+		        $weatherCmd->setType('info');
+		        $weatherCmd->setSubType('numeric');
+				$weatherCmd->setIsHistorized(1);
+		        $weatherCmd->save();
+		        
+		        $weatherCmd = new weatherCmd();
+		        $weatherCmd->setName(__('Pression', __FILE__));
+		        $weatherCmd->setEqLogic_id($include_device);
+		        $weatherCmd->setConfiguration('data', 'pressure');
+				$weatherCmd->setUnite('Pa');
+		        $weatherCmd->setType('info');
+		        $weatherCmd->setSubType('numeric');
+				$weatherCmd->setIsHistorized(1);
+		        $weatherCmd->save();
+		
+		        $weatherCmd = new weatherCmd();
+		        $weatherCmd->setName(__('CO2', __FILE__));
+		        $weatherCmd->setEqLogic_id($include_device);
+		        $weatherCmd->setConfiguration('data', 'CO2');
+				$weatherCmd->setUnite('ppm');
+		        $weatherCmd->setType('info');
+		        $weatherCmd->setSubType('numeric');
+				$weatherCmd->setIsHistorized(1);
+		        $weatherCmd->save();        
+		
+		        $weatherCmd = new weatherCmd();
+		        $weatherCmd->setName(__('Noise', __FILE__));
+		        $weatherCmd->setEqLogic_id($include_device);
+		        $weatherCmd->setConfiguration('data', 'noise');
+				$weatherCmd->setUnite('db');
+		        $weatherCmd->setType('info');
+		        $weatherCmd->setSubType('numeric');
+				$weatherCmd->setIsHistorized(1);
+		        $weatherCmd->save();
+			}
+			
+			log::add('netatmoWeather', 'info', $device['_id'], 'config');
+			foreach ($device['modules'] as $module) {
+				if($module['type']=="NAModule1"){
+					$type='module_ext';
+				}elseif($module['type']=="NAModule4"){
+					$type='module_int';
+				}elseif($module['type']=="NAModule3"){
+					$type='module_rain';
+				}
+				$eqLogics = eqLogic::byTypeAndSearhConfiguration('netatmoWeather',$module['_id']);
+				if(count($eqLogics) == 0){
+					log::add('netatmoWeather', 'info', 'Module non trouvé, création', 'config');
+					$eqLogic = new eqLogic();
+					$eqLogic->setEqType_name('netatmoWeather');
+		            $eqLogic->setIsEnable(1);
+		            $eqLogic->setName($module['module_name']);
+		            $eqLogic->setConfiguration('client_id',$_POST['client_id']);
+					$eqLogic->setConfiguration('client_secret',$_POST['client_secret']);
+					$eqLogic->setConfiguration('username',$_POST['username']);
+		            $eqLogic->setConfiguration('password',$_POST['password']);
+		            $eqLogic->setConfiguration('station_id',$module['_id']);
+					$eqLogic->setConfiguration('type',$type);
+					$eqLogic->setCategory('heating', 1);
+		            $eqLogic->setIsVisible(1);
+		            $eqLogic->save();
+		            $eqLogic = self::byId($eqLogic->getId());
+		            $include_device = $eqLogic->getId();
+					
+					if(in_array($type, array('module_ext','module_int'))){
+						$weatherCmd = new weatherCmd();
+				        $weatherCmd->setName(__('Température', __FILE__));
+				        $weatherCmd->setEqLogic_id($include_device);
+				        $weatherCmd->setConfiguration('data', 'temp');
+				        $weatherCmd->setUnite('°C');
+				        $weatherCmd->setType('info');
+				        $weatherCmd->setSubType('numeric');
+						$weatherCmd->setIsHistorized(1);
+				        $weatherCmd->save();
+					}
+					
+					if(in_array($type, array('module_ext','module_int'))){
+				        $weatherCmd = new weatherCmd();
+				        $weatherCmd->setName(__('Humidité', __FILE__));
+				        $weatherCmd->setEqLogic_id($include_device);
+				        $weatherCmd->setConfiguration('data', 'humidity');
+				        $weatherCmd->setUnite('%');
+				        $weatherCmd->setType('info');
+				        $weatherCmd->setSubType('numeric');
+						$weatherCmd->setIsHistorized(1);
+				        $weatherCmd->save();
+					}
+			        
+					if(in_array($type, array('module_int'))){
+				        $weatherCmd = new weatherCmd();
+				        $weatherCmd->setName(__('CO2', __FILE__));
+				        $weatherCmd->setEqLogic_id($include_device);
+				        $weatherCmd->setConfiguration('data', 'CO2');
+						$weatherCmd->setUnite('ppm');
+				        $weatherCmd->setType('info');
+				        $weatherCmd->setSubType('numeric');
+						$weatherCmd->setIsHistorized(1);
+				        $weatherCmd->save();        
+					}
+					
+					if(in_array($type, array('module_rain'))){
+			        	$weatherCmd = new weatherCmd();
+				        $weatherCmd->setName(__('Rain', __FILE__));
+				        $weatherCmd->setEqLogic_id($include_device);
+				        $weatherCmd->setConfiguration('data', 'rain');
+						$weatherCmd->setUnite('mm');
+				        $weatherCmd->setType('info');
+				        $weatherCmd->setSubType('numeric');
+						$weatherCmd->setIsHistorized(1);
+				        $weatherCmd->save();
+						
+						$weatherCmd = new weatherCmd();
+				        $weatherCmd->setName(__('Rain_24', __FILE__));
+				        $weatherCmd->setEqLogic_id($include_device);
+				        $weatherCmd->setConfiguration('data', 'sum_rain_24');
+						$weatherCmd->setUnite('mm');
+				        $weatherCmd->setType('info');
+				        $weatherCmd->setSubType('numeric');
+						$weatherCmd->setIsHistorized(0);
+				        $weatherCmd->save();
+						
+						$weatherCmd = new weatherCmd();
+				        $weatherCmd->setName(__('Rain_1', __FILE__));
+				        $weatherCmd->setEqLogic_id($include_device);
+				        $weatherCmd->setConfiguration('data', 'sum_rain_1');
+						$weatherCmd->setUnite('mm');
+				        $weatherCmd->setType('info');
+				        $weatherCmd->setSubType('numeric');
+						$weatherCmd->setIsHistorized(0);
+				        $weatherCmd->save();
+					}
+				}
+				log::add('netatmoWeather', 'info', $type, 'config');
+			}
+		}
+		
+		return $devicelist;
+
+    }
+	
+	
     public static function pull($_options) {
     	foreach (eqLogic::byType('netatmoWeather') as $weather) {
 			if (is_object($weather)) {
@@ -93,7 +291,7 @@ class netatmoWeather extends eqLogic {
 	}
 
     public function postInsert() {
-    	
+    	if(1==2){
         $weatherCmd = new weatherCmd();
         $weatherCmd->setName(__('Température', __FILE__));
         $weatherCmd->setEqLogic_id($this->id);
@@ -173,7 +371,7 @@ class netatmoWeather extends eqLogic {
         $weatherCmd->setSubType('numeric');
 		$weatherCmd->setIsHistorized(0);
         $weatherCmd->save();
-        
+        }    
     }
 
     public function toHtml($_version = 'dashboard') {

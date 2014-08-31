@@ -24,6 +24,10 @@ $(function() {
         searchNetatmoDevices($(this).attr('data-eqLogic_id'),$('#client_id').val(),$('#client_secret').val(),$('#username_netatmo').val(),$('#password_netatmo').val());
         return false;
     });
+    $("#createDevices").on('click', function(event) {
+        createNetatmoDevices($(this).attr('data-eqLogic_id'),$('#client_id').val(),$('#client_secret').val(),$('#username_netatmo').val(),$('#password_netatmo').val());
+        return false;
+    });
     $("#sel_station").on('change', function() {
         var optionSelected = $(this).find("option:selected").text();
         if(optionSelected!=''){
@@ -121,6 +125,34 @@ function searchNetatmoDevices(_netatmoWeatherEq_id,client_id,client_secret,usern
                 }
             }
            
+        }
+    });
+}
+
+function createNetatmoDevices(_netatmoWeatherEq_id,client_id,client_secret,username,password) {
+	$.ajax({// fonction permettant de faire de l'ajax
+        type: "POST", // methode de transmission des données au fichier php
+        url: "plugins/netatmoWeather/core/ajax/netatmoWeather.ajax.php", // url du fichier php
+        data: {
+            action: "saveDevicesList",
+            id: _netatmoWeatherEq_id,
+            client_id: client_id,
+            client_secret: client_secret,
+            username: username,
+            password: password
+        },
+        dataType: 'json',
+        error: function(request, status, error) {
+            handleAjaxError(request, status, error);
+        },
+        success: function(data) { // si l'appel a bien fonctionné
+            
+            if (data.state != 'ok') {
+            	$('#div_alert').showAlert({message:  data.result,level: 'danger'});
+                return;
+            }
+            modifyWithoutSave=false;
+             window.location.reload();
         }
     });
 }

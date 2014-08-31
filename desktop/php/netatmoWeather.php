@@ -9,7 +9,7 @@ sendVarToJS('eqType', 'netatmoWeather');
     <div class="col-md-2">
         <div class="bs-sidebar">
             <ul id="ul_eqLogic" class="nav nav-list bs-sidenav">
-                <a class="btn btn-default eqLogicAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter une station météo Netatmo}}</a>
+                <a class="btn btn-default eqLogicAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter une station}}</a>
                 <li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
                 <?php
                 foreach (eqLogic::byType('NetatmoWeather') as $eqLogic) {
@@ -78,12 +78,16 @@ sendVarToJS('eqType', 'netatmoWeather');
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">{{station}}</label>
                     <div class="col-md-3">
-                    	<input type="text" id="station_id" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="station_id" placeholder="ID Station"/>
+                        <a class="btn btn-default" id="createDevices">{{Créer les stations}}</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                    	<input type="hidden" id="station_id" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="station_id" placeholder="ID Station"/>
                     	<input type="hidden" id="type" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="type"/>
                     </div>
-                    <div class="col-md-3">
+                    <!--<div class="col-md-3">
                         <select id="sel_station" class="eqLogicAttr configuration form-control" disabled>
                             
                         </select>
@@ -91,7 +95,7 @@ sendVarToJS('eqType', 'netatmoWeather');
                     <div class="col-md-3">
                         <a class="btn btn-default" id="searchDevices">{{Charger les stations}}</a>
                     </div>
-                </div>
+                </div>-->
                 
             </fieldset> 
         </form>
