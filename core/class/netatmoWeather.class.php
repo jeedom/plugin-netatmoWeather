@@ -242,11 +242,10 @@ class netatmoWeather extends eqLogic {
 	
     public static function pull($_options) {
     	foreach (eqLogic::byType('netatmoWeather') as $weather) {
+			log::add('netatmoWeather', 'info', $weather->getName(), 'config');	
 			if (is_object($weather)) {
-            	$weather_xml = $weather->getWeatherFromNetatmo();
-            	foreach ($weather->getCmd() as $cmd) {
-                	history::historize();
-                    $cmd->event($cmd->execute());
+				foreach ($weather->getCmd() as $cmd) {
+                	$cmd->event($cmd->execute());
             	}
         	}			
 		}
@@ -389,6 +388,7 @@ class netatmoWeather extends eqLogic {
                 '#rain#' => '',
                 '#sum_rain_24#' => '',
             	'#sum_rain_1#' => '',
+            	'#collectDate#' => $this->getCollectDate(),
                 '#background_color#' => $this->getBackgroundColor(jeedom::versionAlias($_version)),
                 '#eqLink#' => $this->getLinkToConfiguration(),
             );
@@ -405,6 +405,7 @@ class netatmoWeather extends eqLogic {
             	'#pressure#' => $weather['Pressure'],
             	'#CO2#' => $weather['CO2'],
             	'#noise#' => $weather['Noise'],
+            	'#collectDate#' => $this->getCollectDate(),
             	'#background_color#' => $this->getBackgroundColor(jeedom::versionAlias($_version)),
             	'#eqLink#' => $this->getLinkToConfiguration(),
         	);
@@ -415,6 +416,7 @@ class netatmoWeather extends eqLogic {
             	'#temperature#' => $weather['Temperature'],
             	'#humidity#' => $weather['Humidity'],
             	'#CO2#' => $weather['CO2'],
+            	'#collectDate#' => $this->getCollectDate(),
             	'#background_color#' => $this->getBackgroundColor(jeedom::versionAlias($_version)),
             	'#eqLink#' => $this->getLinkToConfiguration(),
         	);
@@ -425,6 +427,7 @@ class netatmoWeather extends eqLogic {
             	'#rain#' => round($weather['Rain'],2),
             	'#sum_rain_24#' => round($weather['sum_rain_24'],2),
             	'#sum_rain_1#' => round($weather['sum_rain_1'],2),
+            	'#collectDate#' => $this->getCollectDate(),
             	'#background_color#' => $this->getBackgroundColor(jeedom::versionAlias($_version)),
             	'#eqLink#' => $this->getLinkToConfiguration(),
         	);
@@ -434,6 +437,7 @@ class netatmoWeather extends eqLogic {
         		'#name#' => $this->getName(),
             	'#temperature#' => $weather['Temperature'],
             	'#humidity#' => $weather['Humidity'],
+            	'#collectDate#' => $this->getCollectDate(),
             	'#background_color#' => $this->getBackgroundColor(jeedom::versionAlias($_version)),
             	'#eqLink#' => $this->getLinkToConfiguration(),
         	);
@@ -449,9 +453,11 @@ class netatmoWeather extends eqLogic {
     /*     * **********************Getteur Setteur*************************** */
 
     public function getWeatherFromNetatmo() {
+    	//log::add('netatmoWeather', 'info', 'récuperation 1', 'config');
         if ($this->getConfiguration('client_id') == '') {
             return false;
         }
+		  //  	log::add('netatmoWeather', 'info', 'récuperation 2', 'config');
 		if ($this->getConfiguration('type') == 'Station') {
 			foreach ($this->getCmd() as $cmd) {
 				if($cmd->getConfiguration('data') == 'rain' || $cmd->getConfiguration('data') == 'sum_rain_24' || $cmd->getConfiguration('data') == 'sum_rain_1' ){
@@ -477,14 +483,19 @@ class netatmoWeather extends eqLogic {
 				}
         	}
     	}
+		//log::add('netatmoWeather', 'info', 'récuperation 3', 'config');
 		$cache = cache::byKey('netatmoWeather::' . $this->getConfiguration('station_id'));
 		if ($cache->getValue() === '' || $cache->getValue() == 'false') {
+			$this->setCollectDate(date('Y-m-d H:i:s'));
+			    	//log::add('netatmoWeather', 'info', 'récuperation 4', 'config');
 			try{
+				//log::add('netatmoWeather', 'info', 'récuperation 5', 'config');
             	$client = new NAApiClient(array("client_id" => $this->getConfiguration('client_id'), "client_secret" => $this->getConfiguration('client_secret'), "username" => $this->getConfiguration('username'), "password" => $this->getConfiguration('password'), "scope" => NAScopes::SCOPE_READ_STATION));
         		$helper = new NAApiHelper($client);
 				try {
 					$tokens = $client->getAccessToken();
 				} catch(NAClientException $ex) {
+ 					log::add('netatmoWeather', 'error', 'error 1', 'config');
  					echo "An error happend while trying to retrieve your tokens\n";
  					exit(-1);
 				}
@@ -498,6 +509,7 @@ class netatmoWeather extends eqLogic {
 					
 			}
 		} catch (Exception $e) {
+				log::add('netatmoWeather', 'error', 'error 2', 'config');
                 return '';
             }
             if (strlen($module) < 5000) {
@@ -505,9 +517,18 @@ class netatmoWeather extends eqLogic {
             }
         } else {
             $module = $cache->getValue();
+			$this->setCollectDate($cache->getDatetime());
         }
 
         return json_decode($module, true);
+    }
+
+	public function getCollectDate() {
+        return $this->_collectDate;
+    }
+
+    public function setCollectDate($_collectDate) {
+        $this->_collectDate = $_collectDate;
     }
 
 }
