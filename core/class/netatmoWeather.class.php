@@ -381,13 +381,19 @@ class netatmoWeather extends eqLogic {
 		if (!is_array($weather)) {
             $replace = array(
                 '#temperature#' => '',
+                '#temp_id#' => '',
                 '#humidity#' => '',
+                '#humidity_id#' => '',
                 '#pressure#' => '',
+                '#pressure_id#' =>  '',
                 '#CO2#' => '',
+                '#CO2_id#' => '',
                 '#noise#' => '',
+                '#noise_id#' =>  '',
                 '#rain#' => '',
                 '#sum_rain_24#' => '',
             	'#sum_rain_1#' => '',
+            	'#id#' => $this->getId(),
             	'#collectDate#' => $this->getCollectDate(),
                 '#background_color#' => $this->getBackgroundColor(jeedom::versionAlias($_version)),
                 '#eqLink#' => $this->getLinkToConfiguration(),
@@ -396,15 +402,26 @@ class netatmoWeather extends eqLogic {
 
             return template_replace($replace, getTemplate('core', jeedom::versionAlias($_version), 'station', 'netatmoWeather'));
         }
+		$id=array();
+		foreach($this->getCmd() as $cmd){
+			$type_cmd=$cmd->getConfiguration('data');
+			$id[$type_cmd]=$cmd->getId();
+		}
 		if ($this->getConfiguration('type') == 'Station') {
         	$type='station';
 			$replace = array(
         		'#name#' => $this->getName(),
             	'#temperature#' => $weather['Temperature'],
+            	'#temp_id#' => $id['temp'],
             	'#humidity#' => $weather['Humidity'],
+            	'#humidity_id#' => $id['humidity'],
             	'#pressure#' => $weather['Pressure'],
+            	'#pressure_id#' => $id['pressure'],
             	'#CO2#' => $weather['CO2'],
+            	'#CO2_id#' => $id['CO2'],
             	'#noise#' => $weather['Noise'],
+            	'#noise_id#' => $id['noise'],
+            	'#id#' => $this->getId(),
             	'#collectDate#' => $this->getCollectDate(),
             	'#background_color#' => $this->getBackgroundColor(jeedom::versionAlias($_version)),
             	'#eqLink#' => $this->getLinkToConfiguration(),
@@ -414,8 +431,12 @@ class netatmoWeather extends eqLogic {
 			$replace = array(
         		'#name#' => $this->getName(),
             	'#temperature#' => $weather['Temperature'],
+            	'#temp_id#' => $id['temp'],
             	'#humidity#' => $weather['Humidity'],
+            	'#humidity_id#' => $id['humidity'],
             	'#CO2#' => $weather['CO2'],
+            	'#CO2_id#' => $id['CO2'],
+            	'#id#' => $this->getId(),
             	'#collectDate#' => $this->getCollectDate(),
             	'#background_color#' => $this->getBackgroundColor(jeedom::versionAlias($_version)),
             	'#eqLink#' => $this->getLinkToConfiguration(),
@@ -425,8 +446,10 @@ class netatmoWeather extends eqLogic {
 			$replace = array(
         		'#name#' => $this->getName(),
             	'#rain#' => round($weather['Rain'],2),
+            	'#rain_id#' => $id['rain'],
             	'#sum_rain_24#' => round($weather['sum_rain_24'],2),
             	'#sum_rain_1#' => round($weather['sum_rain_1'],2),
+            	'#id#' => $this->getId(),
             	'#collectDate#' => $this->getCollectDate(),
             	'#background_color#' => $this->getBackgroundColor(jeedom::versionAlias($_version)),
             	'#eqLink#' => $this->getLinkToConfiguration(),
@@ -436,7 +459,10 @@ class netatmoWeather extends eqLogic {
 			$replace = array(
         		'#name#' => $this->getName(),
             	'#temperature#' => $weather['Temperature'],
+            	'#temp_id#' => $id['temp'],
             	'#humidity#' => $weather['Humidity'],
+            	'#humidity_id#' => $id['humidity'],
+            	'#id#' => $this->getId(),
             	'#collectDate#' => $this->getCollectDate(),
             	'#background_color#' => $this->getBackgroundColor(jeedom::versionAlias($_version)),
             	'#eqLink#' => $this->getLinkToConfiguration(),

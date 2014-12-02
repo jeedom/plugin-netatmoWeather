@@ -101,7 +101,6 @@ sendVarToJS('eqType', 'netatmoWeather');
         </form>
 
         <legend>{{Météo Netatmo}}</legend>
-        <div id="div_netatmoWeather"></div>
         <table id="table_netatmoWeather" class="table table-bordered table-condensed">
             <thead>
                 <tr>

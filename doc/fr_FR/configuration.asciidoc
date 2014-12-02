@@ -1,0 +1,17 @@
+Pour intégrer votre station, vous devez posséder un client_id et un client_secret généré sur le site http://dev.netatmo.com.
+
+image::../images/netatmoWeather1.png[]
+
+Une fois, les codes Netatmo obtenus, vous devez vous rendre sur la page du plugin :
+
+. Cliquez sur ajouter une station puis donner un nom à votre station
+. Paramétrer votre station comme ceci :
+.. Choisir l'objet parent où l'on souhaite afficher la station
+.. Entrer les informations issues de Netatmo
+.. Cliquer sur "Créer les stations"
+image:../images/netatmoWeather2.png[]
+. Tous les modules associés à votre station sont automatiquement créés. Vous les trouverez dans la partie gauche.
+. Pour chaque module créé, vous pouvez redéfinir son objet parent afin de définir l'emplacement.
+
+image::../images/netatmoWeather_screenshot1.png[]
+image::../images/netatmoWeather_screenshot2.png[]
