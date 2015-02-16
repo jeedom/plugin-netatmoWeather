@@ -1,4 +1,4 @@
-== Météo
+== Netatmo
 
 === Description
 Plugin permettant de récupérer les informations des stations météo Netatmo.

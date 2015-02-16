@@ -1,0 +1,37 @@
+<div class="eqLogic-widget" style="width: 180px;height:270px;background-color: #background_color#;#style#" data-eqLogic_id="#id#" data-version="dashboard">
+    <center class="widget-name"><strong><a href="#eqLink#" style="font-size : 1.3em;"> #name#  </a></strong></center><br />
+    <div style="position:relative;">
+        <center>
+            <div style="position:absolute;width: 100%;z-index:1;"><img src="plugins/netatmoWeather/core/template/dashboard/files/NetAtmo_station.png" width="180px"></div>
+        </center>
+        <left>
+            <div style="position:absolute;width: 100%;z-index:2;font-family:stateFont;font-size:1.2em;top: 29px;left:85px">
+                    <span class="history cursor cmd tooltips cmd cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#temp_id#">#temperature# °C</span>
+            </div>
+            <div style="position:absolute;width: 100%;z-index:2;font-family:stateFont;font-size:1.2em;top: 67px;left:85px">
+                    <span class="history cursor cmd tooltips cmd cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#humidity_id#">#humidity# %</span>
+            </div>
+            <div style="position:absolute;width: 100%;z-index:2;font-family:stateFont;font-size:1.2em;top: 105px;left:85px">
+                    <span class="history cursor cmd tooltips cmd cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#pressure_id#">#pressure# mb</span>
+            </div>
+            <div style="position:absolute;width: 100%;z-index:2;font-family:stateFont;font-size:1.2em;top: 143px;left:85px">
+                    <span class="history cursor cmd tooltips cmd cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#CO2_id#">#CO2# ppm</span>
+            </div>
+            <div style="position:absolute;width: 100%;z-index:2;font-family:stateFont;font-size:1.2em;top: 181px;left:85px">
+                    <span class="history cursor cmd tooltips cmd cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#noise_id#">#noise# db</span>
+            </div>
+        </left>
+    </div>
+
+    <style>
+    @font-face {
+    font-family: stateFont;
+    src:url("plugins/netatmoWeather/core/template/dashboard/files/appleberry.eot?") format("eot"),
+        url("plugins/netatmoWeather/core/template/dashboard/files/appleberry.woff") format("woff"),
+        url("plugins/netatmoWeather/core/template/dashboard/files/appleberry.ttf") format("truetype"),
+        url("plugins/netatmoWeather/core/template/dashboard/files/appleberry.svg#appleberry") format("svg");
+    font-weight:normal;font-style:normal;
+    }
+  </style>
+</div>
+

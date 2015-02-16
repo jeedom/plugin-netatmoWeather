@@ -377,6 +377,10 @@ class netatmoWeather extends eqLogic {
         if ($this->getIsEnable() != 1) {
             return '';
         }
+		$alternativeDesign = 0;
+	    if (config::byKey('alternativeDesign', 'netatmoWeather', 0) == 1) {
+	        $alternativeDesign = 1;
+	    }
         $weather = $this->getWeatherFromNetatmo();
 		if (!is_array($weather)) {
             $replace = array(
@@ -400,7 +404,12 @@ class netatmoWeather extends eqLogic {
             );
 
 
-            return template_replace($replace, getTemplate('core', jeedom::versionAlias($_version), 'station', 'netatmoWeather'));
+            if($alternativeDesign==1){
+            	return template_replace($replace, getTemplate('core', jeedom::versionAlias($_version), 'station_alt', 'netatmoWeather'));
+            }else{
+            	return template_replace($replace, getTemplate('core', jeedom::versionAlias($_version), 'station', 'netatmoWeather'));	
+            }
+ 
         }
 		$id=array();
 		foreach($this->getCmd() as $cmd){
@@ -468,8 +477,25 @@ class netatmoWeather extends eqLogic {
             	'#eqLink#' => $this->getLinkToConfiguration(),
         	);
         }
-        
-        return template_replace($replace, getTemplate('core', jeedom::versionAlias($_version), $type, 'netatmoWeather'));
+		if (($_version == 'dview' || $_version == 'mview') && $this->getDisplay('doNotShowNameOnView') == 1) {
+            $replace['#name#'] = '';
+            $replace['#object_name#'] = (is_object($object)) ? $object->getName() : '';
+        }
+        if (($_version == 'mobile' || $_version == 'dashboard') && $this->getDisplay('doNotShowNameOnDashboard') == 1) {
+            $replace['#name#'] = '<br/>';
+            $replace['#object_name#'] = (is_object($object)) ? $object->getName() : '';
+        }
+		$parameters = $this->getDisplay('parameters');
+        if (is_array($parameters)) {
+            foreach ($parameters as $key => $value) {
+                $replace['#' . $key . '#'] = $value;
+            }
+        }
+        if($alternativeDesign==1){
+        	return template_replace($replace, getTemplate('core', jeedom::versionAlias($_version), $type.'_alt', 'netatmoWeather'));
+        }else{
+            return template_replace($replace, getTemplate('core', jeedom::versionAlias($_version), $type, 'netatmoWeather'));	
+        }
     }
 
     public function getShowOnChild() {
@@ -479,6 +505,10 @@ class netatmoWeather extends eqLogic {
     /*     * **********************Getteur Setteur*************************** */
 
     public function getWeatherFromNetatmo() {
+    	$enable_logging = 0;
+        if (config::byKey('enableLogging', 'netatmoWeather', 0) == 1) {
+            $enable_logging = 1;
+        }
     	//log::add('netatmoWeather', 'info', 'récuperation 1', 'config');
         if ($this->getConfiguration('client_id') == '') {
             return false;
@@ -535,8 +565,10 @@ class netatmoWeather extends eqLogic {
 					
 			}
 		} catch (Exception $e) {
-				log::add('netatmoWeather', 'error', 'error 2', 'config');
-                return '';
+				if($enable_logging == 1){
+					log::add('netatmoWeather', 'error', 'error 2', 'config');	
+				}
+				return '';
             }
             if (strlen($module) < 5000) {
                 cache::set('netatmoWeather::' . $this->getConfiguration('station_id'), $module, 120);
