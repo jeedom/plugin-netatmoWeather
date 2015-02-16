@@ -84,58 +84,58 @@ class netatmoWeather extends eqLogic {
 	            $eqLogic = self::byId($eqLogic->getId());
 	            $include_device = $eqLogic->getId();
 				
-				$weatherCmd = new weatherCmd();
-		        $weatherCmd->setName(__('Température', __FILE__));
-		        $weatherCmd->setEqLogic_id($include_device);
-		        $weatherCmd->setConfiguration('data', 'temp');
-		        $weatherCmd->setUnite('°C');
-		        $weatherCmd->setType('info');
-		        $weatherCmd->setSubType('numeric');
-				$weatherCmd->setIsHistorized(1);
-		        $weatherCmd->save();
+				$netatmoWeatherCmd = new netatmoWeatherCmd();
+		        $netatmoWeatherCmd->setName(__('Température', __FILE__));
+		        $netatmoWeatherCmd->setEqLogic_id($include_device);
+		        $netatmoWeatherCmd->setConfiguration('data', 'temp');
+		        $netatmoWeatherCmd->setUnite('°C');
+		        $netatmoWeatherCmd->setType('info');
+		        $netatmoWeatherCmd->setSubType('numeric');
+				$netatmoWeatherCmd->setIsHistorized(1);
+		        $netatmoWeatherCmd->save();
 		
-		        $weatherCmd = new weatherCmd();
-		        $weatherCmd->setName(__('Humidité', __FILE__));
-		        $weatherCmd->setEqLogic_id($include_device);
-		        $weatherCmd->setConfiguration('data', 'humidity');
-		        $weatherCmd->setUnite('%');
-		        $weatherCmd->setType('info');
-		        $weatherCmd->setSubType('numeric');
-				$weatherCmd->setIsHistorized(1);
-		        $weatherCmd->save();
+		        $netatmoWeatherCmd = new netatmoWeatherCmd();
+		        $netatmoWeatherCmd->setName(__('Humidité', __FILE__));
+		        $netatmoWeatherCmd->setEqLogic_id($include_device);
+		        $netatmoWeatherCmd->setConfiguration('data', 'humidity');
+		        $netatmoWeatherCmd->setUnite('%');
+		        $netatmoWeatherCmd->setType('info');
+		        $netatmoWeatherCmd->setSubType('numeric');
+				$netatmoWeatherCmd->setIsHistorized(1);
+		        $netatmoWeatherCmd->save();
 		        
-		        $weatherCmd = new weatherCmd();
-		        $weatherCmd->setName(__('Pression', __FILE__));
-		        $weatherCmd->setEqLogic_id($include_device);
-		        $weatherCmd->setConfiguration('data', 'pressure');
-				$weatherCmd->setUnite('Pa');
-		        $weatherCmd->setType('info');
-		        $weatherCmd->setSubType('numeric');
-				$weatherCmd->setIsHistorized(1);
-		        $weatherCmd->save();
+		        $netatmoWeatherCmd = new netatmoWeatherCmd();
+		        $netatmoWeatherCmd->setName(__('Pression', __FILE__));
+		        $netatmoWeatherCmd->setEqLogic_id($include_device);
+		        $netatmoWeatherCmd->setConfiguration('data', 'pressure');
+				$netatmoWeatherCmd->setUnite('Pa');
+		        $netatmoWeatherCmd->setType('info');
+		        $netatmoWeatherCmd->setSubType('numeric');
+				$netatmoWeatherCmd->setIsHistorized(1);
+		        $netatmoWeatherCmd->save();
 		
-		        $weatherCmd = new weatherCmd();
-		        $weatherCmd->setName(__('CO2', __FILE__));
-		        $weatherCmd->setEqLogic_id($include_device);
-		        $weatherCmd->setConfiguration('data', 'CO2');
-				$weatherCmd->setUnite('ppm');
-		        $weatherCmd->setType('info');
-		        $weatherCmd->setSubType('numeric');
-				$weatherCmd->setIsHistorized(1);
-		        $weatherCmd->save();        
+		        $netatmoWeatherCmd = new netatmoWeatherCmd();
+		        $netatmoWeatherCmd->setName(__('CO2', __FILE__));
+		        $netatmoWeatherCmd->setEqLogic_id($include_device);
+		        $netatmoWeatherCmd->setConfiguration('data', 'CO2');
+				$netatmoWeatherCmd->setUnite('ppm');
+		        $netatmoWeatherCmd->setType('info');
+		        $netatmoWeatherCmd->setSubType('numeric');
+				$netatmoWeatherCmd->setIsHistorized(1);
+		        $netatmoWeatherCmd->save();        
 		
-		        $weatherCmd = new weatherCmd();
-		        $weatherCmd->setName(__('Noise', __FILE__));
-		        $weatherCmd->setEqLogic_id($include_device);
-		        $weatherCmd->setConfiguration('data', 'noise');
-				$weatherCmd->setUnite('db');
-		        $weatherCmd->setType('info');
-		        $weatherCmd->setSubType('numeric');
-				$weatherCmd->setIsHistorized(1);
-		        $weatherCmd->save();
+		        $netatmoWeatherCmd = new netatmoWeatherCmd();
+		        $netatmoWeatherCmd->setName(__('Noise', __FILE__));
+		        $netatmoWeatherCmd->setEqLogic_id($include_device);
+		        $netatmoWeatherCmd->setConfiguration('data', 'noise');
+				$netatmoWeatherCmd->setUnite('db');
+		        $netatmoWeatherCmd->setType('info');
+		        $netatmoWeatherCmd->setSubType('numeric');
+				$netatmoWeatherCmd->setIsHistorized(1);
+		        $netatmoWeatherCmd->save();
 			}
 			
-			log::add('netatmoWeather', 'info', $device['_id'], 'config');
+			//log::add('netatmoWeather', 'info', $device['_id'], 'config');
 			foreach ($device['modules'] as $module) {
 				if($module['type']=="NAModule1"){
 					$type='module_ext';
@@ -164,74 +164,74 @@ class netatmoWeather extends eqLogic {
 		            $include_device = $eqLogic->getId();
 					
 					if(in_array($type, array('module_ext','module_int'))){
-						$weatherCmd = new weatherCmd();
-				        $weatherCmd->setName(__('Température', __FILE__));
-				        $weatherCmd->setEqLogic_id($include_device);
-				        $weatherCmd->setConfiguration('data', 'temp');
-				        $weatherCmd->setUnite('°C');
-				        $weatherCmd->setType('info');
-				        $weatherCmd->setSubType('numeric');
-						$weatherCmd->setIsHistorized(1);
-				        $weatherCmd->save();
+						$netatmoWeatherCmd = new netatmoWeatherCmd();
+				        $netatmoWeatherCmd->setName(__('Température', __FILE__));
+				        $netatmoWeatherCmd->setEqLogic_id($include_device);
+				        $netatmoWeatherCmd->setConfiguration('data', 'temp');
+				        $netatmoWeatherCmd->setUnite('°C');
+				        $netatmoWeatherCmd->setType('info');
+				        $netatmoWeatherCmd->setSubType('numeric');
+						$netatmoWeatherCmd->setIsHistorized(1);
+				        $netatmoWeatherCmd->save();
 					}
 					
 					if(in_array($type, array('module_ext','module_int'))){
-				        $weatherCmd = new weatherCmd();
-				        $weatherCmd->setName(__('Humidité', __FILE__));
-				        $weatherCmd->setEqLogic_id($include_device);
-				        $weatherCmd->setConfiguration('data', 'humidity');
-				        $weatherCmd->setUnite('%');
-				        $weatherCmd->setType('info');
-				        $weatherCmd->setSubType('numeric');
-						$weatherCmd->setIsHistorized(1);
-				        $weatherCmd->save();
+				        $netatmoWeatherCmd = new netatmoWeatherCmd();
+				        $netatmoWeatherCmd->setName(__('Humidité', __FILE__));
+				        $netatmoWeatherCmd->setEqLogic_id($include_device);
+				        $netatmoWeatherCmd->setConfiguration('data', 'humidity');
+				        $netatmoWeatherCmd->setUnite('%');
+				        $netatmoWeatherCmd->setType('info');
+				        $netatmoWeatherCmd->setSubType('numeric');
+						$netatmoWeatherCmd->setIsHistorized(1);
+				        $netatmoWeatherCmd->save();
 					}
 			        
 					if(in_array($type, array('module_int'))){
-				        $weatherCmd = new weatherCmd();
-				        $weatherCmd->setName(__('CO2', __FILE__));
-				        $weatherCmd->setEqLogic_id($include_device);
-				        $weatherCmd->setConfiguration('data', 'CO2');
-						$weatherCmd->setUnite('ppm');
-				        $weatherCmd->setType('info');
-				        $weatherCmd->setSubType('numeric');
-						$weatherCmd->setIsHistorized(1);
-				        $weatherCmd->save();        
+				        $netatmoWeatherCmd = new netatmoWeatherCmd();
+				        $netatmoWeatherCmd->setName(__('CO2', __FILE__));
+				        $netatmoWeatherCmd->setEqLogic_id($include_device);
+				        $netatmoWeatherCmd->setConfiguration('data', 'CO2');
+						$netatmoWeatherCmd->setUnite('ppm');
+				        $netatmoWeatherCmd->setType('info');
+				        $netatmoWeatherCmd->setSubType('numeric');
+						$netatmoWeatherCmd->setIsHistorized(1);
+				        $netatmoWeatherCmd->save();        
 					}
 					
 					if(in_array($type, array('module_rain'))){
-			        	$weatherCmd = new weatherCmd();
-				        $weatherCmd->setName(__('Rain', __FILE__));
-				        $weatherCmd->setEqLogic_id($include_device);
-				        $weatherCmd->setConfiguration('data', 'rain');
-						$weatherCmd->setUnite('mm');
-				        $weatherCmd->setType('info');
-				        $weatherCmd->setSubType('numeric');
-						$weatherCmd->setIsHistorized(1);
-				        $weatherCmd->save();
+			        	$netatmoWeatherCmd = new netatmoWeatherCmd();
+				        $netatmoWeatherCmd->setName(__('Rain', __FILE__));
+				        $netatmoWeatherCmd->setEqLogic_id($include_device);
+				        $netatmoWeatherCmd->setConfiguration('data', 'rain');
+						$netatmoWeatherCmd->setUnite('mm');
+				        $netatmoWeatherCmd->setType('info');
+				        $netatmoWeatherCmd->setSubType('numeric');
+						$netatmoWeatherCmd->setIsHistorized(1);
+				        $netatmoWeatherCmd->save();
 						
-						$weatherCmd = new weatherCmd();
-				        $weatherCmd->setName(__('Rain_24', __FILE__));
-				        $weatherCmd->setEqLogic_id($include_device);
-				        $weatherCmd->setConfiguration('data', 'sum_rain_24');
-						$weatherCmd->setUnite('mm');
-				        $weatherCmd->setType('info');
-				        $weatherCmd->setSubType('numeric');
-						$weatherCmd->setIsHistorized(0);
-				        $weatherCmd->save();
+						$netatmoWeatherCmd = new netatmoWeatherCmd();
+				        $netatmoWeatherCmd->setName(__('Rain_24', __FILE__));
+				        $netatmoWeatherCmd->setEqLogic_id($include_device);
+				        $netatmoWeatherCmd->setConfiguration('data', 'sum_rain_24');
+						$netatmoWeatherCmd->setUnite('mm');
+				        $netatmoWeatherCmd->setType('info');
+				        $netatmoWeatherCmd->setSubType('numeric');
+						$netatmoWeatherCmd->setIsHistorized(0);
+				        $netatmoWeatherCmd->save();
 						
-						$weatherCmd = new weatherCmd();
-				        $weatherCmd->setName(__('Rain_1', __FILE__));
-				        $weatherCmd->setEqLogic_id($include_device);
-				        $weatherCmd->setConfiguration('data', 'sum_rain_1');
-						$weatherCmd->setUnite('mm');
-				        $weatherCmd->setType('info');
-				        $weatherCmd->setSubType('numeric');
-						$weatherCmd->setIsHistorized(0);
-				        $weatherCmd->save();
+						$netatmoWeatherCmd = new netatmoWeatherCmd();
+				        $netatmoWeatherCmd->setName(__('Rain_1', __FILE__));
+				        $netatmoWeatherCmd->setEqLogic_id($include_device);
+				        $netatmoWeatherCmd->setConfiguration('data', 'sum_rain_1');
+						$netatmoWeatherCmd->setUnite('mm');
+				        $netatmoWeatherCmd->setType('info');
+				        $netatmoWeatherCmd->setSubType('numeric');
+						$netatmoWeatherCmd->setIsHistorized(0);
+				        $netatmoWeatherCmd->save();
 					}
 				}
-				log::add('netatmoWeather', 'info', $type, 'config');
+				//log::add('netatmoWeather', 'info', $type, 'config');
 			}
 		}
 		
@@ -242,7 +242,7 @@ class netatmoWeather extends eqLogic {
 	
     public static function pull($_options) {
     	foreach (eqLogic::byType('netatmoWeather') as $weather) {
-			log::add('netatmoWeather', 'info', $weather->getName(), 'config');	
+			//log::add('netatmoWeather', 'info', $weather->getName(), 'config');	
 			if (is_object($weather)) {
 				foreach ($weather->getCmd() as $cmd) {
                 	$cmd->event($cmd->execute());
@@ -291,85 +291,85 @@ class netatmoWeather extends eqLogic {
 
     public function postInsert() {
     	if(1==2){
-        $weatherCmd = new weatherCmd();
-        $weatherCmd->setName(__('Température', __FILE__));
-        $weatherCmd->setEqLogic_id($this->id);
-        $weatherCmd->setConfiguration('data', 'temp');
-        $weatherCmd->setUnite('°C');
-        $weatherCmd->setType('info');
-        $weatherCmd->setSubType('numeric');
-		$weatherCmd->setIsHistorized(1);
-        $weatherCmd->save();
+        $netatmoWeatherCmd = new netatmoWeatherCmd();
+        $netatmoWeatherCmd->setName(__('Température', __FILE__));
+        $netatmoWeatherCmd->setEqLogic_id($this->id);
+        $netatmoWeatherCmd->setConfiguration('data', 'temp');
+        $netatmoWeatherCmd->setUnite('°C');
+        $netatmoWeatherCmd->setType('info');
+        $netatmoWeatherCmd->setSubType('numeric');
+		$netatmoWeatherCmd->setIsHistorized(1);
+        $netatmoWeatherCmd->save();
 
-        $weatherCmd = new weatherCmd();
-        $weatherCmd->setName(__('Humidité', __FILE__));
-        $weatherCmd->setEqLogic_id($this->id);
-        $weatherCmd->setConfiguration('data', 'humidity');
-        $weatherCmd->setUnite('%');
-        $weatherCmd->setType('info');
-        $weatherCmd->setSubType('numeric');
-		$weatherCmd->setIsHistorized(1);
-        $weatherCmd->save();
+        $netatmoWeatherCmd = new netatmoWeatherCmd();
+        $netatmoWeatherCmd->setName(__('Humidité', __FILE__));
+        $netatmoWeatherCmd->setEqLogic_id($this->id);
+        $netatmoWeatherCmd->setConfiguration('data', 'humidity');
+        $netatmoWeatherCmd->setUnite('%');
+        $netatmoWeatherCmd->setType('info');
+        $netatmoWeatherCmd->setSubType('numeric');
+		$netatmoWeatherCmd->setIsHistorized(1);
+        $netatmoWeatherCmd->save();
         
-        $weatherCmd = new weatherCmd();
-        $weatherCmd->setName(__('Pression', __FILE__));
-        $weatherCmd->setEqLogic_id($this->id);
-        $weatherCmd->setConfiguration('data', 'pressure');
-		$weatherCmd->setUnite('Pa');
-        $weatherCmd->setType('info');
-        $weatherCmd->setSubType('numeric');
-		$weatherCmd->setIsHistorized(1);
-        $weatherCmd->save();
+        $netatmoWeatherCmd = new netatmoWeatherCmd();
+        $netatmoWeatherCmd->setName(__('Pression', __FILE__));
+        $netatmoWeatherCmd->setEqLogic_id($this->id);
+        $netatmoWeatherCmd->setConfiguration('data', 'pressure');
+		$netatmoWeatherCmd->setUnite('Pa');
+        $netatmoWeatherCmd->setType('info');
+        $netatmoWeatherCmd->setSubType('numeric');
+		$netatmoWeatherCmd->setIsHistorized(1);
+        $netatmoWeatherCmd->save();
 
-        $weatherCmd = new weatherCmd();
-        $weatherCmd->setName(__('CO2', __FILE__));
-        $weatherCmd->setEqLogic_id($this->id);
-        $weatherCmd->setConfiguration('data', 'CO2');
-		$weatherCmd->setUnite('ppm');
-        $weatherCmd->setType('info');
-        $weatherCmd->setSubType('numeric');
-		$weatherCmd->setIsHistorized(1);
-        $weatherCmd->save();        
+        $netatmoWeatherCmd = new netatmoWeatherCmd();
+        $netatmoWeatherCmd->setName(__('CO2', __FILE__));
+        $netatmoWeatherCmd->setEqLogic_id($this->id);
+        $netatmoWeatherCmd->setConfiguration('data', 'CO2');
+		$netatmoWeatherCmd->setUnite('ppm');
+        $netatmoWeatherCmd->setType('info');
+        $netatmoWeatherCmd->setSubType('numeric');
+		$netatmoWeatherCmd->setIsHistorized(1);
+        $netatmoWeatherCmd->save();        
 
-        $weatherCmd = new weatherCmd();
-        $weatherCmd->setName(__('Noise', __FILE__));
-        $weatherCmd->setEqLogic_id($this->id);
-        $weatherCmd->setConfiguration('data', 'noise');
-		$weatherCmd->setUnite('db');
-        $weatherCmd->setType('info');
-        $weatherCmd->setSubType('numeric');
-		$weatherCmd->setIsHistorized(1);
-        $weatherCmd->save();
+        $netatmoWeatherCmd = new netatmoWeatherCmd();
+        $netatmoWeatherCmd->setName(__('Noise', __FILE__));
+        $netatmoWeatherCmd->setEqLogic_id($this->id);
+        $netatmoWeatherCmd->setConfiguration('data', 'noise');
+		$netatmoWeatherCmd->setUnite('db');
+        $netatmoWeatherCmd->setType('info');
+        $netatmoWeatherCmd->setSubType('numeric');
+		$netatmoWeatherCmd->setIsHistorized(1);
+        $netatmoWeatherCmd->save();
 		
-		$weatherCmd = new weatherCmd();
-        $weatherCmd->setName(__('Rain', __FILE__));
-        $weatherCmd->setEqLogic_id($this->id);
-        $weatherCmd->setConfiguration('data', 'rain');
-		$weatherCmd->setUnite('mm');
-        $weatherCmd->setType('info');
-        $weatherCmd->setSubType('numeric');
-		$weatherCmd->setIsHistorized(1);
-        $weatherCmd->save();
+		$netatmoWeatherCmd = new netatmoWeatherCmd();
+        $netatmoWeatherCmd->setName(__('Rain', __FILE__));
+        $netatmoWeatherCmd->setEqLogic_id($this->id);
+        $netatmoWeatherCmd->setConfiguration('data', 'rain');
+		$netatmoWeatherCmd->setUnite('mm');
+        $netatmoWeatherCmd->setType('info');
+        $netatmoWeatherCmd->setSubType('numeric');
+		$netatmoWeatherCmd->setIsHistorized(1);
+        $netatmoWeatherCmd->save();
 		
-		$weatherCmd = new weatherCmd();
-        $weatherCmd->setName(__('Rain_24', __FILE__));
-        $weatherCmd->setEqLogic_id($this->id);
-        $weatherCmd->setConfiguration('data', 'sum_rain_24');
-		$weatherCmd->setUnite('mm');
-        $weatherCmd->setType('info');
-        $weatherCmd->setSubType('numeric');
-		$weatherCmd->setIsHistorized(0);
-        $weatherCmd->save();
+		$netatmoWeatherCmd = new netatmoWeatherCmd();
+        $netatmoWeatherCmd->setName(__('Rain_24', __FILE__));
+        $netatmoWeatherCmd->setEqLogic_id($this->id);
+        $netatmoWeatherCmd->setConfiguration('data', 'sum_rain_24');
+		$netatmoWeatherCmd->setUnite('mm');
+        $netatmoWeatherCmd->setType('info');
+        $netatmoWeatherCmd->setSubType('numeric');
+		$netatmoWeatherCmd->setIsHistorized(0);
+        $netatmoWeatherCmd->save();
 		
-		$weatherCmd = new weatherCmd();
-        $weatherCmd->setName(__('Rain_1', __FILE__));
-        $weatherCmd->setEqLogic_id($this->id);
-        $weatherCmd->setConfiguration('data', 'sum_rain_1');
-		$weatherCmd->setUnite('mm');
-        $weatherCmd->setType('info');
-        $weatherCmd->setSubType('numeric');
-		$weatherCmd->setIsHistorized(0);
-        $weatherCmd->save();
+		$netatmoWeatherCmd = new netatmoWeatherCmd();
+        $netatmoWeatherCmd->setName(__('Rain_1', __FILE__));
+        $netatmoWeatherCmd->setEqLogic_id($this->id);
+        $netatmoWeatherCmd->setConfiguration('data', 'sum_rain_1');
+		$netatmoWeatherCmd->setUnite('mm');
+        $netatmoWeatherCmd->setType('info');
+        $netatmoWeatherCmd->setSubType('numeric');
+		$netatmoWeatherCmd->setIsHistorized(0);
+        $netatmoWeatherCmd->save();
         }    
     }
 
@@ -509,7 +509,9 @@ class netatmoWeather extends eqLogic {
         if (config::byKey('enableLogging', 'netatmoWeather', 0) == 1) {
             $enable_logging = 1;
         }
-    	//log::add('netatmoWeather', 'info', 'récuperation 1', 'config');
+		if($enable_logging==1){
+    		log::add('netatmoWeather', 'info', "starting the update for the module ".$this->getConfiguration('type')." - id =".$this->getConfiguration('station_id'), 'config');
+		}
         if ($this->getConfiguration('client_id') == '') {
             return false;
         }
@@ -543,7 +545,10 @@ class netatmoWeather extends eqLogic {
 		$cache = cache::byKey('netatmoWeather::' . $this->getConfiguration('station_id'));
 		if ($cache->getValue() === '' || $cache->getValue() == 'false') {
 			$this->setCollectDate(date('Y-m-d H:i:s'));
-			    	//log::add('netatmoWeather', 'info', 'récuperation 4', 'config');
+			
+			if($enable_logging==1){
+    			log::add('netatmoWeather', 'info', "cache too old for the module ".$this->getConfiguration('type')." - id =".$this->getConfiguration('station_id'), 'config');
+			}
 			try{
 				//log::add('netatmoWeather', 'info', 'récuperation 5', 'config');
             	$client = new NAApiClient(array("client_id" => $this->getConfiguration('client_id'), "client_secret" => $this->getConfiguration('client_secret'), "username" => $this->getConfiguration('username'), "password" => $this->getConfiguration('password'), "scope" => NAScopes::SCOPE_READ_STATION));
@@ -551,7 +556,7 @@ class netatmoWeather extends eqLogic {
 				try {
 					$tokens = $client->getAccessToken();
 				} catch(NAClientException $ex) {
- 					log::add('netatmoWeather', 'error', 'error 1', 'config');
+ 					log::add('netatmoWeather', 'error', 'error 1 : An error happend while trying to retrieve your tokens', 'config');
  					echo "An error happend while trying to retrieve your tokens\n";
  					exit(-1);
 				}
@@ -561,6 +566,9 @@ class netatmoWeather extends eqLogic {
 			foreach ($mesures[0]['modules'] as $mesure) {
                 if($this->getConfiguration('station_id')==$mesure["_id"]){
                 	$module=json_encode($mesure);
+					if($enable_logging==1){
+			    		log::add('netatmoWeather', 'info', "infos from netatmo for the module ".$this->getConfiguration('type')." - id =".$this->getConfiguration('station_id')." - values :".$module, 'config');
+					}
                 }
 					
 			}
@@ -572,10 +580,16 @@ class netatmoWeather extends eqLogic {
             }
             if (strlen($module) < 5000) {
                 cache::set('netatmoWeather::' . $this->getConfiguration('station_id'), $module, 120);
+				if($enable_logging==1){
+    				log::add('netatmoWeather', 'info', "saving data to the cache for the module ".$this->getConfiguration('type')." - id =".$this->getConfiguration('station_id')." - values :".$module, 'config');
+				}
             }
         } else {
             $module = $cache->getValue();
 			$this->setCollectDate($cache->getDatetime());
+			if($enable_logging==1){
+    			log::add('netatmoWeather', 'info', "getting value from the cache for the module ".$this->getConfiguration('type')." - id =".$this->getConfiguration('station_id')." - values :".$module, 'config');
+			}
         }
 
         return json_decode($module, true);
@@ -605,6 +619,10 @@ class netatmoWeatherCmd extends cmd {
     }
 
     public function execute($_options = array()) {
+    	$enable_logging = 0;
+        if (config::byKey('enableLogging', 'netatmoWeather', 0) == 1) {
+            $enable_logging = 1;
+        }
         $eqLogic_weather = $this->getEqLogic();
         $weather = $eqLogic_weather->getWeatherFromNetatmo();
 		if (!is_array($weather)) {
@@ -614,7 +632,9 @@ class netatmoWeatherCmd extends cmd {
                 return false;
             }
         }
-
+		if($enable_logging==1){
+			log::add('netatmoWeather', 'info', "execute cmd for the module ".$eqLogic_weather->getConfiguration('type')." - id =".$eqLogic_weather->getConfiguration('station_id')." - cmd data :".$this->getConfiguration('data')." with data : ".json_encode($weather), 'config');
+		}
             if ($this->getConfiguration('data') == 'temp') {
                 return $weather['Temperature'];
             }
