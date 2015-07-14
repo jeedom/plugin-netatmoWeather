@@ -17,43 +17,21 @@
  */
 
 try {
-    require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
-    include_file('core', 'authentification', 'php');
+	require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
+	include_file('core', 'authentification', 'php');
 
-    if (!isConnect('admin')) {
-        throw new Exception(__('401 - Accès non autorisé', __FILE__));
-    }
+	if (!isConnect('admin')) {
+		throw new Exception(__('401 - Accès non autorisé', __FILE__));
+	}
 
-    if (init('action') == 'getWeather') {
-        $weather = netatmoWeather::byId(init('id'));
-        if (!is_object($weather)) {
-            throw new Exception(__('netatmoWeather inconnu verifié l\'id', __FILE__));
-        }
-		$return = utils::o2a($weather);
-        $return['cmd'] = array();
-        $return['print'] = $weather->toHtml('dashboard');
-        foreach ($weather->getCmd() as $cmd) {
-            $cmd_info = utils::o2a($cmd);
-            $cmd_info['value'] = $cmd->execCmd(null, 0);
-            $return['cmd'][] = $cmd_info;
-        }
-        ajax::success($return);
-    }else if (init('action') == 'getDevicesList') {
-        $weather = netatmoWeather::getDevicesList(init('id'));
-        $return['cmd'] = array();
-		$return['cmd'] = $weather;
-        
-        ajax::success($return);
-    }else if (init('action') == 'saveDevicesList') {
-        $weather = netatmoWeather::saveDevicesList(init('id'));
-        $return['cmd'] = array();
-		$return['cmd'] = $weather;
-        ajax::success($return);
-    }
+	if (init('action') == 'syncWithNetatmo') {
+		netatmoWeather::syncWithNetatmo();
+		ajax::success();
+	}
 
-    throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
-    /*     * *********Catch exeption*************** */
+	throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
+	/*     * *********Catch exeption*************** */
 } catch (Exception $e) {
-    ajax::error(displayExeption($e), $e->getCode());
+	ajax::error(displayExeption($e), $e->getCode());
 }
 ?>

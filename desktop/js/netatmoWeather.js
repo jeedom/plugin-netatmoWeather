@@ -15,144 +15,39 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
-$(function() {
-    $(".li_eqLogic").on('click', function(event) {
-        printNetatmoWeather($(this).attr('data-eqLogic_id'));
-        return false;
-    });
-    $("#searchDevices").on('click', function(event) {
-        searchNetatmoDevices($(this).attr('data-eqLogic_id'),$('#client_id').val(),$('#client_secret').val(),$('#username_netatmo').val(),$('#password_netatmo').val());
-        return false;
-    });
-    $("#createDevices").on('click', function(event) {
-        createNetatmoDevices($(this).attr('data-eqLogic_id'),$('#client_id').val(),$('#client_secret').val(),$('#username_netatmo').val(),$('#password_netatmo').val());
-        return false;
-    });
-    $("#sel_station").on('change', function() {
-        var optionSelected = $(this).find("option:selected").text();
-        if(optionSelected!=''){
-        	var type=optionSelected.split(':');	
-        	$("#type").val(type[0]);
-        }
-        
-        
-        $("#station_id").val(this.value);       
-        return false;
-    });
+ $('.eqLogicAttr[data-l1key=configuration][data-l2key=type]').on('change',function(){
+    $('#img_netatmoModel').attr('src','plugins/netatmoWeather/core/img/'+$(this).value()+'.png');
 });
 
-function addCmdToTable() {
+
+function addCmdToTable(_cmd) {
+    if (!isset(_cmd)) {
+        var _cmd = {configuration: {}};
+    }
+    if (!isset(_cmd.configuration)) {
+        _cmd.configuration = {};
+    }
+    var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '">';
+    tr += '<td>';
+    tr += '<input class="cmdAttr form-control input-sm" data-l1key="id" style="display : none;">';
+    tr += '<input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 140px;" placeholder="{{Nom}}"></td>';
+    tr += '<input class="cmdAttr form-control type input-sm" data-l1key="type" value="info" disabled style="display : none;" />';
+    tr += '<span class="subType" subType="' + init(_cmd.subType) + '" style="display : none;"></span>';
+    tr += '<td>';
+    tr += '<span><input type="checkbox" class="cmdAttr bootstrapSwitch" data-size="mini" data-label-text="{{Historiser}}" data-l1key="isHistorized" /></span>';
+    tr += '</td>';
+    tr += '<td>';
+    if (is_numeric(_cmd.id)) {
+        tr += '<a class="btn btn-default btn-xs cmdAction expertModeVisible" data-action="configure"><i class="fa fa-cogs"></i></a> ';
+        tr += '<a class="btn btn-default btn-xs cmdAction" data-action="test"><i class="fa fa-rss"></i> {{Tester}}</a>';
+    }
+    tr += '<i class="fa fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i></td>';
+    tr += '</tr>';
+    $('#table_cmd tbody').append(tr);
+    $('#table_cmd tbody tr:last').setValues(_cmd, '.cmdAttr');
+    if (isset(_cmd.type)) {
+        $('#table_cmd tbody tr:last .cmdAttr[data-l1key=type]').value(init(_cmd.type));
+    }
+    jeedom.cmd.changeType($('#table_cmd tbody tr:last'), init(_cmd.subType));
 }
 
-function printNetatmoWeather(_netatmoWeatherEq_id) {
-    $.ajax({// fonction permettant de faire de l'ajax
-        type: "POST", // methode de transmission des données au fichier php
-        url: "plugins/netatmoWeather/core/ajax/netatmoWeather.ajax.php", // url du fichier php
-        data: {
-            action: "getWeather",
-            id: _netatmoWeatherEq_id
-        },
-        dataType: 'json',
-        error: function(request, status, error) {
-            handleAjaxError(request, status, error);
-        },
-        success: function(data) { // si l'appel a bien fonctionné
-        	if (data.state != 'ok') {
-                $('#div_alert').showAlert({message:  data.result,level: 'danger'});
-                return;
-            }
-            $('#table_netatmoWeather tbody').empty();
-            $('#div_netatmoWeather').empty();
-            $('#div_netatmoWeather').append(data.result.print);
-            for (var i in data.result.cmd) {
-            	if (data.result.cmd[i].value != null) {
-                	var tr = '<tr>';
-                	tr += '<td>' + data.result.cmd[i].name + '</td>';
-                	tr += '<td>' + data.result.cmd[i].value;
-                	if (data.result.cmd[i].unite != null) {
-                    	tr += ' ' + data.result.cmd[i].unite;
-                	}
-                	tr += '</td>';
-                	tr += '</tr>';
-                	$('#table_netatmoWeather tbody').append(tr);
-               }
-            }
-        }
-    });
-}
-
-function searchNetatmoDevices(_netatmoWeatherEq_id,client_id,client_secret,username,password) {
-	$.ajax({// fonction permettant de faire de l'ajax
-        type: "POST", // methode de transmission des données au fichier php
-        url: "plugins/netatmoWeather/core/ajax/netatmoWeather.ajax.php", // url du fichier php
-        data: {
-            action: "getDevicesList",
-            id: _netatmoWeatherEq_id,
-            client_id: client_id,
-            client_secret: client_secret,
-            username: username,
-            password: password
-        },
-        dataType: 'json',
-        error: function(request, status, error) {
-            handleAjaxError(request, status, error);
-        },
-        success: function(data) { // si l'appel a bien fonctionné
-            if (data.state != 'ok') {
-            	$('#div_alert').showAlert({message:  data.result,level: 'danger'});
-                return;
-            }
-           
-            for (var i in data.result.cmd.devices) {
-            	$('#sel_station').prop('disabled', false);
-            	$('#sel_station').empty();
-            	$('#sel_station').append(new Option('Station:'+data.result.cmd.devices[i].module_name,data.result.cmd.devices[i]._id));
-            	if($('#station_id').val() ==""){
-            		$('#station_id').val(data.result.cmd.devices[i]._id);
-            		$('#type').val('Station');
-            	} 
-            	var type='';          	
-                for (var j in data.result.cmd.devices[i].modules) {
-                	
-                	if(data.result.cmd.devices[i].modules[j].type=="NAModule1"){
-                		type='module_ext';
-                	}else if(data.result.cmd.devices[i].modules[j].type=="NAModule4"){
-                		type='module_int';
-                	}else if(data.result.cmd.devices[i].modules[j].type=="NAModule3"){
-                		type='module_rain';
-                	}
-                	$('#sel_station').append(new Option(type+':'+data.result.cmd.devices[i].modules[j].module_name,data.result.cmd.devices[i].modules[j]._id));
-                }
-            }
-           
-        }
-    });
-}
-
-function createNetatmoDevices(_netatmoWeatherEq_id,client_id,client_secret,username,password) {
-	$.ajax({// fonction permettant de faire de l'ajax
-        type: "POST", // methode de transmission des données au fichier php
-        url: "plugins/netatmoWeather/core/ajax/netatmoWeather.ajax.php", // url du fichier php
-        data: {
-            action: "saveDevicesList",
-            id: _netatmoWeatherEq_id,
-            client_id: client_id,
-            client_secret: client_secret,
-            username: username,
-            password: password
-        },
-        dataType: 'json',
-        error: function(request, status, error) {
-            handleAjaxError(request, status, error);
-        },
-        success: function(data) { // si l'appel a bien fonctionné
-            
-            if (data.state != 'ok') {
-            	$('#div_alert').showAlert({message:  data.result,level: 'danger'});
-                return;
-            }
-            modifyWithoutSave=false;
-             window.location.reload();
-        }
-    });
-}
