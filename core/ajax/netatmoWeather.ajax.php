@@ -26,6 +26,7 @@ try {
 
 	if (init('action') == 'syncWithNetatmo') {
 		netatmoWeather::syncWithNetatmo();
+		netatmoWeather::pull();
 		ajax::success();
 	}
 
