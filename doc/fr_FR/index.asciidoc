@@ -1,16 +1,9 @@
-== Netatmo
+= Netatmo
 
-=== Description
 Plugin permettant de récupérer les informations des stations météo Netatmo.
 
-'''
-=== Configuration
 include::configuration.asciidoc[]
 
-'''
-=== FAQ
+== FAQ
 include::faq.asciidoc[]
 
-'''
-=== Changelog
-include::changelog.asciidoc[]
