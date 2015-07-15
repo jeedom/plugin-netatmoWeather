@@ -103,6 +103,9 @@ class netatmoWeather extends eqLogic {
 			$mesures = $helper->getLastMeasures($client, $devicelist);
 			foreach ($mesures[0]['modules'] as $mesure) {
 				$eqLogic = eqLogic::byLogicalId($mesure["_id"], 'netatmoWeather');
+				if (is_object($eqLogic)) {
+					continue;
+				}
 				foreach ($mesure as $key => $value) {
 					$cmd = $eqLogic->getCmd(null, strtolower($key));
 					if (is_object($cmd)) {
