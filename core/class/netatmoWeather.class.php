@@ -34,11 +34,7 @@ class netatmoWeather extends eqLogic {
 			'scope' => NAScopes::SCOPE_READ_STATION,
 		));
 		$helper = new NAApiHelper($client);
-		try {
-			$tokens = $client->getAccessToken();
-		} catch (NAClientException $ex) {
-			return;
-		}
+		$tokens = $client->getAccessToken();
 		$user = $helper->api("getuser", "POST");
 		$devicelist = $helper->simplifyDeviceList();
 		foreach ($devicelist['devices'] as $device) {
@@ -88,9 +84,18 @@ class netatmoWeather extends eqLogic {
 				'scope' => NAScopes::SCOPE_READ_STATION,
 			));
 			$helper = new NAApiHelper($client);
+
 			try {
 				$tokens = $client->getAccessToken();
+				if (config::byKey('numberFailed', 'netatmoWeather', 0) > 0) {
+					config::save('numberFailed', 0, 'netatmoWeather');
+				}
 			} catch (NAClientException $ex) {
+				if (config::byKey('numberFailed', 'netatmoWeather', 0) > 3) {
+					log::add('netatmoWeather', 'error', __('Erreur sur synchro netatmo weather ', __FILE__) . '(' . config::byKey('numberFailed', 'netatmoWeather', 0) . ')' . $e->getMessage());
+				} else {
+					config::save('numberFailed', config::byKey('numberFailed', 'netatmoWeather', 0) + 1, 'netatmoWeather');
+				}
 				return;
 			}
 			$user = $helper->api("getuser", "POST");
