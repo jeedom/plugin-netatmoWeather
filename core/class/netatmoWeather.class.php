@@ -106,7 +106,11 @@ class netatmoWeather extends eqLogic {
 				foreach ($mesure as $key => $value) {
 					$cmd = $eqLogic->getCmd(null, strtolower($key));
 					if (is_object($cmd)) {
-						if (isset($mesure['time_utc'])) {
+						if ($key == 'max_temp') {
+							$cmd->setCollectDate(date('Y-m-d H:i:s', $mesure['date_max_temp']));
+						} else if ($key == 'min_temp') {
+							$cmd->setCollectDate(date('Y-m-d H:i:s', $mesure['date_min_temp']));
+						} else {
 							$cmd->setCollectDate(date('Y-m-d H:i:s', $mesure['time_utc']));
 						}
 						$cmd->event($value);
@@ -144,6 +148,27 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->save();
 		} else {
 			$netatmoWeatherCmd = $this->getCmd(null, 'pressure');
+			if (is_object($netatmoWeatherCmd)) {
+				$netatmoWeatherCmd->remove();
+			}
+		}
+
+		if (in_array($this->getConfiguration('type'), array('station'))) {
+			$netatmoWeatherCmd = $this->getCmd(null, 'absolutepressure');
+			if (!is_object($netatmoWeatherCmd)) {
+				$netatmoWeatherCmd = new netatmoWeatherCmd();
+				$netatmoWeatherCmd->setName(__('Pression Absolue', __FILE__));
+				$netatmoWeatherCmd->setIsHistorized(1);
+			}
+			$netatmoWeatherCmd->setEqLogic_id($this->getId());
+			$netatmoWeatherCmd->setLogicalId('absolutepressure');
+			$netatmoWeatherCmd->setUnite('Pa');
+			$netatmoWeatherCmd->setType('info');
+			$netatmoWeatherCmd->setSubType('numeric');
+			$netatmoWeatherCmd->setEventOnly(1);
+			$netatmoWeatherCmd->save();
+		} else {
+			$netatmoWeatherCmd = $this->getCmd(null, 'absolutepressure');
 			if (is_object($netatmoWeatherCmd)) {
 				$netatmoWeatherCmd->remove();
 			}
@@ -207,6 +232,48 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->save();
 		} else {
 			$netatmoWeatherCmd = $this->getCmd(null, 'temperature');
+			if (is_object($netatmoWeatherCmd)) {
+				$netatmoWeatherCmd->remove();
+			}
+		}
+
+		if (in_array($this->getConfiguration('type'), array('module_ext', 'module_int', 'station'))) {
+			$netatmoWeatherCmd = $this->getCmd(null, 'min_temp');
+			if (!is_object($netatmoWeatherCmd)) {
+				$netatmoWeatherCmd = new netatmoWeatherCmd();
+				$netatmoWeatherCmd->setName(__('Température min', __FILE__));
+				$netatmoWeatherCmd->setIsHistorized(1);
+			}
+			$netatmoWeatherCmd->setEqLogic_id($this->getId());
+			$netatmoWeatherCmd->setLogicalId('min_temp');
+			$netatmoWeatherCmd->setUnite('°C');
+			$netatmoWeatherCmd->setType('info');
+			$netatmoWeatherCmd->setSubType('numeric');
+			$netatmoWeatherCmd->setEventOnly(1);
+			$netatmoWeatherCmd->save();
+		} else {
+			$netatmoWeatherCmd = $this->getCmd(null, 'min_temp');
+			if (is_object($netatmoWeatherCmd)) {
+				$netatmoWeatherCmd->remove();
+			}
+		}
+
+		if (in_array($this->getConfiguration('type'), array('module_ext', 'module_int', 'station'))) {
+			$netatmoWeatherCmd = $this->getCmd(null, 'max_temp');
+			if (!is_object($netatmoWeatherCmd)) {
+				$netatmoWeatherCmd = new netatmoWeatherCmd();
+				$netatmoWeatherCmd->setName(__('Température max', __FILE__));
+				$netatmoWeatherCmd->setIsHistorized(1);
+			}
+			$netatmoWeatherCmd->setEqLogic_id($this->getId());
+			$netatmoWeatherCmd->setLogicalId('max_temp');
+			$netatmoWeatherCmd->setUnite('°C');
+			$netatmoWeatherCmd->setType('info');
+			$netatmoWeatherCmd->setSubType('numeric');
+			$netatmoWeatherCmd->setEventOnly(1);
+			$netatmoWeatherCmd->save();
+		} else {
+			$netatmoWeatherCmd = $this->getCmd(null, 'max_temp');
 			if (is_object($netatmoWeatherCmd)) {
 				$netatmoWeatherCmd->remove();
 			}
