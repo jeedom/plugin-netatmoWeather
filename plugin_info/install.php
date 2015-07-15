@@ -46,6 +46,9 @@ function netatmoWeather_update() {
 
 	foreach (netatmoWeather::byType('netatmoWeather') as $eqLogic) {
 		foreach ($eqLogic->getCmd() as $cmd) {
+			if ($cmd->getLogicalId() != '') {
+				continue;
+			}
 			$key = strtolower($cmd->getConfiguration('data'));
 			if ($key == 'temp') {
 				$key = 'temperature';
