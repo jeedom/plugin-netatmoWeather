@@ -53,6 +53,9 @@ function netatmoWeather_update() {
 			if ($key == 'temp') {
 				$key = 'temperature';
 			}
+			if ($key == '') {
+				continue;
+			}
 			$cmd->setLogicalId($key);
 			$cmd->save();
 		}
