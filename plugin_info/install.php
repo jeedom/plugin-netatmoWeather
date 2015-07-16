@@ -64,7 +64,7 @@ function netatmoWeather_update() {
 			$eqLogic->setLogicalId($eqLogic->getConfiguration('station_id'));
 		}
 		$eqLogic->save();
-		if (config::byKey('client_id') == '') {
+		if (config::byKey('client_id', 'netatmoWeather') == '') {
 			config::save('client_id', $eqLogic->getConfiguration('client_id'), 'netatmoWeather');
 			config::save('client_secret', $eqLogic->getConfiguration('client_secret'), 'netatmoWeather');
 			config::save('username', $eqLogic->getConfiguration('username'), 'netatmoWeather');
