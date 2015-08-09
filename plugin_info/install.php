@@ -18,31 +18,11 @@
 
 require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 
-function netatmoWeather_install() {
-	$cron = cron::byClassAndFunction('netatmoWeather', 'pull');
-	if (!is_object($cron)) {
-		$cron = new cron();
-		$cron->setClass('netatmoWeather');
-		$cron->setFunction('pull');
-		$cron->setEnable(1);
-		$cron->setDeamon(0);
-		$cron->setSchedule('*/10 * * * *');
-		$cron->save();
-	}
-}
-
 function netatmoWeather_update() {
 	$cron = cron::byClassAndFunction('netatmoWeather', 'pull');
-	if (!is_object($cron)) {
-		$cron = new cron();
-		$cron->setClass('netatmoWeather');
-		$cron->setFunction('pull');
-		$cron->setEnable(1);
+	if (is_object($cron)) {
+		$cron->remove();
 	}
-	$cron->setDeamon(0);
-	$cron->setSchedule('*/15 * * * *');
-	$cron->save();
-	$cron->stop();
 
 	foreach (netatmoWeather::byType('netatmoWeather') as $eqLogic) {
 		foreach ($eqLogic->getCmd() as $cmd) {
@@ -70,13 +50,6 @@ function netatmoWeather_update() {
 			config::save('username', $eqLogic->getConfiguration('username'), 'netatmoWeather');
 			config::save('password', $eqLogic->getConfiguration('password'), 'netatmoWeather');
 		}
-	}
-}
-
-function netatmoWeather_remove() {
-	$cron = cron::byClassAndFunction('netatmoWeather', 'pull');
-	if (is_object($cron)) {
-		$cron->remove();
 	}
 }
 ?>

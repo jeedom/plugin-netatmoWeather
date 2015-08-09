@@ -74,7 +74,7 @@ class netatmoWeather extends eqLogic {
 		}
 	}
 
-	public static function pull() {
+	public static function cron15() {
 		try {
 			$client = new NAApiClient(array(
 				'client_id' => config::byKey('client_id', 'netatmoWeather'),
