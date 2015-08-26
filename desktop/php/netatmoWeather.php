@@ -30,10 +30,7 @@ if (count($eqLogics) == 0) {
    <div class="eqLogicThumbnailContainer">
     <?php
 foreach ($eqLogics as $eqLogic) {
-		$opacity = '';
-		if ($eqLogic->getIsEnable() != 1) {
-			$opacity = 'opacity:0.3;';
-		}
+		$opacity = ($eqLogic->getIsEnable() != 1) ? 'opacity:0.5;' : '';
 		echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
 		echo "<center>";
 		if ($eqLogic->getConfiguration('type', '') != '') {
