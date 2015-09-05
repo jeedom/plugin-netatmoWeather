@@ -37,6 +37,7 @@ class netatmoWeather extends eqLogic {
 		$tokens = $client->getAccessToken();
 		$user = $helper->api("getuser", "POST");
 		$devicelist = $helper->simplifyDeviceList();
+		log::add('netatmoWeather', 'debug', print_r($devicelist, true));
 		foreach ($devicelist['devices'] as $device) {
 			$eqLogic = eqLogic::byLogicalId($device['_id'], 'netatmoWeather');
 			if (!is_object($eqLogic)) {
