@@ -371,6 +371,10 @@ class netatmoWeather extends eqLogic {
 		if (!$this->hasRight('r')) {
 			return '';
 		}
+		$version = jeedom::versionAlias($_version);
+		if ($this->getDisplay('hideOn' . $version) == 1) {
+			return '';
+		}
 		$mc = cache::byKey('netatmoWeatherWidget' . jeedom::versionAlias($_version) . $this->getId());
 		if ($mc->getValue() != '') {
 			return $mc->getValue();
