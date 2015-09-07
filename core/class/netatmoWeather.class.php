@@ -398,15 +398,11 @@ class netatmoWeather extends eqLogic {
 		foreach ($this->getCmd() as $cmd) {
 			if ($cmd->getType() == 'info') {
 				$replace['#' . $cmd->getLogicalId() . '_history#'] = '';
-				if ($cmd->getIsVisible() == 1 && $cmd->getDisplay('hideOn' . $_version) != 1) {
-					$replace['#' . $cmd->getLogicalId() . '#'] = $cmd->execCmd();
-					$replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
-					$replace['#' . $cmd->getLogicalId() . '_collectDate#'] = $cmd->getCollectDate();
-					if ($cmd->getIsHistorized() == 1) {
-						$replace['#' . $cmd->getLogicalId() . '_history#'] = 'history cursor';
-					}
-				} else {
-					$replace['#' . $cmd->getLogicalId() . '#'] = '';
+				$replace['#' . $cmd->getLogicalId() . '#'] = $cmd->execCmd();
+				$replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
+				$replace['#' . $cmd->getLogicalId() . '_collectDate#'] = $cmd->getCollectDate();
+				if ($cmd->getIsHistorized() == 1) {
+					$replace['#' . $cmd->getLogicalId() . '_history#'] = 'history cursor';
 				}
 			} else {
 				$replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();

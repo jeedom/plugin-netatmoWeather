@@ -37,7 +37,6 @@ function addCmdToTable(_cmd) {
     tr += '<td>';
     if(!isset(_cmd.type) || _cmd.type == 'info' ){
         tr += '<span><input type="checkbox" class="cmdAttr bootstrapSwitch" data-size="mini" data-label-text="{{Historiser}}" data-l1key="isHistorized" /></span>';
-        tr += ' <span><input type="checkbox" class="cmdAttr bootstrapSwitch" data-l1key="isVisible" data-size="mini" data-label-text="{{Afficher}}" checked/></span>';
     }
     tr += '</td>';
     tr += '<td>';

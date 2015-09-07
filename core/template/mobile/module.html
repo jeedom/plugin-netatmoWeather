@@ -8,11 +8,8 @@
 		<span class="humidity" data-cmd_id="#humidity_id#"><i class="fa fa-tint"></i> <strong style="font-size:1.1em;">#humidity#</strong> %</span><br/>
 	</center>
 	<script type="text/javascript">
-		if (isNaN(parseInt('#temperature#'))) {
-			$('.eqLogic[data-eqLogic_id=#id#] .temperature').remove();
-		}
-		if (isNaN(parseInt('#humidity#'))) {
-			$('.eqLogic[data-eqLogic_id=#id#] .humidity').remove();
-		}
+		$('.eqLogic[data-eqLogic_id=#id#] .refresh').on('click', function () {
+			jeedom.cmd.execute({id: '#refresh_id#'});
+		});
 	</script>
 </div>

@@ -12,14 +12,5 @@
 		$('.eqLogic[data-eqLogic_id=#id#] .refresh').on('click', function () {
 			jeedom.cmd.execute({id: '#refresh_id#'});
 		});
-		if (isNaN(parseInt('#rain#'))) {
-			$('.eqLogic[data-eqLogic_id=#id#] .rain').remove();
-		}
-		if (isNaN(parseInt('#sum_rain_1#'))) {
-			$('.eqLogic[data-eqLogic_id=#id#] .sum_rain_1').remove();
-		}
-		if (isNaN(parseInt('#sum_rain_24#'))) {
-			$('.eqLogic[data-eqLogic_id=#id#] .sum_rain_24').remove();
-		}
 	</script>
 </div>

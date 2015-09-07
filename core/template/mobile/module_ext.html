@@ -11,11 +11,5 @@
 		$('.eqLogic[data-eqLogic_id=#id#] .refresh').on('click', function () {
 			jeedom.cmd.execute({id: '#refresh_id#'});
 		});
-		if (isNaN(parseInt('#temperature#'))) {
-			$('.eqLogic[data-eqLogic_id=#id#] .temperature').remove();
-		}
-		if (isNaN(parseInt('#humidity#'))) {
-			$('.eqLogic[data-eqLogic_id=#id#] .humidity').remove();
-		}
 	</script>
 </div>
