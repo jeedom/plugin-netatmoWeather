@@ -85,7 +85,6 @@ class netatmoWeather extends eqLogic {
 				'scope' => NAScopes::SCOPE_READ_STATION,
 			));
 			$helper = new NAApiHelper($client);
-
 			try {
 				$tokens = $client->getAccessToken();
 				if (config::byKey('numberFailed', 'netatmoWeather', 0) > 0) {
@@ -126,6 +125,7 @@ class netatmoWeather extends eqLogic {
 				$mc->remove();
 				$eqLogic->toHtml('mobile');
 				$eqLogic->toHtml('dashboard');
+				print_r($eqLogic);
 				$eqLogic->refreshWidget();
 			}
 		} catch (Exception $e) {
@@ -362,6 +362,17 @@ class netatmoWeather extends eqLogic {
 				$netatmoWeatherCmd->remove();
 			}
 		}
+
+		$refresh = $this->getCmd(null, 'refresh');
+		if (!is_object($refresh)) {
+			$refresh = new netatmoWeatherCmd();
+			$refresh->setName(__('Rafraichir', __FILE__));
+		}
+		$refresh->setEqLogic_id($this->getId());
+		$refresh->setLogicalId('refresh');
+		$refresh->setType('action');
+		$refresh->setSubType('other');
+		$refresh->save();
 	}
 
 	public function toHtml($_version = 'dashboard') {
@@ -377,7 +388,7 @@ class netatmoWeather extends eqLogic {
 		}
 		$mc = cache::byKey('netatmoWeatherWidget' . jeedom::versionAlias($_version) . $this->getId());
 		if ($mc->getValue() != '') {
-			return $mc->getValue();
+			//return $mc->getValue();
 		}
 		$replace = array(
 			'#name#' => $this->getName(),
@@ -386,10 +397,21 @@ class netatmoWeather extends eqLogic {
 			'#eqLink#' => $this->getLinkToConfiguration(),
 		);
 		foreach ($this->getCmd() as $cmd) {
-			$replace['#' . $cmd->getLogicalId() . '#'] = $cmd->execCmd();
-			$replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
-			$replace['#' . $cmd->getLogicalId() . '_collectDate#'] = $cmd->getCollectDate();
-
+			if ($cmd->getType() == 'info') {
+				$replace['#' . $cmd->getLogicalId() . '_history#'] = '';
+				if ($cmd->getIsVisible() == 1 && $cmd->getDisplay('hideOn' . $_version) != 1) {
+					$replace['#' . $cmd->getLogicalId() . '#'] = $cmd->execCmd();
+					$replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
+					$replace['#' . $cmd->getLogicalId() . '_collectDate#'] = $cmd->getCollectDate();
+					if ($cmd->getIsHistorized() == 1) {
+						$replace['#' . $cmd->getLogicalId() . '_history#'] = 'history cursor';
+					}
+				} else {
+					$replace['#' . $cmd->getLogicalId() . '#'] = '';
+				}
+			} else {
+				$replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
+			}
 		}
 		if (($_version == 'dview' || $_version == 'mview') && $this->getDisplay('doNotShowNameOnView') == 1) {
 			$replace['#name#'] = '';
@@ -405,12 +427,8 @@ class netatmoWeather extends eqLogic {
 				$replace['#' . $key . '#'] = $value;
 			}
 		}
-		if (config::byKey('alternativeDesign', 'netatmoWeather', 0) == 1) {
-			$html = template_replace($replace, getTemplate('core', jeedom::versionAlias($_version), strtolower($this->getConfiguration('type')) . '_alt', 'netatmoWeather'));
-		} else {
-			$html = template_replace($replace, getTemplate('core', jeedom::versionAlias($_version), strtolower($this->getConfiguration('type')), 'netatmoWeather'));
-		}
-		cache::set('netatmoWeatherWidget' . jeedom::versionAlias($_version) . $this->getId(), $html, 0);
+		$html = template_replace($replace, getTemplate('core', $version, strtolower($this->getConfiguration('type')), 'netatmoWeather'));
+		cache::set('netatmoWeatherWidget' . $version . $this->getId(), $html, 0);
 		return $html;
 	}
 
@@ -428,7 +446,9 @@ class netatmoWeatherCmd extends cmd {
 	}
 
 	public function execute($_options = array()) {
-
+		if ($this->getLogicalId() == 'refresh') {
+			netatmoWeather::cron15();
+		}
 	}
 
 	/*     * **********************Getteur Setteur*************************** */
