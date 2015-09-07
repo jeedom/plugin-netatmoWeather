@@ -15,7 +15,7 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
- $('.eqLogicAttr[data-l1key=configuration][data-l2key=type]').on('change',function(){
+$('.eqLogicAttr[data-l1key=configuration][data-l2key=type]').on('change',function(){
     $('#img_netatmoModel').attr('src','plugins/netatmoWeather/core/img/'+$(this).value()+'.png');
 });
 
@@ -34,7 +34,10 @@ function addCmdToTable(_cmd) {
     tr += '<input class="cmdAttr form-control type input-sm" data-l1key="type" value="info" disabled style="display : none;" />';
     tr += '<span class="subType" subType="' + init(_cmd.subType) + '" style="display : none;"></span>';
     tr += '<td>';
-    tr += '<span><input type="checkbox" class="cmdAttr bootstrapSwitch" data-size="mini" data-label-text="{{Historiser}}" data-l1key="isHistorized" /></span>';
+    if(!isset(_cmd.type) || _cmd.type == 'info' ){
+        tr += '<span><input type="checkbox" class="cmdAttr bootstrapSwitch" data-size="mini" data-label-text="{{Historiser}}" data-l1key="isHistorized" /></span>';
+        tr += ' <span><input type="checkbox" class="cmdAttr bootstrapSwitch" data-l1key="isVisible" data-size="mini" data-label-text="{{Afficher}}" checked/></span>';
+    }
     tr += '</td>';
     tr += '<td>';
     if (is_numeric(_cmd.id)) {
