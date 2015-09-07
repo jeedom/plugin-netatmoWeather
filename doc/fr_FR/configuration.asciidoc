@@ -8,7 +8,6 @@ image::../images/netatmoWeather2.png[]
 * *Client secret* : votre client secret (voir partie configuration)
 * *Nom d'utilisateur* : nom d'utilisateur de votre compte netatmo
 * *Mot de passe* : mot de passe de votre compte Netatmo
-* *Utiliser le design alternatif* : permet d'utiliser un autre design (voir partie widget)
 * *Synchroniser* : permet de synchroniser Jeedom avec votre compte Netamo pour découvrir automatiquement vos équipements Netamo. A faire après avoir sauvegardé les paramètres précedent.
 
 == Recupération des informations de connexion
@@ -74,19 +73,10 @@ En dessous vous retrouvez la liste des commandes :
 
 == Widget
 
-Voici le widget standard pour une station : 
+Voici le widget standard pour une station sur le dashboard : 
 
 image::../images/netatmoWeather6.png[]
 
-Pour une sonde extérieure : 
+Et en mobile :
 
 image::../images/netatmoWeather7.png[]
-
-Et voila le résultat en mode widget alternatif :
-
-image::../images/netatmoWeather8.png[]
-
-image::../images/netatmoWeather9.png[] 
-
-[TIP]
-Lors du changement de mode de widget il est conseillé de cliquer sur synchroniser pour voir le resultat immédiatement
