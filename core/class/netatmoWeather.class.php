@@ -387,7 +387,7 @@ class netatmoWeather extends eqLogic {
 		}
 		$mc = cache::byKey('netatmoWeatherWidget' . jeedom::versionAlias($_version) . $this->getId());
 		if ($mc->getValue() != '') {
-			//return $mc->getValue();
+			return $mc->getValue();
 		}
 		$replace = array(
 			'#name#' => $this->getName(),
