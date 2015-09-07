@@ -30,9 +30,10 @@ function addCmdToTable(_cmd) {
     var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '">';
     tr += '<td>';
     tr += '<input class="cmdAttr form-control input-sm" data-l1key="id" style="display : none;">';
+    tr += '<input class="cmdAttr form-control input-sm" data-l1key="type" style="display : none;">';
+    tr += '<input class="cmdAttr form-control input-sm" data-l1key="subType" style="display : none;">';
     tr += '<input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 140px;" placeholder="{{Nom}}"></td>';
     tr += '<input class="cmdAttr form-control type input-sm" data-l1key="type" value="info" disabled style="display : none;" />';
-    tr += '<span class="subType" subType="' + init(_cmd.subType) + '" style="display : none;"></span>';
     tr += '<td>';
     if(!isset(_cmd.type) || _cmd.type == 'info' ){
         tr += '<span><input type="checkbox" class="cmdAttr bootstrapSwitch" data-size="mini" data-label-text="{{Historiser}}" data-l1key="isHistorized" /></span>';
