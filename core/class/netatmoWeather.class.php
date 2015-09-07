@@ -125,7 +125,6 @@ class netatmoWeather extends eqLogic {
 				$mc->remove();
 				$eqLogic->toHtml('mobile');
 				$eqLogic->toHtml('dashboard');
-				print_r($eqLogic);
 				$eqLogic->refreshWidget();
 			}
 		} catch (Exception $e) {
@@ -388,7 +387,7 @@ class netatmoWeather extends eqLogic {
 		}
 		$mc = cache::byKey('netatmoWeatherWidget' . jeedom::versionAlias($_version) . $this->getId());
 		if ($mc->getValue() != '') {
-			//return $mc->getValue();
+			return $mc->getValue();
 		}
 		$replace = array(
 			'#name#' => $this->getName(),
