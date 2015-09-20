@@ -387,13 +387,14 @@ class netatmoWeather extends eqLogic {
 		}
 		$mc = cache::byKey('netatmoWeatherWidget' . jeedom::versionAlias($_version) . $this->getId());
 		if ($mc->getValue() != '') {
-			return $mc->getValue();
+			return preg_replace("/" . preg_quote(self::UIDDELIMITER) . "(.*?)" . preg_quote(self::UIDDELIMITER) . "/", self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER, $mc->getValue());
 		}
 		$replace = array(
 			'#name#' => $this->getName(),
 			'#id#' => $this->getId(),
 			'#background_color#' => $this->getBackgroundColor(jeedom::versionAlias($_version)),
 			'#eqLink#' => $this->getLinkToConfiguration(),
+			'#uid#' => 'netatmoWeather' . $this->getId() . self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER,
 		);
 		foreach ($this->getCmd() as $cmd) {
 			if ($cmd->getType() == 'info') {
