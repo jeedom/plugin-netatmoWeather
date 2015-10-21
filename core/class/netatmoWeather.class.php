@@ -18,7 +18,7 @@
 
 /* * ***************************Includes********************************* */
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
-require_once dirname(__FILE__) . '/../../3rdparty/Netatmo-API-PHP/NAApiClient.php';
+require_once dirname(__FILE__) . '/../../3rdparty/Netatmo-API-PHP/Clients/NAApiClient.php';
 
 class netatmoWeather extends eqLogic {
 	/*     * *************************Attributs****************************** */
@@ -100,13 +100,13 @@ class netatmoWeather extends eqLogic {
 			}
 			$user = $helper->api("getuser", "POST");
 			$devicelist = $helper->simplifyDeviceList();
-			$mesures = $helper->getLastMeasures($client, $devicelist);
-			foreach ($mesures[0]['modules'] as $mesure) {
-				$eqLogic = eqLogic::byLogicalId($mesure["_id"], 'netatmoWeather');
+
+			foreach ($devicelist['devices'] as $device) {
+				$eqLogic = eqLogic::byLogicalId($device["_id"], 'netatmoWeather');
 				if (!is_object($eqLogic)) {
 					continue;
 				}
-				foreach ($mesure as $key => $value) {
+				foreach ($device['dashboard_data'] as $key => $value) {
 					$cmd = $eqLogic->getCmd(null, strtolower($key));
 					if (is_object($cmd)) {
 						if ($key == 'max_temp') {
@@ -114,7 +114,7 @@ class netatmoWeather extends eqLogic {
 						} else if ($key == 'min_temp') {
 							$cmd->setCollectDate(date('Y-m-d H:i:s', $mesure['date_min_temp']));
 						} else {
-							$cmd->setCollectDate(date('Y-m-d H:i:s', $mesure['time_utc']));
+							$cmd->setCollectDate(date('Y-m-d H:i:s', $device['last_status_store']));
 						}
 						$cmd->event($value);
 					}
@@ -126,6 +126,29 @@ class netatmoWeather extends eqLogic {
 				$eqLogic->toHtml('mobile');
 				$eqLogic->toHtml('dashboard');
 				$eqLogic->refreshWidget();
+				foreach ($device['modules'] as $module) {
+					$eqLogic = eqLogic::byLogicalId($module["_id"], 'netatmoWeather');
+					foreach ($module['dashboard_data'] as $key => $value) {
+						$cmd = $eqLogic->getCmd(null, strtolower($key));
+						if (is_object($cmd)) {
+							if ($key == 'max_temp') {
+								$cmd->setCollectDate(date('Y-m-d H:i:s', $module['dashboard_data']['date_max_temp']));
+							} else if ($key == 'min_temp') {
+								$cmd->setCollectDate(date('Y-m-d H:i:s', $module['dashboard_data']['date_min_temp']));
+							} else {
+								$cmd->setCollectDate(date('Y-m-d H:i:s', $module['dashboard_data']['time_utc']));
+							}
+							$cmd->event($value);
+						}
+					}
+					$mc = cache::byKey('netatmoWeatherWidgetmobile' . $eqLogic->getId());
+					$mc->remove();
+					$mc = cache::byKey('netatmoWeatherWidgetdashboard' . $eqLogic->getId());
+					$mc->remove();
+					$eqLogic->toHtml('mobile');
+					$eqLogic->toHtml('dashboard');
+					$eqLogic->refreshWidget();
+				}
 			}
 		} catch (Exception $e) {
 			return '';
