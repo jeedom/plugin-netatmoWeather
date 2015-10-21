@@ -100,11 +100,22 @@ class netatmoWeather extends eqLogic {
 			}
 			$user = $helper->api("getuser", "POST");
 			$devicelist = $helper->simplifyDeviceList();
-
 			foreach ($devicelist['devices'] as $device) {
 				$eqLogic = eqLogic::byLogicalId($device["_id"], 'netatmoWeather');
 				if (!is_object($eqLogic)) {
 					continue;
+				}
+				$changed = false;
+				if ($eqLogic->getConfiguration('firmware') != $device['firmware']) {
+					$changed = true;
+					$eqLogic->setConfiguration('firmware', $device['firmware']);
+				}
+				if ($eqLogic->getConfiguration('wifi_status') != $device['wifi_status']) {
+					$changed = true;
+					$eqLogic->setConfiguration('wifi_status', $device['wifi_status']);
+				}
+				if ($changed) {
+					$eqLogic->save();
 				}
 				foreach ($device['dashboard_data'] as $key => $value) {
 					$cmd = $eqLogic->getCmd(null, strtolower($key));
@@ -128,6 +139,47 @@ class netatmoWeather extends eqLogic {
 				$eqLogic->refreshWidget();
 				foreach ($device['modules'] as $module) {
 					$eqLogic = eqLogic::byLogicalId($module["_id"], 'netatmoWeather');
+					$changed = false;
+					if ($eqLogic->getConfiguration('rf_status') != $module['rf_status']) {
+						$changed = true;
+						$eqLogic->setConfiguration('rf_status', $module['rf_status']);
+					}
+					if ($eqLogic->getConfiguration('firmware') != $module['firmware']) {
+						$changed = true;
+						$eqLogic->setConfiguration('firmware', $module['firmware']);
+					}
+					if ($changed) {
+						$eqLogic->save();
+					}
+					$battery_max = null;
+					$battery_min = null;
+					if ($module['type'] == 'NAModule1') {
+						//outdoormodule
+						$battery_max = 6000;
+						$battery_min = 3600;
+					}
+					if ($module['type'] == 'NAModule4') {
+						//indoor
+						$battery_max = 6000;
+						$battery_min = 4200;
+					}
+					if ($module['type'] == 'NAModule3') {
+						//rain
+						$battery_max = 6000;
+						$battery_min = 3600;
+					}
+					if ($module['type'] == 'NAModule2') {
+						//wind
+						$battery_max = 6000;
+						$battery_min = 3950;
+					}
+					if ($battery_max != null && $battery_min != null) {
+						$battery = ($module['battery_vp'] - $battery_min) / ($battery_max-$$battery_min);
+					}
+					if ($battery < 0) {
+						$battery = 0;
+					}
+					$eqLogic->batteryStatus($battery);
 					foreach ($module['dashboard_data'] as $key => $value) {
 						$cmd = $eqLogic->getCmd(null, strtolower($key));
 						if (is_object($cmd)) {
