@@ -174,7 +174,7 @@ class netatmoWeather extends eqLogic {
 						$battery_min = 3950;
 					}
 					if ($battery_max != null && $battery_min != null) {
-						$battery = ($module['battery_vp'] - $battery_min) / ($battery_max-$$battery_min);
+						$battery = ($module['battery_vp'] - $battery_min) / ($battery_max-$battery_min);
 					}
 					if ($battery < 0) {
 						$battery = 0;
