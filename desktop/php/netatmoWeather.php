@@ -105,11 +105,19 @@ foreach (object::all() as $object) {
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-4 control-label">{{Reception réseaux}}</label>
+      <label class="col-sm-4 control-label">{{Réception réseaux}}</label>
       <div class="col-sm-6">
         <span class="label label-info" style="font-size:1em;">
           <span class="eqLogicAttr" data-l1key="configuration" data-l2key="wifi_status"></span>
           <span class="eqLogicAttr" data-l1key="configuration" data-l2key="rf_status"></span>
+        </span>
+      </div>
+    </div>
+	<div class="form-group" id="battery_net_weather">
+      <label class="col-sm-4 control-label">{{Batterie}}</label>
+      <div class="col-sm-6">
+        <span class="label label-info" style="font-size:1em;">
+          <span class="eqLogicAttr" data-l1key="configuration" data-l2key="batteryStatus"></span> %
         </span>
       </div>
     </div>
@@ -118,7 +126,7 @@ foreach (object::all() as $object) {
 </div>
 <div class="col-sm-6">
   <center>
-    <img src="plugins/netatmoWeather/doc/images/netatmoWeather_icon.png" id="img_netatmoModel" style="height : 300px;" />
+    <img src="plugins/netatmoWeather/doc/images/netatmoWeather_icon.png" id="img_netatmoModel" style="height : 300px;margin-top : 60px" />
   </center>
 </div>
 </div>

@@ -17,6 +17,11 @@
 
 $('.eqLogicAttr[data-l1key=configuration][data-l2key=type]').on('change',function(){
     $('#img_netatmoModel').attr('src','plugins/netatmoWeather/core/img/'+$(this).value()+'.png');
+	if ($(this).value()=='station') {
+		$('#battery_net_weather').hide();
+	} else {
+		$('#battery_net_weather').show();
+	}
 });
 
 
