@@ -121,9 +121,9 @@ class netatmoWeather extends eqLogic {
 					$cmd = $eqLogic->getCmd(null, strtolower($key));
 					if (is_object($cmd)) {
 						if ($key == 'max_temp') {
-							$cmd->setCollectDate(date('Y-m-d H:i:s', $device['date_max_temp']));
+							$cmd->setCollectDate(date('Y-m-d H:i:s', $device['dashboard_data']['date_max_temp']));
 						} else if ($key == 'min_temp') {
-							$cmd->setCollectDate(date('Y-m-d H:i:s', $device['date_min_temp']));
+							$cmd->setCollectDate(date('Y-m-d H:i:s', $device['dashboard_data']['date_min_temp']));
 						} else {
 							$cmd->setCollectDate(date('Y-m-d H:i:s', $device['last_status_store']));
 						}
