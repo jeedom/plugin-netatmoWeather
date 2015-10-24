@@ -63,6 +63,7 @@ class netatmoWeather extends eqLogic {
 				if (!is_object($eqLogic)) {
 					$eqLogic = new netatmoWeather();
 				}
+				$eqLogic->setConfiguration('battery_type', '4* 1.5V AAA');
 				$eqLogic->setEqType_name('netatmoWeather');
 				$eqLogic->setIsEnable(1);
 				$eqLogic->setName($module['module_name']);
@@ -174,7 +175,7 @@ class netatmoWeather extends eqLogic {
 						$battery_min = 3950;
 					}
 					if ($battery_max != null && $battery_min != null) {
-						$battery = round(($module['battery_vp'] - $battery_min) / ($battery_max-$battery_min)*100,0);
+						$battery = round(($module['battery_vp'] - $battery_min) / ($battery_max - $battery_min) * 100, 0);
 					}
 					if ($battery < 0) {
 						$battery = 0;
