@@ -18,7 +18,9 @@
 
 /* * ***************************Includes********************************* */
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
-require_once dirname(__FILE__) . '/../../3rdparty/Netatmo-API-PHP/Clients/NAApiClient.php';
+if (!class_exists('NAApiClient')) {
+	require_once dirname(__FILE__) . '/../../3rdparty/Netatmo-API-PHP/Clients/NAApiClient.php';
+}
 
 class netatmoWeather extends eqLogic {
 	/*     * *************************Attributs****************************** */
