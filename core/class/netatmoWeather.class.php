@@ -25,19 +25,27 @@ if (!class_exists('NAApiClient')) {
 class netatmoWeather extends eqLogic {
 	/*     * *************************Attributs****************************** */
 
+	private static $_client = null;
+
 	/*     * ***********************Methode static*************************** */
 
+	public function getClient() {
+		if (self::$_client == null) {
+			self::$_client = new NAApiClient(array(
+				'client_id' => config::byKey('client_id', 'netatmoWeather'),
+				'client_secret' => config::byKey('client_secret', 'netatmoWeather'),
+				'username' => config::byKey('username', 'netatmoWeather'),
+				'password' => config::byKey('password', 'netatmoWeather'),
+				'scope' => NAScopes::SCOPE_READ_STATION,
+			));
+			self::$_client->getAccessToken();
+		}
+		return self::$_client;
+	}
+
 	public function syncWithNetatmo() {
-		$client = new NAApiClient(array(
-			'client_id' => config::byKey('client_id', 'netatmoWeather'),
-			'client_secret' => config::byKey('client_secret', 'netatmoWeather'),
-			'username' => config::byKey('username', 'netatmoWeather'),
-			'password' => config::byKey('password', 'netatmoWeather'),
-			'scope' => NAScopes::SCOPE_READ_STATION,
-		));
+		$client = self::getClient();
 		$helper = new NAApiHelper($client);
-		$tokens = $client->getAccessToken();
-		$user = $helper->api("getuser", "POST");
 		$devicelist = $helper->simplifyDeviceList();
 		log::add('netatmoWeather', 'debug', print_r($devicelist, true));
 		foreach ($devicelist['devices'] as $device) {
@@ -80,16 +88,8 @@ class netatmoWeather extends eqLogic {
 
 	public static function cron15() {
 		try {
-			$client = new NAApiClient(array(
-				'client_id' => config::byKey('client_id', 'netatmoWeather'),
-				'client_secret' => config::byKey('client_secret', 'netatmoWeather'),
-				'username' => config::byKey('username', 'netatmoWeather'),
-				'password' => config::byKey('password', 'netatmoWeather'),
-				'scope' => NAScopes::SCOPE_READ_STATION,
-			));
-			$helper = new NAApiHelper($client);
 			try {
-				$tokens = $client->getAccessToken();
+				$client = self::getClient();
 				if (config::byKey('numberFailed', 'netatmoWeather', 0) > 0) {
 					config::save('numberFailed', 0, 'netatmoWeather');
 				}
@@ -101,7 +101,7 @@ class netatmoWeather extends eqLogic {
 				}
 				return;
 			}
-			$user = $helper->api("getuser", "POST");
+			$helper = new NAApiHelper($client);
 			$devicelist = $helper->simplifyDeviceList();
 			foreach ($devicelist['devices'] as $device) {
 				$eqLogic = eqLogic::byLogicalId($device["_id"], 'netatmoWeather');
