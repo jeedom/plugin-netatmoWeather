@@ -44,8 +44,7 @@ class netatmoWeather extends eqLogic {
 	}
 
 	public function syncWithNetatmo() {
-		$client = self::getClient();
-		$helper = new NAApiHelper($client);
+		$helper = new NAApiHelper(self::getClient());
 		$devicelist = $helper->simplifyDeviceList();
 		log::add('netatmoWeather', 'debug', print_r($devicelist, true));
 		foreach ($devicelist['devices'] as $device) {
@@ -89,7 +88,7 @@ class netatmoWeather extends eqLogic {
 	public static function cron15() {
 		try {
 			try {
-				$client = self::getClient();
+				$helper = new NAApiHelper(self::getClient());
 				if (config::byKey('numberFailed', 'netatmoWeather', 0) > 0) {
 					config::save('numberFailed', 0, 'netatmoWeather');
 				}
@@ -101,7 +100,6 @@ class netatmoWeather extends eqLogic {
 				}
 				return;
 			}
-			$helper = new NAApiHelper($client);
 			$devicelist = $helper->simplifyDeviceList();
 			foreach ($devicelist['devices'] as $device) {
 				$eqLogic = eqLogic::byLogicalId($device["_id"], 'netatmoWeather');
