@@ -94,7 +94,7 @@ class netatmoWeather extends eqLogic {
 				}
 			} catch (NAClientException $ex) {
 				if (config::byKey('numberFailed', 'netatmoWeather', 0) > 3) {
-					log::add('netatmoWeather', 'error', __('Erreur sur synchro netatmo weather ', __FILE__) . '(' . config::byKey('numberFailed', 'netatmoWeather', 0) . ')' . $e->getMessage());
+					log::add('netatmoWeather', 'error', __('Erreur sur synchro netatmo weather ', __FILE__) . '(' . config::byKey('numberFailed', 'netatmoWeather', 0) . ')' . $ex->getMessage());
 				} else {
 					config::save('numberFailed', config::byKey('numberFailed', 'netatmoWeather', 0) + 1, 'netatmoWeather');
 				}
