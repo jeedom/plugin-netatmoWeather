@@ -72,7 +72,7 @@ class netatmoWeather extends eqLogic {
 				if (!is_object($eqLogic)) {
 					$eqLogic = new netatmoWeather();
 				}
-				$eqLogic->setConfiguration('battery_type', '4* 1.5V AAA');
+				$eqLogic->setConfiguration('battery_type', '4x1.5V AAA');
 				$eqLogic->setEqType_name('netatmoWeather');
 				$eqLogic->setIsEnable(1);
 				$eqLogic->setName($module['module_name']);
