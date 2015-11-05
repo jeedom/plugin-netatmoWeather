@@ -187,6 +187,9 @@ class netatmoWeather extends eqLogic {
 					if ($battery < 0) {
 						$battery = 0;
 					}
+					if ($battery > 100) {
+						$battery = 100;
+					}
 					$eqLogic->batteryStatus($battery);
 					foreach ($module['dashboard_data'] as $key => $value) {
 						$cmd = $eqLogic->getCmd(null, strtolower($key));

@@ -3,11 +3,18 @@
 	<i class='fa fa-refresh pull-right cursor refresh' style="margin-top: 3px;margin-right: 3px;"></i>
 	<span class="cmd cmd-widget" data-cmd_id="#refresh_id#" style="display:none;"></span>
 	<center class="widget-name"><a href="#eqLink#" style="font-size : 1.3em;"> #name#  </a></center>
+	<div class="row">
+
+	<div class="col-sm-12">
 	<center>
-		<span class="#rain_history# rain" data-cmd_id="#rain_id#"><i class="fa fa-tint"></i> <strong class="tooltips" title="#rain_collectDate#" style="font-size:1.1em;">#rain#</strong> mm/live</span><br/>
-		<span class="#sum_rain_1_history# sum_rain_1" data-cmd_id="#sum_rain_1_id#"><i class="fa fa-tint"></i> <strong class="tooltips" title="#sum_rain_1_collectDate#" style="font-size:1.1em;">#sum_rain_1#</strong> mm/1h</span><br/>
-		<span class="#sum_rain_24_history# sum_rain_24" data-cmd_id="#sum_rain_24_id#"><i class="fa fa-tint"></i> <strong class="tooltips" title="#sum_rain_24_collectDate#" style="font-size:1.1em;">#sum_rain_24#</strong> mm/24h</span><br/>
-	</center>
+	 <span class="#rain_history# rain tooltips" data-cmd_id="#rain_id#" title="Pluie (#rain_collectDate#)" style="cursor : default;"><i class="fa fa-tint"></i> <strong style="cursor : default;font-size:1em;">#rain#</strong> mm/h</span>
+	<span style="margin-left: 30px;cursor : default;" class="#sum_rain_1_history# sum_rain_1 tooltips" data-cmd_id="#sum_rain_1_id#" title="Pluie dans l'heure (#sum_rain_1_collectDate#)"><i class="icon divers-circular114"></i> <strong style="cursor : default;font-size:1em;">#sum_rain_1#</strong> mm/h</span>
+   </center>
+	</div>
+	</div>
+	<center>
+       <span class="#sum_rain_24_history# sum_rain_24 tooltips" data-cmd_id="#sum_rain_24_id#" title="Pluie du jour (#sum_rain_24_collectDate#)" style="cursor : default;font-size : 1.2em;"><i class="icon divers-table29"></i> <strong style="cursor : default;font-size:1.2em;">#sum_rain_24#</strong> mm/h</span>
+    </center>
 	<script type="text/javascript">
 		$('.eqLogic[data-eqLogic_uid=#uid#] .refresh').on('click', function () {
 			jeedom.cmd.execute({id: '#refresh_id#'});
