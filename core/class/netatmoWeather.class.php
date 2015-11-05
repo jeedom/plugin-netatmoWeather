@@ -67,6 +67,8 @@ class netatmoWeather extends eqLogic {
 					$type = 'module_int';
 				} elseif ($module['type'] == "NAModule3") {
 					$type = 'module_rain';
+				} elseif ($module['type'] == "NAModule2") {
+					$type = 'module_wind';
 				}
 				$eqLogic = eqLogic::byLogicalId($module['_id'], 'netatmoWeather');
 				if (!is_object($eqLogic)) {
@@ -437,6 +439,105 @@ class netatmoWeather extends eqLogic {
 				$netatmoWeatherCmd->remove();
 			}
 		}
+		
+		if (in_array($this->getConfiguration('type'), array('module_wind'))) {
+			$netatmoWeatherCmd = $this->getCmd(null, 'winddirection');
+			if (!is_object($netatmoWeatherCmd)) {
+				$netatmoWeatherCmd = new netatmoWeatherCmd();
+				$netatmoWeatherCmd->setName(__('Direction Vent', __FILE__));
+				$netatmoWeatherCmd->setIsHistorized(1);
+			}
+			$netatmoWeatherCmd->setEqLogic_id($this->getId());
+			$netatmoWeatherCmd->setLogicalId('winddirection');
+			$netatmoWeatherCmd->setUnite('°');
+			$netatmoWeatherCmd->setType('info');
+			$netatmoWeatherCmd->setSubType('numeric');
+			$netatmoWeatherCmd->setEventOnly(1);
+			$netatmoWeatherCmd->save();
+		
+			$netatmoWeatherCmd = $this->getCmd(null, 'windspeed');
+			if (!is_object($netatmoWeatherCmd)) {
+				$netatmoWeatherCmd = new netatmoWeatherCmd();
+				$netatmoWeatherCmd->setName(__('Vitesse Vent', __FILE__));
+				$netatmoWeatherCmd->setIsHistorized(1);
+			}
+			$netatmoWeatherCmd->setEqLogic_id($this->getId());
+			$netatmoWeatherCmd->setLogicalId('windspeed');
+			$netatmoWeatherCmd->setUnite('km/h');
+			$netatmoWeatherCmd->setType('info');
+			$netatmoWeatherCmd->setSubType('numeric');
+		
+			$netatmoWeatherCmd->setEventOnly(1);
+			$netatmoWeatherCmd->save();
+		
+			$netatmoWeatherCmd = $this->getCmd(null, 'rafaledirection');
+			if (!is_object($netatmoWeatherCmd)) {
+				$netatmoWeatherCmd = new netatmoWeatherCmd();
+				$netatmoWeatherCmd->setName(__('Direction rafale', __FILE__));
+				$netatmoWeatherCmd->setIsHistorized(0);
+			}
+		
+			$netatmoWeatherCmd->setEqLogic_id($this->getId());
+			$netatmoWeatherCmd->setLogicalId('rafaledirection');
+			$netatmoWeatherCmd->setUnite('°');
+			$netatmoWeatherCmd->setType('info');
+			$netatmoWeatherCmd->setSubType('numeric');
+			$netatmoWeatherCmd->setEventOnly(1);
+			$netatmoWeatherCmd->save();
+			
+			$netatmoWeatherCmd = $this->getCmd(null, 'rafalespeed');
+			if (!is_object($netatmoWeatherCmd)) {
+				$netatmoWeatherCmd = new netatmoWeatherCmd();
+				$netatmoWeatherCmd->setName(__('Vitesse rafale', __FILE__));
+				$netatmoWeatherCmd->setIsHistorized(0);
+			}
+			
+			$netatmoWeatherCmd->setEqLogic_id($this->getId());
+			$netatmoWeatherCmd->setLogicalId('rafalespeed');
+			$netatmoWeatherCmd->setUnite('km/h');
+			$netatmoWeatherCmd->setType('info');
+			$netatmoWeatherCmd->setSubType('numeric');
+			$netatmoWeatherCmd->setEventOnly(1);
+			$netatmoWeatherCmd->save();
+			
+			$netatmoWeatherCmd = $this->getCmd(null, 'maxwindspeed');
+			if (!is_object($netatmoWeatherCmd)) {
+				$netatmoWeatherCmd = new netatmoWeatherCmd();
+				$netatmoWeatherCmd->setName(__('Vitesse Max', __FILE__));
+				$netatmoWeatherCmd->setIsHistorized(0);
+			}
+				
+			$netatmoWeatherCmd->setEqLogic_id($this->getId());
+			$netatmoWeatherCmd->setLogicalId('maxwindspeed');
+			$netatmoWeatherCmd->setUnite('km/h');
+			$netatmoWeatherCmd->setType('info');
+			$netatmoWeatherCmd->setSubType('numeric');
+			$netatmoWeatherCmd->setEventOnly(1);
+			$netatmoWeatherCmd->save();
+			
+		} else {
+			$netatmoWeatherCmd = $this->getCmd(null, 'winddirection');
+			if (is_object($netatmoWeatherCmd)) {
+				$netatmoWeatherCmd->remove();
+			}
+			$netatmoWeatherCmd = $this->getCmd(null, 'windspeed');
+			if (is_object($netatmoWeatherCmd)) {
+				$netatmoWeatherCmd->remove();
+			}
+			$netatmoWeatherCmd = $this->getCmd(null, 'rafaledirection');
+			if (is_object($netatmoWeatherCmd)) {
+				$netatmoWeatherCmd->remove();
+			}
+			$netatmoWeatherCmd = $this->getCmd(null, 'rafalespeed');
+			if (is_object($netatmoWeatherCmd)) {
+				$netatmoWeatherCmd->remove();
+			}
+			$netatmoWeatherCmd = $this->getCmd(null, 'maxwindspeed');
+			if (is_object($netatmoWeatherCmd)) {
+				$netatmoWeatherCmd->remove();
+			}
+		}
+		
 
 		$refresh = $this->getCmd(null, 'refresh');
 		if (!is_object($refresh)) {
