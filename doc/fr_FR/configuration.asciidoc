@@ -38,6 +38,9 @@ Recuperer les informations "CLient id" et "Client secret" et copier les dans la 
 
 image::../images/netatmoWeather15.png[]
 
+[IMPORTANT]
+Attention il faut bien que l'url de callback soit à "None" sinon ca ne marchera pas.
+
 == Configuration des équipements
 
 La configuration des équipements Netatmo est accessible à partir du menu plugin : 
