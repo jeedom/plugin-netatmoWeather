@@ -61,19 +61,19 @@ class netatmoWeather extends eqLogic {
 			$eqLogic->setIsVisible(1);
 			$eqLogic->save();
 			foreach ($device['modules'] as $module) {
-                                $battery_type = '';
+				$battery_type = '';
 				if ($module['type'] == "NAModule1") {
 					$type = 'module_ext';
-                                        $battery_type = '4x1.5V AAA';
+					$battery_type = '4x1.5V AAA';
 				} elseif ($module['type'] == "NAModule4") {
 					$type = 'module_int';
-                                        $battery_type = '4x1.5V AAA';
+					$battery_type = '4x1.5V AAA';
 				} elseif ($module['type'] == "NAModule3") {
 					$type = 'module_rain';
-                                        $battery_type = '2x1.5V AAA';
+					$battery_type = '2x1.5V AAA';
 				} elseif ($module['type'] == "NAModule2") {
 					$type = 'module_wind';
-                                        $battery_type = '4x1.5V AA';
+					$battery_type = '4x1.5V AA';
 				}
 				$eqLogic = eqLogic::byLogicalId($module['_id'], 'netatmoWeather');
 				if (!is_object($eqLogic)) {
@@ -235,7 +235,6 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setUnite('Pa');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->setEventOnly(1);
 			$netatmoWeatherCmd->save();
 		} else {
 			$netatmoWeatherCmd = $this->getCmd(null, 'pressure');
@@ -256,7 +255,6 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setUnite('Pa');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->setEventOnly(1);
 			$netatmoWeatherCmd->save();
 		} else {
 			$netatmoWeatherCmd = $this->getCmd(null, 'absolutepressure');
@@ -277,7 +275,6 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setUnite('ppm');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->setEventOnly(1);
 			$netatmoWeatherCmd->save();
 		} else {
 			$netatmoWeatherCmd = $this->getCmd(null, 'co2');
@@ -298,7 +295,6 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
 			$netatmoWeatherCmd->setIsHistorized(1);
-			$netatmoWeatherCmd->setEventOnly(1);
 			$netatmoWeatherCmd->save();
 		} else {
 			$netatmoWeatherCmd = $this->getCmd(null, 'noise');
@@ -319,7 +315,6 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setUnite('°C');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->setEventOnly(1);
 			$netatmoWeatherCmd->save();
 		} else {
 			$netatmoWeatherCmd = $this->getCmd(null, 'temperature');
@@ -340,7 +335,6 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setUnite('°C');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->setEventOnly(1);
 			$netatmoWeatherCmd->save();
 		} else {
 			$netatmoWeatherCmd = $this->getCmd(null, 'min_temp');
@@ -361,7 +355,6 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setUnite('°C');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->setEventOnly(1);
 			$netatmoWeatherCmd->save();
 		} else {
 			$netatmoWeatherCmd = $this->getCmd(null, 'max_temp');
@@ -382,7 +375,6 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setUnite('%');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->setEventOnly(1);
 			$netatmoWeatherCmd->save();
 		} else {
 			$netatmoWeatherCmd = $this->getCmd(null, 'humidity');
@@ -403,7 +395,6 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setUnite('mm');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->setEventOnly(1);
 			$netatmoWeatherCmd->save();
 
 			$netatmoWeatherCmd = $this->getCmd(null, 'sum_rain_24');
@@ -417,8 +408,6 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setUnite('mm');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
-
-			$netatmoWeatherCmd->setEventOnly(1);
 			$netatmoWeatherCmd->save();
 
 			$netatmoWeatherCmd = $this->getCmd(null, 'sum_rain_1');
@@ -433,7 +422,6 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setUnite('mm');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->setEventOnly(1);
 			$netatmoWeatherCmd->save();
 		} else {
 			$netatmoWeatherCmd = $this->getCmd(null, 'rain');
@@ -449,7 +437,7 @@ class netatmoWeather extends eqLogic {
 				$netatmoWeatherCmd->remove();
 			}
 		}
-		
+
 		if (in_array($this->getConfiguration('type'), array('module_wind'))) {
 			$netatmoWeatherCmd = $this->getCmd(null, 'windangle');
 			if (!is_object($netatmoWeatherCmd)) {
@@ -462,9 +450,8 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setUnite('°');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->setEventOnly(1);
 			$netatmoWeatherCmd->save();
-		
+
 			$netatmoWeatherCmd = $this->getCmd(null, 'windstrength');
 			if (!is_object($netatmoWeatherCmd)) {
 				$netatmoWeatherCmd = new netatmoWeatherCmd();
@@ -476,55 +463,50 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setUnite('km/h');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
-		
-			$netatmoWeatherCmd->setEventOnly(1);
 			$netatmoWeatherCmd->save();
-		
+
 			$netatmoWeatherCmd = $this->getCmd(null, 'gustangle');
 			if (!is_object($netatmoWeatherCmd)) {
 				$netatmoWeatherCmd = new netatmoWeatherCmd();
 				$netatmoWeatherCmd->setName(__('Direction rafale', __FILE__));
 				$netatmoWeatherCmd->setIsHistorized(0);
 			}
-		
+
 			$netatmoWeatherCmd->setEqLogic_id($this->getId());
 			$netatmoWeatherCmd->setLogicalId('gustangle');
 			$netatmoWeatherCmd->setUnite('°');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->setEventOnly(1);
 			$netatmoWeatherCmd->save();
-			
+
 			$netatmoWeatherCmd = $this->getCmd(null, 'guststrength');
 			if (!is_object($netatmoWeatherCmd)) {
 				$netatmoWeatherCmd = new netatmoWeatherCmd();
 				$netatmoWeatherCmd->setName(__('Vitesse rafale', __FILE__));
 				$netatmoWeatherCmd->setIsHistorized(0);
 			}
-			
+
 			$netatmoWeatherCmd->setEqLogic_id($this->getId());
 			$netatmoWeatherCmd->setLogicalId('guststrength');
 			$netatmoWeatherCmd->setUnite('km/h');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->setEventOnly(1);
 			$netatmoWeatherCmd->save();
-			
+
 			$netatmoWeatherCmd = $this->getCmd(null, 'max_wind_str');
 			if (!is_object($netatmoWeatherCmd)) {
 				$netatmoWeatherCmd = new netatmoWeatherCmd();
 				$netatmoWeatherCmd->setName(__('Vitesse Max', __FILE__));
 				$netatmoWeatherCmd->setIsHistorized(0);
 			}
-				
+
 			$netatmoWeatherCmd->setEqLogic_id($this->getId());
 			$netatmoWeatherCmd->setLogicalId('max_wind_str');
 			$netatmoWeatherCmd->setUnite('km/h');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->setEventOnly(1);
 			$netatmoWeatherCmd->save();
-			
+
 		} else {
 			$netatmoWeatherCmd = $this->getCmd(null, 'windangle');
 			if (is_object($netatmoWeatherCmd)) {
@@ -547,7 +529,6 @@ class netatmoWeather extends eqLogic {
 				$netatmoWeatherCmd->remove();
 			}
 		}
-		
 
 		$refresh = $this->getCmd(null, 'refresh');
 		if (!is_object($refresh)) {
