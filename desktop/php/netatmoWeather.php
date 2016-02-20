@@ -95,6 +95,7 @@ foreach (object::all() as $object) {
           <option value="module_ext">{{Module extérieur}}</option>
           <option value="module_int">{{Module intérieur}}</option>
           <option value="module_rain">{{Module pluie}}</option>
+          <option value="module_wind">{{Anémomètre}}</option>
         </select>
       </div>
     </div>
@@ -113,7 +114,7 @@ foreach (object::all() as $object) {
         </span>
       </div>
     </div>
-	<div class="form-group" id="battery_net_weather">
+    <div class="form-group" id="battery_net_weather">
       <label class="col-sm-4 control-label">{{Batterie}}</label>
       <div class="col-sm-6">
         <span class="label label-info" style="font-size:1em;">
