@@ -26,6 +26,11 @@ class netatmoWeather extends eqLogic {
 	/*     * *************************Attributs****************************** */
 
 	private static $_client = null;
+	public static $_widgetPossibility = array('custom' => array(
+		'visibility' => true,
+		'displayName' => array('dashboard' => true, 'view' => true),
+		'optionalParameters' => true,
+	));
 
 	/*     * ***********************Methode static*************************** */
 
