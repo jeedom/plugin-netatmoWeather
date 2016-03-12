@@ -139,12 +139,6 @@ class netatmoWeather extends eqLogic {
 						$cmd->event($value);
 					}
 				}
-				$mc = cache::byKey('netatmoWeatherWidgetmobile' . $eqLogic->getId());
-				$mc->remove();
-				$mc = cache::byKey('netatmoWeatherWidgetdashboard' . $eqLogic->getId());
-				$mc->remove();
-				$eqLogic->toHtml('mobile');
-				$eqLogic->toHtml('dashboard');
 				$eqLogic->refreshWidget();
 				foreach ($device['modules'] as $module) {
 					$eqLogic = eqLogic::byLogicalId($module["_id"], 'netatmoWeather');
@@ -207,12 +201,6 @@ class netatmoWeather extends eqLogic {
 							$cmd->event($value);
 						}
 					}
-					$mc = cache::byKey('netatmoWeatherWidgetmobile' . $eqLogic->getId());
-					$mc->remove();
-					$mc = cache::byKey('netatmoWeatherWidgetdashboard' . $eqLogic->getId());
-					$mc->remove();
-					$eqLogic->toHtml('mobile');
-					$eqLogic->toHtml('dashboard');
 					$eqLogic->refreshWidget();
 				}
 			}
