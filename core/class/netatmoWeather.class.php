@@ -26,11 +26,7 @@ class netatmoWeather extends eqLogic {
 	/*     * *************************Attributs****************************** */
 
 	private static $_client = null;
-	public static $_widgetPossibility = array('custom' => array(
-		'visibility' => true,
-		'displayName' => array('dashboard' => true, 'view' => true),
-		'optionalParameters' => true,
-	));
+	public static $_widgetPossibility = array('custom' => true);
 
 	/*     * ***********************Methode static*************************** */
 
@@ -548,27 +544,11 @@ class netatmoWeather extends eqLogic {
 	}
 
 	public function toHtml($_version = 'dashboard') {
-		if ($this->getIsEnable() != 1) {
-			return '';
-		}
-		if (!$this->hasRight('r')) {
-			return '';
+		$replace = $this->preToHtml($_version);
+		if (!is_array($replace)) {
+			return $replace;
 		}
 		$version = jeedom::versionAlias($_version);
-		if ($this->getDisplay('hideOn' . $version) == 1) {
-			return '';
-		}
-		$mc = cache::byKey('netatmoWeatherWidget' . jeedom::versionAlias($_version) . $this->getId());
-		if ($mc->getValue() != '') {
-			return preg_replace("/" . preg_quote(self::UIDDELIMITER) . "(.*?)" . preg_quote(self::UIDDELIMITER) . "/", self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER, $mc->getValue());
-		}
-		$replace = array(
-			'#name#' => $this->getName(),
-			'#id#' => $this->getId(),
-			'#background_color#' => $this->getBackgroundColor(jeedom::versionAlias($_version)),
-			'#eqLink#' => $this->getLinkToConfiguration(),
-			'#uid#' => 'netatmoWeather' . $this->getId() . self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER,
-		);
 		foreach ($this->getCmd() as $cmd) {
 			if ($cmd->getType() == 'info') {
 				$replace['#' . $cmd->getLogicalId() . '_history#'] = '';
@@ -582,22 +562,8 @@ class netatmoWeather extends eqLogic {
 				$replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
 			}
 		}
-		if (($_version == 'dview' || $_version == 'mview') && $this->getDisplay('doNotShowNameOnView') == 1) {
-			$replace['#name#'] = '';
-			$replace['#object_name#'] = (is_object($object)) ? $object->getName() : '';
-		}
-		if (($_version == 'mobile' || $_version == 'dashboard') && $this->getDisplay('doNotShowNameOnDashboard') == 1) {
-			$replace['#name#'] = '<br/>';
-			$replace['#object_name#'] = (is_object($object)) ? $object->getName() : '';
-		}
-		$parameters = $this->getDisplay('parameters');
-		if (is_array($parameters)) {
-			foreach ($parameters as $key => $value) {
-				$replace['#' . $key . '#'] = $value;
-			}
-		}
 		$html = template_replace($replace, getTemplate('core', $version, strtolower($this->getConfiguration('type')), 'netatmoWeather'));
-		cache::set('netatmoWeatherWidget' . $version . $this->getId(), $html, 0);
+		cache::set('widgetHtml' . $version . $this->getId(), $html, 0);
 		return $html;
 	}
 
