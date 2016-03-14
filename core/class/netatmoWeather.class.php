@@ -45,21 +45,25 @@ class netatmoWeather extends eqLogic {
 	}
 
 	public function syncWithNetatmo() {
+		$getFriends = config::byKey('getFriendsDevices', 'netatmoWeather', 0);
 		$helper = new NAApiHelper(self::getClient());
 		$devicelist = $helper->simplifyDeviceList();
-		log::add('netatmoWeather', 'debug', print_r($devicelist, true));
+		log::add('netatmoWeather', 'debug', print_r($devicelist,true));
 		foreach ($devicelist['devices'] as $device) {
 			$eqLogic = eqLogic::byLogicalId($device['_id'], 'netatmoWeather');
+			if (isset($device['read_only']) && $device['read_only'] === true && ($getFriends == '' || $getFriends == 0)) {
+				continue;
+			}
 			if (!is_object($eqLogic)) {
 				$eqLogic = new netatmoWeather();
+				$eqLogic->setIsVisible(1);
+				$eqLogic->setIsEnable(1);
 			}
 			$eqLogic->setEqType_name('netatmoWeather');
-			$eqLogic->setIsEnable(1);
 			$eqLogic->setName($device['station_name']);
 			$eqLogic->setLogicalId($device['_id']);
 			$eqLogic->setConfiguration('type', 'station');
 			$eqLogic->setCategory('heating', 1);
-			$eqLogic->setIsVisible(1);
 			$eqLogic->save();
 			foreach ($device['modules'] as $module) {
 				$battery_type = '';

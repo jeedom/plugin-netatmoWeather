@@ -49,6 +49,12 @@ if (!isConnect()) {
         </div>
     </div>
     <div class="form-group">
+            <label class="col-sm-2 control-label">{{Récupérer aussi les stations des amis}}</label>
+            <div class="col-sm-3">
+                <input type="checkbox" class="configKey bootstrapSwitch" data-l1key="getFriendsDevices" />
+            </div>
+        </div>
+    <div class="form-group">
         <label class="col-lg-2 control-label">{{Synchroniser}}</label>
         <div class="col-lg-2">
         <a class="btn btn-default" id="bt_syncWithNetatmoWeather"><i class='fa fa-refresh'></i> {{Synchroniser mes équipements}}</a>
