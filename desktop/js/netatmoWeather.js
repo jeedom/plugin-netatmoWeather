@@ -15,6 +15,11 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
+ $('#bt_healthNetatmoWeather').on('click', function () {
+    $('#md_modal').dialog({title: "{{Santé NetatmoWeather}}"});
+    $('#md_modal').load('index.php?v=d&plugin=netatmoWeather&modal=health').dialog('open');
+});
+
 $('.eqLogicAttr[data-l1key=configuration][data-l2key=type]').on('change',function(){
     $('#img_netatmoModel').attr('src','plugins/netatmoWeather/core/img/'+$(this).value()+'.png');
 	if ($(this).value()=='station') {
