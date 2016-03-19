@@ -48,7 +48,7 @@ class netatmoWeather extends eqLogic {
 		$getFriends = config::byKey('getFriendsDevices', 'netatmoWeather', 0);
 		$helper = new NAApiHelper(self::getClient());
 		$devicelist = $helper->simplifyDeviceList();
-		log::add('netatmoWeather', 'debug', print_r($devicelist,true));
+		log::add('netatmoWeather', 'debug', print_r($devicelist, true));
 		foreach ($devicelist['devices'] as $device) {
 			$eqLogic = eqLogic::byLogicalId($device['_id'], 'netatmoWeather');
 			if (isset($device['read_only']) && $device['read_only'] === true && ($getFriends == '' || $getFriends == 0)) {
@@ -555,7 +555,7 @@ class netatmoWeather extends eqLogic {
 			}
 		}
 		$html = template_replace($replace, getTemplate('core', $version, strtolower($this->getConfiguration('type')), 'netatmoWeather'));
-		cache::set('widgetHtml' . $version . $this->getId(), $html, 0);
+		cache::set('widgetHtml' . $_version . $this->getId(), $html, 0);
 		return $html;
 	}
 
