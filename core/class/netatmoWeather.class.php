@@ -564,6 +564,8 @@ class netatmoWeather extends eqLogic {
 class netatmoWeatherCmd extends cmd {
 	/*     * *************************Attributs****************************** */
 
+	public static $_widgetPossibility = array('custom' => false);
+
 	/*     * ***********************Methode static*************************** */
 
 	/*     * *********************Methode d'instance************************* */
