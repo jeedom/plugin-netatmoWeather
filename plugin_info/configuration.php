@@ -48,16 +48,35 @@ if (!isConnect()) {
             <input type="password" class="configKey form-control" data-l1key="password" placeholder="mot de passe"/>
         </div>
     </div>
-    <div class="form-group">
+	 <div class="form-group">
             <label class="col-sm-2 control-label">{{Récupérer aussi les stations des amis}}</label>
             <div class="col-sm-3">
                 <input type="checkbox" class="configKey bootstrapSwitch" data-l1key="getFriendsDevices" />
             </div>
         </div>
+	<?php
+		$hasthermostat = plugin::byId('netatmoThermostat');
+		$haswelcome = plugin::byId('netatmoWelcome');
+		if (($hasthermostat && $hasthermostat->isActive()) || ($haswelcome && $haswelcome->isActive())){
+			echo '<div class="form-group">
+			<label class="col-sm-2 control-label">{{Récupérer les infos du plugin}}</label>';
+			if (($haswelcome && $haswelcome->isActive())){
+				echo '<div class="col-lg-2">
+					<a class="btn btn-success" id="bt_getFromWelcome"><i class="fa fa-random"></i> {{Netatmo Welcome}}</a>
+					</div>';
+			}
+			if (($hasthermostat && $hasthermostat->isActive())){
+				echo '<div class="col-lg-1">
+					<a class="btn btn-success" id="bt_getFromThermostat"><i class="fa fa-random"></i> {{Netatmo Thermostat}}</a>
+					</div>';
+			}
+			echo '</div>';
+		}
+    ?>
     <div class="form-group">
         <label class="col-lg-2 control-label">{{Synchroniser}}</label>
         <div class="col-lg-2">
-        <a class="btn btn-default" id="bt_syncWithNetatmoWeather"><i class='fa fa-refresh'></i> {{Synchroniser mes équipements}}</a>
+        <a class="btn btn-warning" id="bt_syncWithNetatmoWeather"><i class='fa fa-refresh'></i> {{Synchroniser mes équipements}}</a>
         </div>
     </div>
 </fieldset>
@@ -84,4 +103,62 @@ if (!isConnect()) {
             }
         });
     });
+	$('#bt_getFromWelcome').on('click', function () {
+	bootbox.confirm('{{Cela récupérera les identifiants configurés dans le plugin Netatmo Welcome, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? }}', function (result) {
+      if (result) {
+		$.ajax({// fonction permettant de faire de l'ajax
+            type: "POST", // methode de transmission des données au fichier php
+            url: "plugins/netatmoWeather/core/ajax/netatmoWeather.ajax.php", // url du fichier php
+            data: {
+                action: "getFromWelcome",
+            },
+            dataType: 'json',
+            error: function (request, status, error) {
+                handleAjaxError(request, status, error);
+            },
+            success: function (data) { // si l'appel a bien fonctionné
+				if (data.state != 'ok') {
+                    $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                    return;
+                }
+				console.log(data.result[0]);
+				$('.configKey[data-l1key=client_id]').empty().val(data.result[0]);
+				$('.configKey[data-l1key=client_secret]').empty().val(data.result[1]);
+				$('.configKey[data-l1key=username]').empty().val(data.result[2]);
+				$('.configKey[data-l1key=password]').empty().val(data.result[3]);
+                $('#div_alert').showAlert({message: '{{Synchronisation réussie}}', level: 'success'});
+            }
+        });
+    };
+	});
+	});
+	$('#bt_getFromThermostat').on('click', function () {
+	bootbox.confirm('{{Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? }}', function (result) {
+      if (result) {
+		$.ajax({// fonction permettant de faire de l'ajax
+            type: "POST", // methode de transmission des données au fichier php
+            url: "plugins/netatmoWeather/core/ajax/netatmoWeather.ajax.php", // url du fichier php
+            data: {
+                action: "getFromThermostat",
+            },
+            dataType: 'json',
+            error: function (request, status, error) {
+                handleAjaxError(request, status, error);
+            },
+            success: function (data) { // si l'appel a bien fonctionné
+				if (data.state != 'ok') {
+                    $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                    return;
+                }
+				console.log(data.result[0]);
+				$('.configKey[data-l1key=client_id]').empty().val(data.result[0]);
+				$('.configKey[data-l1key=client_secret]').empty().val(data.result[1]);
+				$('.configKey[data-l1key=username]').empty().val(data.result[2]);
+				$('.configKey[data-l1key=password]').empty().val(data.result[3]);
+                $('#div_alert').showAlert({message: '{{Synchronisation réussie}}', level: 'success'});
+            }
+        });
+    };
+	});
+	});
 </script>

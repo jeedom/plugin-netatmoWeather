@@ -43,6 +43,22 @@ class netatmoWeather extends eqLogic {
 		}
 		return self::$_client;
 	}
+	
+	public function getFromWelcome() {
+		$client_id = config::byKey('client_id', 'netatmoWelcome');
+		$client_secret = config::byKey('client_secret', 'netatmoWelcome');
+		$username = config::byKey('username', 'netatmoWelcome');
+		$password = config::byKey('password', 'netatmoWelcome');
+		return (array($client_id,$client_secret,$username,$password));
+	}
+	
+	public function getFromThermostat() {
+		$client_id = config::byKey('client_id', 'netatmoThermostat');
+		$client_secret = config::byKey('client_secret', 'netatmoThermostat');
+		$username = config::byKey('username', 'netatmoThermostat');
+		$password = config::byKey('password', 'netatmoThermostat');
+		return (array($client_id,$client_secret,$username,$password));
+	}
 
 	public function syncWithNetatmo() {
 		$getFriends = config::byKey('getFriendsDevices', 'netatmoWeather', 0);
