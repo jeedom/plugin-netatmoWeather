@@ -55,8 +55,11 @@ if (!isConnect()) {
             </div>
         </div>
 	<?php
-		$hasthermostat = plugin::byId('netatmoThermostat');
-		$haswelcome = plugin::byId('netatmoWelcome');
+		try {
+			$hasthermostat = plugin::byId('netatmoThermostat');
+			$haswelcome = plugin::byId('netatmoWelcome');
+		} catch (Exception $e) {
+		}
 		if (($hasthermostat && $hasthermostat->isActive()) || ($haswelcome && $haswelcome->isActive())){
 			echo '<div class="form-group">
 			<label class="col-sm-2 control-label">{{Récupérer les infos du plugin}}</label>';
