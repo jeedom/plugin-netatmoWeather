@@ -40,11 +40,11 @@ foreach ($eqLogics as $eqLogic) {
 	echo '<tr><td><a href="' . $eqLogic->getLinkToConfiguration() . '" style="text-decoration: none;">' . $eqLogic->getHumanName(true) . '</a></td>';
 	echo '<td><span class="label label-info" style="font-size : 1em;">' . $eqLogic->getId() . '</span></td>';
 	$battery = $eqLogic->getConfiguration('batteryStatus');
-	if ($battery < 20) {
+	if (trim($battery != '') && $battery < 20) {
 		$battery_status = '<span class="label label-danger" style="font-size : 1em;">' . $battery . '%</span>';
-	} elseif ($battery < 60) {
+	} elseif (trim($battery != '') && $battery < 60) {
 		$battery_status = '<span class="label label-warning" style="font-size : 1em;">' . $battery . '%</span>';
-	} elseif ($battery > 60) {
+	} elseif (trim($battery != '') && $battery > 60) {
 		$battery_status = '<span class="label label-success" style="font-size : 1em;">' . $battery . '%</span>';
 	} else {
 		$battery_status = '<span class="label label-primary" style="font-size : 1em;" title="{{Secteur}}"><i class="fa fa-plug"></i></span>';
