@@ -24,6 +24,7 @@ $eqLogics = netatmoWeather::byType('netatmoWeather');
 <table class="table table-condensed tablesorter" id="table_healthNetatmoWeather">
 	<thead>
 		<tr>
+			<th>{{Image}}</th>
 			<th>{{Module}}</th>
 			<th>{{ID}}</th>
 			<th>{{Batterie}}</th>
@@ -37,7 +38,12 @@ $eqLogics = netatmoWeather::byType('netatmoWeather');
 	<tbody>
 	 <?php
 foreach ($eqLogics as $eqLogic) {
-	echo '<tr><td><a href="' . $eqLogic->getLinkToConfiguration() . '" style="text-decoration: none;">' . $eqLogic->getHumanName(true) . '</a></td>';
+	if ($eqLogic->getConfiguration('type', '') != '') {
+			$img = '<img src="plugins/netatmoWeather/core/img/' . $eqLogic->getConfiguration('type', '') . '.png" height="65" width="55" />';
+		} else {
+			$img = '<img src="plugins/netatmoWeather/doc/images/netatmoWeather_icon.png" height="65" width="55" />';
+		}
+	echo '<tr><td>'.$img.'</td><td><a href="' . $eqLogic->getLinkToConfiguration() . '" style="text-decoration: none;">' . $eqLogic->getHumanName(true) . '</a></td>';
 	echo '<td><span class="label label-info" style="font-size : 1em;">' . $eqLogic->getId() . '</span></td>';
 	$battery = $eqLogic->getConfiguration('batteryStatus');
 	if (trim($battery != '') && $battery < 20) {
