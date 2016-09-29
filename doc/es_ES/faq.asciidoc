@@ -1,0 +1,4 @@
+== FAQ
+
+Quelle est la fréquence de rafraîchissement ?::
+Le systeme recupère les informations  toutes les 15 min.

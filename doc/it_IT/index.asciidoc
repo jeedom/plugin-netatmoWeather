@@ -1,0 +1,7 @@
+= Netatmo
+
+Plugin permettant de récupérer les informations des stations météo Netatmo.
+
+include::configuration.asciidoc[]
+
+include::faq.asciidoc[]
