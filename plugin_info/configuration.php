@@ -51,7 +51,7 @@ if (!isConnect()) {
 	 <div class="form-group">
             <label class="col-sm-2 control-label">{{Récupérer aussi les stations des amis}}</label>
             <div class="col-sm-3">
-                <input type="checkbox" class="configKey bootstrapSwitch" data-l1key="getFriendsDevices" />
+                <input type="checkbox" class="configKey" data-l1key="getFriendsDevices" />
             </div>
         </div>
 	<?php
