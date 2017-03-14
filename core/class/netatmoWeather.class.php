@@ -30,7 +30,7 @@ class netatmoWeather extends eqLogic {
 
 	/*     * ***********************Methode static*************************** */
 
-	public function getClient() {
+	public static function getClient() {
 		if (self::$_client == null) {
 			self::$_client = new NAApiClient(array(
 				'client_id' => config::byKey('client_id', 'netatmoWeather'),
@@ -44,7 +44,7 @@ class netatmoWeather extends eqLogic {
 		return self::$_client;
 	}
 	
-	public function getFromWelcome() {
+	public static function getFromWelcome() {
 		$client_id = config::byKey('client_id', 'netatmoWelcome');
 		$client_secret = config::byKey('client_secret', 'netatmoWelcome');
 		$username = config::byKey('username', 'netatmoWelcome');
@@ -52,7 +52,7 @@ class netatmoWeather extends eqLogic {
 		return (array($client_id,$client_secret,$username,$password));
 	}
 	
-	public function getFromThermostat() {
+	public static function getFromThermostat() {
 		$client_id = config::byKey('client_id', 'netatmoThermostat');
 		$client_secret = config::byKey('client_secret', 'netatmoThermostat');
 		$username = config::byKey('username', 'netatmoThermostat');
@@ -60,7 +60,7 @@ class netatmoWeather extends eqLogic {
 		return (array($client_id,$client_secret,$username,$password));
 	}
 
-	public function syncWithNetatmo() {
+	public static function syncWithNetatmo() {
 		$getFriends = config::byKey('getFriendsDevices', 'netatmoWeather', 0);
 		$helper = new NAApiHelper(self::getClient());
 		$devicelist = $helper->simplifyDeviceList();
