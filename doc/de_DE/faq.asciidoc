@@ -1,4 +1,0 @@
-== FAQ
-
-Wie häufig wird aktualisiert ?::
-Das System ruft alle 15 Minuten die Informationen ab.
