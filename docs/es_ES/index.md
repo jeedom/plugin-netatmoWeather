@@ -83,11 +83,11 @@ Une fois que vous cliquez sur un équipement vous obtenez :
 
 ![netatmoWeather5](../images/netatmoWeather5.png)
 
-Vous retrouvez ici toute la configuration de votre équipement :
+Aquí encontrará toda la configuración de su dispositivo:
 
 -   **Nom de l’équipement Netatmo** : nom de votre équipement Netatmo
 
--   **Objet parent** : indique l’objet parent auquel appartient
+-   **Objeto padre** : especifica el objeto padre al que pertenece
     l’équipement
 
 -   **Activer** : permet de rendre votre équipement actif
@@ -99,7 +99,7 @@ Vous retrouvez ici toute la configuration de votre équipement :
 -   **Type** : type de votre équipement (station, sonde intérieure,
     sonde extérieures…​)
 
-En dessous vous retrouvez la liste des commandes :
+A continuación encontrará la lista de ordenes :
 
 -   le nom affiché sur le dashboard
 

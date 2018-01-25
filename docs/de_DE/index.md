@@ -27,15 +27,15 @@ Recupération des informations de connexion
 Pour intégrer votre station, vous devez posséder un client\_id et un
 client\_secret généré sur le site <http://dev.netatmo.com>.
 
-Une fois dessus cliquez sur start :
+Klicken sie einmal auf Start :
 
 ![netatmoWeather10](../images/netatmoWeather10.png)
 
-Puis sur "create an app"
+Anschließend auf "create an app"
 
 ![netatmoWeather11](../images/netatmoWeather11.png)
 
-Identifiez vous, avec votre mail et mot de passe
+Melden Sie sich mit Ihrer E-Mail und Passwort an
 
 ![netatmoWeather12](../images/netatmoWeather12.png)
 
@@ -79,11 +79,11 @@ Voilà à quoi ressemble la page du plugin Netatmo (ici avec déjà 2
 > permet de faire apparaître un menu d’accès rapide (vous pouvez à
 > partir de votre profil le laisser toujours visible).
 
-Une fois que vous cliquez sur un équipement vous obtenez :
+Sobald Sie auf ein Gerät klicken, erhalten Sie :
 
 ![netatmoWeather5](../images/netatmoWeather5.png)
 
-Vous retrouvez ici toute la configuration de votre équipement :
+Hier finden sie die ganze Konfiguration Ihrer Geräte:
 
 -   **Nom de l’équipement Netatmo** : nom de votre équipement Netatmo
 
@@ -99,7 +99,7 @@ Vous retrouvez ici toute la configuration de votre équipement :
 -   **Type** : type de votre équipement (station, sonde intérieure,
     sonde extérieures…​)
 
-En dessous vous retrouvez la liste des commandes :
+Im unteren Bereich finden sie eine Liste der Befehle :
 
 -   le nom affiché sur le dashboard
 
@@ -114,11 +114,11 @@ En dessous vous retrouvez la liste des commandes :
 Widget 
 ======
 
-Voici le widget standard pour une station sur le dashboard :
+Hier ist das standard Widget für eine Station auf dem Armaturenbrett :
 
 ![netatmoWeather6](../images/netatmoWeather6.png)
 
-Et en mobile :
+Und das Mobile :
 
 ![netatmoWeather7](../images/netatmoWeather7.png)
 
