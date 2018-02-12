@@ -1,7 +1,7 @@
 Plugin permettant de récupérer les informations des stations météo
 Netatmo.
 
-Configuration du plugin 
+configuración del plugin
 =======================
 
 Une fois le plugin installé, il vous faut renseigner vos informations de
@@ -122,7 +122,7 @@ Et en mobile :
 
 ![netatmoWeather7](../images/netatmoWeather7.png)
 
-FAQ 
+Preguntas frecuentes
 ===
 
 Quelle est la fréquence de rafraîchissement ?
