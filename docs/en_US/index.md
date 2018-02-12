@@ -59,7 +59,7 @@ précedent)
 > Attention il faut bien que l’url de callback soit à "None" sinon ca ne
 > marchera pas.
 
-Configuration des équipements 
+Equipment configuration
 =============================
 
 La configuration des équipements Netatmo est accessible à partir du menu
