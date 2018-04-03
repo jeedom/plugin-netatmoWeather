@@ -2,8 +2,9 @@
 if (!isConnect('admin')) {
 	throw new Exception('{{401 - Accès non autorisé}}');
 }
-sendVarToJS('eqType', 'netatmoWeather');
-$eqLogics = eqLogic::byType('netatmoWeather');
+$plugin = plugin::byId('netatmoWeather');
+sendVarToJS('eqType', $plugin->getId());
+$eqLogics = eqLogic::byType($plugin->getId());
 ?>
 
 <div class="row row-overflow">
@@ -52,7 +53,7 @@ foreach ($eqLogics as $eqLogic) {
 		if ($eqLogic->getConfiguration('type', '') != '') {
 			echo '<img src="plugins/netatmoWeather/core/img/' . $eqLogic->getConfiguration('type', '') . '.png" height="105" width="95" />';
 		} else {
-			echo '<img src="plugins/netatmoWeather/doc/images/netatmoWeather_icon.png" height="105" width="95" />';
+			echo '<img src="' . $plugin->getPathImgIcon() . '" height="105" width="95" />';
 		}
 		echo "</center>";
 		echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;"><center>' . $eqLogic->getHumanName(true, true) . '</center></span>';
@@ -142,7 +143,7 @@ foreach (object::all() as $object) {
 </div>
 <div class="col-sm-6">
   <center>
-    <img src="plugins/netatmoWeather/doc/images/netatmoWeather_icon.png" id="img_netatmoModel" style="height : 300px;margin-top : 60px" />
+    <img src="' . $plugin->getPathImgIcon() . '" id="img_netatmoModel" style="height : 300px;margin-top : 60px" />
   </center>
 </div>
 </div>
