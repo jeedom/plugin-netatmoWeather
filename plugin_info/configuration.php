@@ -55,6 +55,8 @@ if (!isConnect()) {
             </div>
         </div>
 	<?php
+	    	$hasthermostat = false;
+	    	$haswelcome = false;
 		try {
 			$hasthermostat = plugin::byId('netatmoThermostat');
 			$haswelcome = plugin::byId('netatmoWelcome');
