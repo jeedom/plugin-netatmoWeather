@@ -1,7 +1,7 @@
 # 04/04/2018
 
-- Correction du widget anémometre
+- Korrektur des Windmesser-Widget
 
 # 03/04/2018
 
-- Correction des images
+- Korrektur von Bildern
