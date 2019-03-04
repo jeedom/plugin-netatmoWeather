@@ -244,6 +244,7 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setUnite('Pa');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
+			$netatmoWeatherCmd->setGeneric_type('PRESSURE');
 			$netatmoWeatherCmd->save();
 		} else {
 			$netatmoWeatherCmd = $this->getCmd(null, 'pressure');
@@ -264,6 +265,7 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setUnite('Pa');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
+			$netatmoWeatherCmd->setGeneric_type('PRESSURE');
 			$netatmoWeatherCmd->save();
 		} else {
 			$netatmoWeatherCmd = $this->getCmd(null, 'absolutepressure');
@@ -284,6 +286,7 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setUnite('ppm');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
+			$netatmoWeatherCmd->setGeneric_type('CO2');
 			$netatmoWeatherCmd->save();
 		} else {
 			$netatmoWeatherCmd = $this->getCmd(null, 'co2');
@@ -302,6 +305,7 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setLogicalId('noise');
 			$netatmoWeatherCmd->setUnite('db');
 			$netatmoWeatherCmd->setType('info');
+			$netatmoWeatherCmd->setGeneric_type('NOISE');
 			$netatmoWeatherCmd->setSubType('numeric');
 			$netatmoWeatherCmd->setIsHistorized(1);
 			$netatmoWeatherCmd->save();
@@ -323,6 +327,7 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setLogicalId('temperature');
 			$netatmoWeatherCmd->setUnite('°C');
 			$netatmoWeatherCmd->setType('info');
+			$netatmoWeatherCmd->setGeneric_type('TEMPERATURE');
 			$netatmoWeatherCmd->setSubType('numeric');
 			$netatmoWeatherCmd->save();
 		} else {
@@ -343,6 +348,7 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setLogicalId('min_temp');
 			$netatmoWeatherCmd->setUnite('°C');
 			$netatmoWeatherCmd->setType('info');
+			$netatmoWeatherCmd->setGeneric_type('TEMPERATURE');
 			$netatmoWeatherCmd->setSubType('numeric');
 			$netatmoWeatherCmd->save();
 		} else {
@@ -363,6 +369,7 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setLogicalId('max_temp');
 			$netatmoWeatherCmd->setUnite('°C');
 			$netatmoWeatherCmd->setType('info');
+			$netatmoWeatherCmd->setGeneric_type('TEMPERATURE');
 			$netatmoWeatherCmd->setSubType('numeric');
 			$netatmoWeatherCmd->save();
 		} else {
@@ -383,6 +390,7 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setLogicalId('humidity');
 			$netatmoWeatherCmd->setUnite('%');
 			$netatmoWeatherCmd->setType('info');
+			$netatmoWeatherCmd->setGeneric_type('HUMIDITY');
 			$netatmoWeatherCmd->setSubType('numeric');
 			$netatmoWeatherCmd->save();
 		} else {
@@ -403,6 +411,7 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setLogicalId('rain');
 			$netatmoWeatherCmd->setUnite('mm');
 			$netatmoWeatherCmd->setType('info');
+			$netatmoWeatherCmd->setGeneric_type('RAIN_TOTAL');
 			$netatmoWeatherCmd->setSubType('numeric');
 			$netatmoWeatherCmd->save();
 
@@ -416,6 +425,7 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setLogicalId('sum_rain_24');
 			$netatmoWeatherCmd->setUnite('mm');
 			$netatmoWeatherCmd->setType('info');
+			$netatmoWeatherCmd->setGeneric_type('RAIN_TOTAL');
 			$netatmoWeatherCmd->setSubType('numeric');
 			$netatmoWeatherCmd->save();
 
@@ -430,6 +440,7 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setLogicalId('sum_rain_1');
 			$netatmoWeatherCmd->setUnite('mm');
 			$netatmoWeatherCmd->setType('info');
+			$netatmoWeatherCmd->setGeneric_type('RAIN_TOTAL');
 			$netatmoWeatherCmd->setSubType('numeric');
 			$netatmoWeatherCmd->save();
 		} else {
@@ -458,6 +469,7 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setLogicalId('windangle');
 			$netatmoWeatherCmd->setUnite('°');
 			$netatmoWeatherCmd->setType('info');
+			$netatmoWeatherCmd->setGeneric_type('WIND_DIRECTION');
 			$netatmoWeatherCmd->setSubType('numeric');
 			$netatmoWeatherCmd->save();
 
@@ -471,6 +483,7 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setLogicalId('windstrength');
 			$netatmoWeatherCmd->setUnite('km/h');
 			$netatmoWeatherCmd->setType('info');
+			$netatmoWeatherCmd->setGeneric_type('WIND_SPEED');
 			$netatmoWeatherCmd->setSubType('numeric');
 			$netatmoWeatherCmd->save();
 
