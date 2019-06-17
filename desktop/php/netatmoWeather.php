@@ -39,7 +39,7 @@ foreach ($eqLogics as $eqLogic) {
 		} else {
 			echo '<img src="' . $plugin->getPathImgIcon() . '" />';
 		}
-		echo '<br/>;
+		echo '<br/>';
 		echo '<span>' . $eqLogic->getHumanName(true, true) . '</span>';
 		echo '</div>';
 	}
