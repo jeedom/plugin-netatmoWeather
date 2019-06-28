@@ -102,7 +102,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<div class="form-group">
 									<label class="col-sm-4 control-label">{{Type}}</label>
 									<div class="col-sm-6">
-										<select type="text" disabled class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="type" >
+										<select disabled class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="type">
 											<option value="station">{{Station}}</option>
 											<option value="module_ext">{{Module extérieur}}</option>
 											<option value="module_int">{{Module intérieur}}</option>
