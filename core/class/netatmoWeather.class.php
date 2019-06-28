@@ -1,35 +1,35 @@
 <?php
 
 /* This file is part of Jeedom.
- *
- * Jeedom is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jeedom is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
- */
+*
+* Jeedom is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* Jeedom is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 /* * ***************************Includes********************************* */
-require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
+require_once __DIR__ . '/../../../../core/php/core.inc.php';
 if (!class_exists('NAApiClient')) {
-	require_once dirname(__FILE__) . '/../../3rdparty/Netatmo-API-PHP/Clients/NAApiClient.php';
+	require_once __DIR__ . '/../../3rdparty/Netatmo-API-PHP/Clients/NAApiClient.php';
 }
 
 class netatmoWeather extends eqLogic {
 	/*     * *************************Attributs****************************** */
-
+	
 	private static $_client = null;
 	public static $_widgetPossibility = array('custom' => true);
-
+	
 	/*     * ***********************Methode static*************************** */
-
+	
 	public static function getClient() {
 		if (self::$_client == null) {
 			self::$_client = new NAApiClient(array(
@@ -59,7 +59,7 @@ class netatmoWeather extends eqLogic {
 		$password = config::byKey('password', 'netatmoThermostat');
 		return (array($client_id,$client_secret,$username,$password));
 	}
-
+	
 	public static function syncWithNetatmo() {
 		$getFriends = config::byKey('getFriendsDevices', 'netatmoWeather', 0);
 		$helper = new NAApiHelper(self::getClient());
@@ -112,7 +112,7 @@ class netatmoWeather extends eqLogic {
 			}
 		}
 	}
-
+	
 	public static function cron15() {
 		try {
 			try {
@@ -228,9 +228,9 @@ class netatmoWeather extends eqLogic {
 			return '';
 		}
 	}
-
+	
 	/*     * *********************Methode d'instance************************* */
-
+	
 	public function postSave() {
 		if (in_array($this->getConfiguration('type'), array('station'))) {
 			$netatmoWeatherCmd = $this->getCmd(null, 'pressure');
@@ -252,7 +252,7 @@ class netatmoWeather extends eqLogic {
 				$netatmoWeatherCmd->remove();
 			}
 		}
-
+		
 		if (in_array($this->getConfiguration('type'), array('station'))) {
 			$netatmoWeatherCmd = $this->getCmd(null, 'absolutepressure');
 			if (!is_object($netatmoWeatherCmd)) {
@@ -273,7 +273,7 @@ class netatmoWeather extends eqLogic {
 				$netatmoWeatherCmd->remove();
 			}
 		}
-
+		
 		if (in_array($this->getConfiguration('type'), array('module_int', 'station'))) {
 			$netatmoWeatherCmd = $this->getCmd(null, 'co2');
 			if (!is_object($netatmoWeatherCmd)) {
@@ -294,7 +294,7 @@ class netatmoWeather extends eqLogic {
 				$netatmoWeatherCmd->remove();
 			}
 		}
-
+		
 		if (in_array($this->getConfiguration('type'), array('station'))) {
 			$netatmoWeatherCmd = $this->getCmd(null, 'noise');
 			if (!is_object($netatmoWeatherCmd)) {
@@ -315,7 +315,7 @@ class netatmoWeather extends eqLogic {
 				$netatmoWeatherCmd->remove();
 			}
 		}
-
+		
 		if (in_array($this->getConfiguration('type'), array('module_ext', 'module_int', 'station'))) {
 			$netatmoWeatherCmd = $this->getCmd(null, 'temperature');
 			if (!is_object($netatmoWeatherCmd)) {
@@ -336,7 +336,7 @@ class netatmoWeather extends eqLogic {
 				$netatmoWeatherCmd->remove();
 			}
 		}
-
+		
 		if (in_array($this->getConfiguration('type'), array('module_ext', 'module_int', 'station'))) {
 			$netatmoWeatherCmd = $this->getCmd(null, 'min_temp');
 			if (!is_object($netatmoWeatherCmd)) {
@@ -357,7 +357,7 @@ class netatmoWeather extends eqLogic {
 				$netatmoWeatherCmd->remove();
 			}
 		}
-
+		
 		if (in_array($this->getConfiguration('type'), array('module_ext', 'module_int', 'station'))) {
 			$netatmoWeatherCmd = $this->getCmd(null, 'max_temp');
 			if (!is_object($netatmoWeatherCmd)) {
@@ -378,7 +378,7 @@ class netatmoWeather extends eqLogic {
 				$netatmoWeatherCmd->remove();
 			}
 		}
-
+		
 		if (in_array($this->getConfiguration('type'), array('module_ext', 'module_int', 'station'))) {
 			$netatmoWeatherCmd = $this->getCmd(null, 'humidity');
 			if (!is_object($netatmoWeatherCmd)) {
@@ -399,7 +399,7 @@ class netatmoWeather extends eqLogic {
 				$netatmoWeatherCmd->remove();
 			}
 		}
-
+		
 		if (in_array($this->getConfiguration('type'), array('module_rain'))) {
 			$netatmoWeatherCmd = $this->getCmd(null, 'rain');
 			if (!is_object($netatmoWeatherCmd)) {
@@ -414,7 +414,7 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setGeneric_type('RAIN_TOTAL');
 			$netatmoWeatherCmd->setSubType('numeric');
 			$netatmoWeatherCmd->save();
-
+			
 			$netatmoWeatherCmd = $this->getCmd(null, 'sum_rain_24');
 			if (!is_object($netatmoWeatherCmd)) {
 				$netatmoWeatherCmd = new netatmoWeatherCmd();
@@ -428,14 +428,14 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setGeneric_type('RAIN_TOTAL');
 			$netatmoWeatherCmd->setSubType('numeric');
 			$netatmoWeatherCmd->save();
-
+			
 			$netatmoWeatherCmd = $this->getCmd(null, 'sum_rain_1');
 			if (!is_object($netatmoWeatherCmd)) {
 				$netatmoWeatherCmd = new netatmoWeatherCmd();
 				$netatmoWeatherCmd->setName(__('Pluie 1H', __FILE__));
 				$netatmoWeatherCmd->setIsHistorized(0);
 			}
-
+			
 			$netatmoWeatherCmd->setEqLogic_id($this->getId());
 			$netatmoWeatherCmd->setLogicalId('sum_rain_1');
 			$netatmoWeatherCmd->setUnite('mm');
@@ -457,7 +457,7 @@ class netatmoWeather extends eqLogic {
 				$netatmoWeatherCmd->remove();
 			}
 		}
-
+		
 		if (in_array($this->getConfiguration('type'), array('module_wind'))) {
 			$netatmoWeatherCmd = $this->getCmd(null, 'windangle');
 			if (!is_object($netatmoWeatherCmd)) {
@@ -472,7 +472,7 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setGeneric_type('WIND_DIRECTION');
 			$netatmoWeatherCmd->setSubType('numeric');
 			$netatmoWeatherCmd->save();
-
+			
 			$netatmoWeatherCmd = $this->getCmd(null, 'windstrength');
 			if (!is_object($netatmoWeatherCmd)) {
 				$netatmoWeatherCmd = new netatmoWeatherCmd();
@@ -486,49 +486,49 @@ class netatmoWeather extends eqLogic {
 			$netatmoWeatherCmd->setGeneric_type('WIND_SPEED');
 			$netatmoWeatherCmd->setSubType('numeric');
 			$netatmoWeatherCmd->save();
-
+			
 			$netatmoWeatherCmd = $this->getCmd(null, 'gustangle');
 			if (!is_object($netatmoWeatherCmd)) {
 				$netatmoWeatherCmd = new netatmoWeatherCmd();
 				$netatmoWeatherCmd->setName(__('Direction rafale', __FILE__));
 				$netatmoWeatherCmd->setIsHistorized(0);
 			}
-
+			
 			$netatmoWeatherCmd->setEqLogic_id($this->getId());
 			$netatmoWeatherCmd->setLogicalId('gustangle');
 			$netatmoWeatherCmd->setUnite('°');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
 			$netatmoWeatherCmd->save();
-
+			
 			$netatmoWeatherCmd = $this->getCmd(null, 'guststrength');
 			if (!is_object($netatmoWeatherCmd)) {
 				$netatmoWeatherCmd = new netatmoWeatherCmd();
 				$netatmoWeatherCmd->setName(__('Vitesse rafale', __FILE__));
 				$netatmoWeatherCmd->setIsHistorized(0);
 			}
-
+			
 			$netatmoWeatherCmd->setEqLogic_id($this->getId());
 			$netatmoWeatherCmd->setLogicalId('guststrength');
 			$netatmoWeatherCmd->setUnite('km/h');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
 			$netatmoWeatherCmd->save();
-
+			
 			$netatmoWeatherCmd = $this->getCmd(null, 'max_wind_str');
 			if (!is_object($netatmoWeatherCmd)) {
 				$netatmoWeatherCmd = new netatmoWeatherCmd();
 				$netatmoWeatherCmd->setName(__('Vitesse Max', __FILE__));
 				$netatmoWeatherCmd->setIsHistorized(0);
 			}
-
+			
 			$netatmoWeatherCmd->setEqLogic_id($this->getId());
 			$netatmoWeatherCmd->setLogicalId('max_wind_str');
 			$netatmoWeatherCmd->setUnite('km/h');
 			$netatmoWeatherCmd->setType('info');
 			$netatmoWeatherCmd->setSubType('numeric');
 			$netatmoWeatherCmd->save();
-
+			
 		} else {
 			$netatmoWeatherCmd = $this->getCmd(null, 'windangle');
 			if (is_object($netatmoWeatherCmd)) {
@@ -551,7 +551,7 @@ class netatmoWeather extends eqLogic {
 				$netatmoWeatherCmd->remove();
 			}
 		}
-
+		
 		$refresh = $this->getCmd(null, 'refresh');
 		if (!is_object($refresh)) {
 			$refresh = new netatmoWeatherCmd();
@@ -563,7 +563,7 @@ class netatmoWeather extends eqLogic {
 		$refresh->setSubType('other');
 		$refresh->save();
 	}
-
+	
 	public function toHtml($_version = 'dashboard') {
 		$replace = $this->preToHtml($_version);
 		if (!is_array($replace)) {
@@ -587,28 +587,28 @@ class netatmoWeather extends eqLogic {
 		cache::set('widgetHtml' . $_version . $this->getId(), $html, 0);
 		return $html;
 	}
-
+	
 }
 
 class netatmoWeatherCmd extends cmd {
 	/*     * *************************Attributs****************************** */
-
+	
 	public static $_widgetPossibility = array('custom' => false);
-
+	
 	/*     * ***********************Methode static*************************** */
-
+	
 	/*     * *********************Methode d'instance************************* */
-
+	
 	public function dontRemoveCmd() {
 		return true;
 	}
-
+	
 	public function execute($_options = array()) {
 		if ($this->getLogicalId() == 'refresh') {
 			netatmoWeather::cron15();
 		}
 	}
-
+	
 	/*     * **********************Getteur Setteur*************************** */
 }
 
