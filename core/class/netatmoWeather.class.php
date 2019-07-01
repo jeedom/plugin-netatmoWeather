@@ -39,7 +39,6 @@ class netatmoWeather extends eqLogic {
 				'password' => config::byKey('password', 'netatmoWeather'),
 				'scope' => 'read_station',
 			));
-			self::$_client->getAccessToken();
 		}
 		return self::$_client;
 	}
