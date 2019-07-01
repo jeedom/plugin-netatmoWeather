@@ -103,11 +103,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									<label class="col-sm-4 control-label">{{Type}}</label>
 									<div class="col-sm-6">
 										<select disabled class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="type">
-											<option value="station">{{Station}}</option>
-											<option value="module_ext">{{Module extérieur}}</option>
-											<option value="module_int">{{Module intérieur}}</option>
-											<option value="module_rain">{{Module pluie}}</option>
-											<option value="module_wind">{{Anémomètre}}</option>
+											<option value="NAMain">{{Station}}</option>
+											<option value="NAModule1">{{Module extérieur}}</option>
+											<option value="NAModule4">{{Module intérieur}}</option>
+											<option value="NAModule3">{{Module pluie}}</option>
+											<option value="NAModule2">{{Anémomètre}}</option>
 										</select>
 									</div>
 								</div>
