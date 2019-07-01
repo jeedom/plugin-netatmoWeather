@@ -18,13 +18,9 @@
 
 /* * ***************************Includes********************************* */
 require_once __DIR__ . '/../../../../core/php/core.inc.php';
-if (!class_exists('NAApiClient')) {
-	require_once __DIR__ . '/../../3rdparty/Netatmo-API-PHP/Clients/NAApiClient.php';
-}
 if (!class_exists('netatmoApi')) {
 	require_once __DIR__ . '/netatmoApi.class.php';
 }
-
 class netatmoWeather extends eqLogic {
 	/*     * *************************Attributs****************************** */
 	
@@ -35,12 +31,12 @@ class netatmoWeather extends eqLogic {
 	
 	public static function getClient() {
 		if (self::$_client == null) {
-			self::$_client = new NAApiClient(array(
+			self::$_client = new netatmoApi(array(
 				'client_id' => config::byKey('client_id', 'netatmoWeather'),
 				'client_secret' => config::byKey('client_secret', 'netatmoWeather'),
 				'username' => config::byKey('username', 'netatmoWeather'),
 				'password' => config::byKey('password', 'netatmoWeather'),
-				'scope' => NAScopes::SCOPE_READ_STATION,
+				'scope' => 'read_station',
 			));
 			self::$_client->getAccessToken();
 		}
@@ -65,9 +61,8 @@ class netatmoWeather extends eqLogic {
 	
 	public static function syncWithNetatmo() {
 		$getFriends = config::byKey('getFriendsDevices', 'netatmoWeather', 0);
-		$helper = new NAApiHelper(self::getClient());
-		$devicelist = $helper->simplifyDeviceList();
-		log::add('netatmoWeather', 'debug', print_r($devicelist, true));
+		$devicelist = self::getClient()->api("devicelist", "POST", array("app_type" => 'app_station'));
+		log::add('netatmoWeather', 'debug', json_encode($devicelist));
 		foreach ($devicelist['devices'] as $device) {
 			$eqLogic = eqLogic::byLogicalId($device['_id'], 'netatmoWeather');
 			if (isset($device['read_only']) && $device['read_only'] === true && ($getFriends == '' || $getFriends == 0)) {
@@ -119,11 +114,11 @@ class netatmoWeather extends eqLogic {
 	public static function cron15() {
 		try {
 			try {
-				$helper = new NAApiHelper(self::getClient());
+				$devicelist = self::getClient()->api("devicelist", "POST", array("app_type" => 'app_station'));
 				if (config::byKey('numberFailed', 'netatmoWeather', 0) > 0) {
 					config::save('numberFailed', 0, 'netatmoWeather');
 				}
-			} catch (NAClientException $ex) {
+			} catch (Exception $ex) {
 				if (config::byKey('numberFailed', 'netatmoWeather', 0) > 3) {
 					log::add('netatmoWeather', 'error', __('Erreur sur synchro netatmo weather ', __FILE__) . ' (' . config::byKey('numberFailed', 'netatmoWeather', 0) . ') ' . $ex->getMessage());
 				} else {
@@ -131,100 +126,73 @@ class netatmoWeather extends eqLogic {
 				}
 				return;
 			}
-			$devicelist = $helper->simplifyDeviceList();
 			foreach ($devicelist['devices'] as $device) {
 				$eqLogic = eqLogic::byLogicalId($device["_id"], 'netatmoWeather');
 				if (!is_object($eqLogic)) {
 					continue;
 				}
-				$changed = false;
 				if ($eqLogic->getConfiguration('firmware') != $device['firmware']) {
-					$changed = true;
 					$eqLogic->setConfiguration('firmware', $device['firmware']);
 				}
 				if ($eqLogic->getConfiguration('wifi_status') != $device['wifi_status']) {
-					$changed = true;
 					$eqLogic->setConfiguration('wifi_status', $device['wifi_status']);
 				}
-				if ($changed) {
-					$eqLogic->save();
-				}
+				$eqLogic->save();
 				foreach ($device['dashboard_data'] as $key => $value) {
-					$cmd = $eqLogic->getCmd(null, strtolower($key));
-					if (is_object($cmd)) {
-						if ($key == 'max_temp') {
-							$cmd->setCollectDate(date('Y-m-d H:i:s', $device['dashboard_data']['date_max_temp']));
-						} else if ($key == 'min_temp') {
-							$cmd->setCollectDate(date('Y-m-d H:i:s', $device['dashboard_data']['date_min_temp']));
-						} else {
-							$cmd->setCollectDate(date('Y-m-d H:i:s', $device['last_status_store']));
-						}
-						$cmd->event($value);
+					if ($key == 'max_temp') {
+						$collectDate = date('Y-m-d H:i:s', $device['dashboard_data']['date_max_temp']);
+					} else if ($key == 'min_temp') {
+						$collectDate = date('Y-m-d H:i:s', $device['dashboard_data']['date_min_temp']);
+					} else if ($key == 'max_wind_str') {
+						$collectDate = date('Y-m-d H:i:s', $device['dashboard_data']['date_max_wind_str']);
+					} else {
+						$collectDate = date('Y-m-d H:i:s', $device['dashboard_data']['time_utc']);
 					}
+					$eqLogic->checkAndUpdateCmd(strtolower($key),$value,$collectDate);
 				}
-				$eqLogic->refreshWidget();
-				foreach ($device['modules'] as $module) {
+			}
+			if(count($devicelist['modules']) > 0){
+				foreach ($devicelist['modules'] as $module) {
 					$eqLogic = eqLogic::byLogicalId($module["_id"], 'netatmoWeather');
-					$changed = false;
 					if ($eqLogic->getConfiguration('rf_status') != $module['rf_status']) {
-						$changed = true;
 						$eqLogic->setConfiguration('rf_status', $module['rf_status']);
 					}
 					if ($eqLogic->getConfiguration('firmware') != $module['firmware']) {
-						$changed = true;
 						$eqLogic->setConfiguration('firmware', $module['firmware']);
 					}
-					if ($changed) {
-						$eqLogic->save();
-					}
+					$eqLogic->save();
 					$battery_max = null;
 					$battery_min = null;
 					if ($module['type'] == 'NAModule1') {
-						//outdoormodule
 						$battery_max = 6000;
 						$battery_min = 3600;
-					}
-					if ($module['type'] == 'NAModule4') {
-						//indoor
+					}else if ($module['type'] == 'NAModule4') {
 						$battery_max = 6000;
 						$battery_min = 4200;
-					}
-					if ($module['type'] == 'NAModule3') {
-						//rain
+					}else if ($module['type'] == 'NAModule3') {
 						$battery_max = 6000;
 						$battery_min = 3600;
-					}
-					if ($module['type'] == 'NAModule2') {
-						//wind
+					}else if ($module['type'] == 'NAModule2') {
 						$battery_max = 6000;
 						$battery_min = 3950;
 					}
 					if ($battery_max != null && $battery_min != null) {
 						$battery = round(($module['battery_vp'] - $battery_min) / ($battery_max - $battery_min) * 100, 0);
 					}
-					if ($battery < 0) {
-						$battery = 0;
-					}
-					if ($battery > 100) {
-						$battery = 100;
-					}
 					$eqLogic->batteryStatus($battery);
+					
 					foreach ($module['dashboard_data'] as $key => $value) {
-						$cmd = $eqLogic->getCmd(null, strtolower($key));
-						if (is_object($cmd)) {
-							if ($key == 'max_temp') {
-								$cmd->setCollectDate(date('Y-m-d H:i:s', $module['dashboard_data']['date_max_temp']));
-							} else if ($key == 'min_temp') {
-								$cmd->setCollectDate(date('Y-m-d H:i:s', $module['dashboard_data']['date_min_temp']));
-							} else if ($key == 'max_wind_str') {
-								$cmd->setCollectDate(date('Y-m-d H:i:s', $module['dashboard_data']['date_max_wind_str']));
-							} else {
-								$cmd->setCollectDate(date('Y-m-d H:i:s', $module['dashboard_data']['time_utc']));
-							}
-							$cmd->event($value);
+						if ($key == 'max_temp') {
+							$collectDate = date('Y-m-d H:i:s', $module['dashboard_data']['date_max_temp']);
+						} else if ($key == 'min_temp') {
+							$collectDate = date('Y-m-d H:i:s', $module['dashboard_data']['date_min_temp']);
+						} else if ($key == 'max_wind_str') {
+							$collectDate = date('Y-m-d H:i:s', $module['dashboard_data']['date_max_wind_str']);
+						} else {
+							$collectDate = date('Y-m-d H:i:s', $module['dashboard_data']['time_utc']);
 						}
+						$eqLogic->checkAndUpdateCmd(strtolower($key),$value,$collectDate);
 					}
-					$eqLogic->refreshWidget();
 				}
 			}
 		} catch (Exception $e) {

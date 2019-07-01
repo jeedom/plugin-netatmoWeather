@@ -60,7 +60,7 @@ class netatmoApi {
     if(isset($config["refresh_token"])){
       $this->refresh_token = $config["refresh_token"];
     }
-    $uri = array("base_uri" => BACKEND_BASE_URI, "services_uri" => BACKEND_SERVICES_URI, "access_token_uri" => BACKEND_ACCESS_TOKEN_URI, "authorize_uri" => BACKEND_AUTHORIZE_URI);
+    $uri = array("base_uri" => self::BACKEND_BASE_URI, "services_uri" => self::BACKEND_SERVICES_URI, "access_token_uri" => self::BACKEND_ACCESS_TOKEN_URI, "authorize_uri" => self::BACKEND_AUTHORIZE_URI);
     foreach($uri as $key => $val){
       if(isset($config[$key])){
         $this->setVariable($key, $config[$key]);
@@ -113,7 +113,7 @@ class netatmoApi {
       $result = curl_exec($ch);
     }
     if ($result === FALSE)  {
-      $e = new Exception(curl_errno($ch), curl_error($ch));
+      $e = new Exception(curl_errno($ch).' | '.curl_error($ch));
       curl_close($ch);
       throw $e;
     }
@@ -124,9 +124,9 @@ class netatmoApi {
       $decode = json_decode($body, TRUE);
       if(!$decode){
         if (preg_match('/^HTTP\/1.1 ([0-9]{3,3}) (.*)$/', $headers[0], $matches)){
-          throw new Exception($matches[1], $matches[2]);
+          throw new Exception($matches[1].' | '. $matches[2]);
         }else {
-          throw new Exception(200, "OK");
+          throw new Exception("OK");
         }
       }
       return $decode;
@@ -136,9 +136,9 @@ class netatmoApi {
       }
       $decode = json_decode($body, TRUE);
       if(!$decode){
-        throw new Exception($matches[1], $matches[2], null);
+        throw new Exception($matches[1].' | '. $matches[2]);
       }
-      throw new Exception($matches[1], $matches[2], $decode);
+      throw new Exception($matches[1].' | '.$matches[2].' | '. $decode);
     }
   }
   
