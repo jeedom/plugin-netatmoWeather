@@ -94,12 +94,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-4 control-label">{{Identifiant}}</label>
-									<div class="col-sm-6">
-										<span class="eqLogicAttr label label-info" style="font-size:1em;" data-l1key="logicalId"></span>
-									</div>
-								</div>
-								<div class="form-group">
 									<label class="col-sm-4 control-label">{{Type}}</label>
 									<div class="col-sm-6">
 										<select disabled class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="type">
@@ -109,6 +103,18 @@ $eqLogics = eqLogic::byType($plugin->getId());
 											<option value="NAModule3">{{Module pluie}}</option>
 											<option value="NAModule2">{{Anémomètre}}</option>
 										</select>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+					<div class="col-sm-6">
+						<form class="form-horizontal">
+							<fieldset>
+								<div class="form-group">
+									<label class="col-sm-4 control-label">{{Identifiant}}</label>
+									<div class="col-sm-6">
+										<span class="eqLogicAttr label label-info" style="font-size:1em;" data-l1key="logicalId"></span>
 									</div>
 								</div>
 								<div class="form-group">
@@ -128,8 +134,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</fieldset>
 						</form>
-					</div>
-					<div class="col-sm-6">
 						<center>
 							<img src="' . $plugin->getPathImgIcon() . '" id="img_netatmoModel" style="height : 300px;margin-top : 60px" />
 						</center>
