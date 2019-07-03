@@ -126,14 +126,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
 										</span>
 									</div>
 								</div>
-								<div class="form-group" id="battery_net_weather">
-									<label class="col-sm-4 control-label">{{Batterie}}</label>
-									<div class="col-sm-6">
-										<span class="label label-info" style="font-size:1em;">
-											<span class="eqLogicAttr" data-l1key="configuration" data-l2key="batteryStatus"></span> %
-										</span>
-									</div>
-								</div>
 							</fieldset>
 						</form>
 					</div>
