@@ -135,7 +135,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							</fieldset>
 						</form>
 						<center>
-							<img src="' . $plugin->getPathImgIcon() . '" id="img_netatmoModel" style="height : 300px;margin-top : 60px" />
+							<img src="' . $plugin->getPathImgIcon() . '" id="img_netatmoModel" style="height : 250px;margin-top : 60px" />
 						</center>
 					</div>
 				</div>
