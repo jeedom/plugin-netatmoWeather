@@ -26,7 +26,7 @@
   },
   "NAModule4" : {
     "type" : "module_int",
-    "cmd" : ["temperature","min_temp","max_temp","humidity"],
+    "cmd" : ["temperature","min_temp","max_temp","humidity","co2"],
     "bat_type" : "4x1.5V AAA",
     "bat_max" : 6000,
     "bat_min" : 4200
