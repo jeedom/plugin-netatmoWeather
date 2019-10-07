@@ -134,7 +134,7 @@ class netatmoWeather extends eqLogic {
 				}
 				$eqLogic->setConfiguration('firmware', $device['firmware']);
 				$eqLogic->setConfiguration('wifi_status', $device['wifi_status']);
-				$eqLogic->save();
+				$eqLogic->save(true);
 				foreach ($device['dashboard_data'] as $key => $value) {
 					if ($key == 'max_temp') {
 						$collectDate = date('Y-m-d H:i:s', $device['dashboard_data']['date_max_temp']);
@@ -156,7 +156,7 @@ class netatmoWeather extends eqLogic {
 					}
 					$eqLogic->setConfiguration('rf_status', $module['rf_status']);
 					$eqLogic->setConfiguration('firmware', $module['firmware']);
-					$eqLogic->save();
+					$eqLogic->save(true);
 					$eqLogic->batteryStatus(round(($module['battery_vp'] - self::getGConfig($module['type'].'::bat_min')) / (self::getGConfig($module['type'].'::bat_max') - self::getGConfig($module['type'].'::bat_min')) * 100, 0));
 					
 					foreach ($module['dashboard_data'] as $key => $value) {
