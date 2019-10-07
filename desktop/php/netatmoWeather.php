@@ -40,7 +40,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						echo '<img src="' . $plugin->getPathImgIcon() . '" />';
 					}
 					echo '<br/>';
-					echo '<span>' . $eqLogic->getHumanName(true, true) . '</span>';
+					echo '<span class="name">' . $eqLogic->getHumanName(true, true) . '</span>';
 					echo '</div>';
 				}
 				?>
