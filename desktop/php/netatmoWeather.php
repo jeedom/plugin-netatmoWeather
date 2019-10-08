@@ -26,7 +26,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 		<input class="form-control" placeholder="{{Rechercher}}" id="in_searchEqlogic" />
 		<?php
 		if (count($eqLogics) == 0) {
-			echo "<br/><br/><br/><center><span style='color:#767676;font-size:1.2em;font-weight: bold;'>{{Vous n'avez pas encore de station Netatmo, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer}}</span></center>";
+			echo "<br/><br/><br/><center><span style='color:#767676;font-size:1.2em;font-weight: bold;'>{{Vous n’avez pas encore de station Netatmo, cliquez sur configuration et cliquez sur synchroniser pour commencer}}</span></center>";
 		} else {
 			?>
 			<div class="eqLogicThumbnailContainer">
