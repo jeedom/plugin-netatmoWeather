@@ -1,47 +1,61 @@
 <?php
 
 /* This file is part of Jeedom.
- *
- * Jeedom is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jeedom is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
- */
+*
+* Jeedom is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* Jeedom is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 /* * ***************************Includes********************************* */
-require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
-if (!class_exists('NAApiClient')) {
-	require_once dirname(__FILE__) . '/../../3rdparty/Netatmo-API-PHP/Clients/NAApiClient.php';
+require_once __DIR__ . '/../../../../core/php/core.inc.php';
+if (!class_exists('netatmoApi')) {
+	require_once __DIR__ . '/netatmoApi.class.php';
 }
-
 class netatmoWeather extends eqLogic {
 	/*     * *************************Attributs****************************** */
-
+	
 	private static $_client = null;
+	private static $_globalConfig = null;
 	public static $_widgetPossibility = array('custom' => true);
-
+	
 	/*     * ***********************Methode static*************************** */
-
+	
 	public static function getClient() {
 		if (self::$_client == null) {
-			self::$_client = new NAApiClient(array(
+			self::$_client = new netatmoApi(array(
 				'client_id' => config::byKey('client_id', 'netatmoWeather'),
 				'client_secret' => config::byKey('client_secret', 'netatmoWeather'),
 				'username' => config::byKey('username', 'netatmoWeather'),
 				'password' => config::byKey('password', 'netatmoWeather'),
-				'scope' => NAScopes::SCOPE_READ_STATION,
+				'scope' => 'read_station',
 			));
-			self::$_client->getAccessToken();
 		}
 		return self::$_client;
+	}
+	
+	public static function getGConfig($_key){
+		$keys = explode('::',$_key);
+		if(self::$_globalConfig == null){
+			self::$_globalConfig = json_decode(file_get_contents(__DIR__.'/../config/config.json'),true);
+		}
+		$return = self::$_globalConfig;
+		foreach ($keys as $key) {
+			if(!isset($return[$key])){
+				return '';
+			}
+			$return = $return[$key];
+		}
+		return $return;
 	}
 	
 	public static function getFromWelcome() {
@@ -59,12 +73,11 @@ class netatmoWeather extends eqLogic {
 		$password = config::byKey('password', 'netatmoThermostat');
 		return (array($client_id,$client_secret,$username,$password));
 	}
-
+	
 	public static function syncWithNetatmo() {
 		$getFriends = config::byKey('getFriendsDevices', 'netatmoWeather', 0);
-		$helper = new NAApiHelper(self::getClient());
-		$devicelist = $helper->simplifyDeviceList();
-		log::add('netatmoWeather', 'debug', print_r($devicelist, true));
+		$devicelist = self::getClient()->api("devicelist", "POST", array("app_type" => 'app_station'));
+		log::add('netatmoWeather', 'debug', json_encode($devicelist));
 		foreach ($devicelist['devices'] as $device) {
 			$eqLogic = eqLogic::byLogicalId($device['_id'], 'netatmoWeather');
 			if (isset($device['read_only']) && $device['read_only'] === true && ($getFriends == '' || $getFriends == 0)) {
@@ -74,541 +87,144 @@ class netatmoWeather extends eqLogic {
 				$eqLogic = new netatmoWeather();
 				$eqLogic->setIsVisible(1);
 				$eqLogic->setIsEnable(1);
+				$eqLogic->setName($device['station_name']);
+				$eqLogic->setCategory('heating', 1);
 			}
 			$eqLogic->setEqType_name('netatmoWeather');
-			$eqLogic->setName($device['station_name']);
 			$eqLogic->setLogicalId($device['_id']);
-			$eqLogic->setConfiguration('type', 'station');
-			$eqLogic->setCategory('heating', 1);
+			$eqLogic->setConfiguration('type', $device['type']);
 			$eqLogic->save();
-			foreach ($device['modules'] as $module) {
-				$battery_type = '';
-				if ($module['type'] == "NAModule1") {
-					$type = 'module_ext';
-					$battery_type = '4x1.5V AAA';
-				} elseif ($module['type'] == "NAModule4") {
-					$type = 'module_int';
-					$battery_type = '4x1.5V AAA';
-				} elseif ($module['type'] == "NAModule3") {
-					$type = 'module_rain';
-					$battery_type = '2x1.5V AAA';
-				} elseif ($module['type'] == "NAModule2") {
-					$type = 'module_wind';
-					$battery_type = '4x1.5V AA';
-				}
-				$eqLogic = eqLogic::byLogicalId($module['_id'], 'netatmoWeather');
-				if (!is_object($eqLogic)) {
-					$eqLogic = new netatmoWeather();
-				}
-				$eqLogic->setConfiguration('battery_type', $battery_type);
-				$eqLogic->setEqType_name('netatmoWeather');
-				$eqLogic->setIsEnable(1);
+		}
+		foreach ($devicelist['modules'] as $module) {
+			$eqLogic = eqLogic::byLogicalId($module['_id'], 'netatmoWeather');
+			if (!is_object($eqLogic)) {
+				$eqLogic = new netatmoWeather();
 				$eqLogic->setName($module['module_name']);
-				$eqLogic->setLogicalId($module['_id']);
-				$eqLogic->setConfiguration('type', $type);
+				$eqLogic->setIsEnable(1);
 				$eqLogic->setCategory('heating', 1);
 				$eqLogic->setIsVisible(1);
-				$eqLogic->save();
 			}
+			$eqLogic->setConfiguration('battery_type', self::getGConfig($module['type'].'::bat_type'));
+			$eqLogic->setEqType_name('netatmoWeather');
+			$eqLogic->setLogicalId($module['_id']);
+			$eqLogic->setConfiguration('type', $module['type']);
+			$eqLogic->save();
 		}
 	}
-
+	
 	public static function cron15() {
 		try {
 			try {
-				$helper = new NAApiHelper(self::getClient());
+				$devicelist = self::getClient()->api("devicelist", "POST", array("app_type" => 'app_station'));
 				if (config::byKey('numberFailed', 'netatmoWeather', 0) > 0) {
 					config::save('numberFailed', 0, 'netatmoWeather');
 				}
-			} catch (NAClientException $ex) {
+			} catch (Exception $ex) {
 				if (config::byKey('numberFailed', 'netatmoWeather', 0) > 3) {
 					log::add('netatmoWeather', 'error', __('Erreur sur synchro netatmo weather ', __FILE__) . ' (' . config::byKey('numberFailed', 'netatmoWeather', 0) . ') ' . $ex->getMessage());
-				} else {
-					config::save('numberFailed', config::byKey('numberFailed', 'netatmoWeather', 0) + 1, 'netatmoWeather');
+					return;
 				}
+				config::save('numberFailed', config::byKey('numberFailed', 'netatmoWeather', 0) + 1, 'netatmoWeather');
 				return;
 			}
-			$devicelist = $helper->simplifyDeviceList();
 			foreach ($devicelist['devices'] as $device) {
 				$eqLogic = eqLogic::byLogicalId($device["_id"], 'netatmoWeather');
 				if (!is_object($eqLogic)) {
 					continue;
 				}
-				$changed = false;
-				if ($eqLogic->getConfiguration('firmware') != $device['firmware']) {
-					$changed = true;
-					$eqLogic->setConfiguration('firmware', $device['firmware']);
-				}
-				if ($eqLogic->getConfiguration('wifi_status') != $device['wifi_status']) {
-					$changed = true;
-					$eqLogic->setConfiguration('wifi_status', $device['wifi_status']);
-				}
-				if ($changed) {
-					$eqLogic->save();
-				}
+				$eqLogic->setConfiguration('firmware', $device['firmware']);
+				$eqLogic->setConfiguration('wifi_status', $device['wifi_status']);
+				$eqLogic->save(true);
 				foreach ($device['dashboard_data'] as $key => $value) {
-					$cmd = $eqLogic->getCmd(null, strtolower($key));
-					if (is_object($cmd)) {
-						if ($key == 'max_temp') {
-							$cmd->setCollectDate(date('Y-m-d H:i:s', $device['dashboard_data']['date_max_temp']));
-						} else if ($key == 'min_temp') {
-							$cmd->setCollectDate(date('Y-m-d H:i:s', $device['dashboard_data']['date_min_temp']));
-						} else {
-							$cmd->setCollectDate(date('Y-m-d H:i:s', $device['last_status_store']));
-						}
-						$cmd->event($value);
+					if ($key == 'max_temp') {
+						$collectDate = date('Y-m-d H:i:s', $device['dashboard_data']['date_max_temp']);
+					} else if ($key == 'min_temp') {
+						$collectDate = date('Y-m-d H:i:s', $device['dashboard_data']['date_min_temp']);
+					} else if ($key == 'max_wind_str') {
+						$collectDate = date('Y-m-d H:i:s', $device['dashboard_data']['date_max_wind_str']);
+					} else {
+						$collectDate = date('Y-m-d H:i:s', $device['dashboard_data']['time_utc']);
 					}
+					$eqLogic->checkAndUpdateCmd(strtolower($key),$value,$collectDate);
 				}
-				$eqLogic->refreshWidget();
-				foreach ($device['modules'] as $module) {
+			}
+			if(count($devicelist['modules']) > 0){
+				foreach ($devicelist['modules'] as $module) {
 					$eqLogic = eqLogic::byLogicalId($module["_id"], 'netatmoWeather');
-					$changed = false;
-					if ($eqLogic->getConfiguration('rf_status') != $module['rf_status']) {
-						$changed = true;
-						$eqLogic->setConfiguration('rf_status', $module['rf_status']);
+					if(!is_object($eqLogic)){
+						continue;
 					}
-					if ($eqLogic->getConfiguration('firmware') != $module['firmware']) {
-						$changed = true;
-						$eqLogic->setConfiguration('firmware', $module['firmware']);
-					}
-					if ($changed) {
-						$eqLogic->save();
-					}
-					$battery_max = null;
-					$battery_min = null;
-					if ($module['type'] == 'NAModule1') {
-						//outdoormodule
-						$battery_max = 6000;
-						$battery_min = 3600;
-					}
-					if ($module['type'] == 'NAModule4') {
-						//indoor
-						$battery_max = 6000;
-						$battery_min = 4200;
-					}
-					if ($module['type'] == 'NAModule3') {
-						//rain
-						$battery_max = 6000;
-						$battery_min = 3600;
-					}
-					if ($module['type'] == 'NAModule2') {
-						//wind
-						$battery_max = 6000;
-						$battery_min = 3950;
-					}
-					if ($battery_max != null && $battery_min != null) {
-						$battery = round(($module['battery_vp'] - $battery_min) / ($battery_max - $battery_min) * 100, 0);
-					}
-					if ($battery < 0) {
-						$battery = 0;
-					}
-					if ($battery > 100) {
-						$battery = 100;
-					}
-					$eqLogic->batteryStatus($battery);
+					$eqLogic->setConfiguration('rf_status', $module['rf_status']);
+					$eqLogic->setConfiguration('firmware', $module['firmware']);
+					$eqLogic->save(true);
+					$eqLogic->batteryStatus(round(($module['battery_vp'] - self::getGConfig($module['type'].'::bat_min')) / (self::getGConfig($module['type'].'::bat_max') - self::getGConfig($module['type'].'::bat_min')) * 100, 0));
+					
 					foreach ($module['dashboard_data'] as $key => $value) {
-						$cmd = $eqLogic->getCmd(null, strtolower($key));
-						if (is_object($cmd)) {
-							if ($key == 'max_temp') {
-								$cmd->setCollectDate(date('Y-m-d H:i:s', $module['dashboard_data']['date_max_temp']));
-							} else if ($key == 'min_temp') {
-								$cmd->setCollectDate(date('Y-m-d H:i:s', $module['dashboard_data']['date_min_temp']));
-							} else if ($key == 'max_wind_str') {
-								$cmd->setCollectDate(date('Y-m-d H:i:s', $module['dashboard_data']['date_max_wind_str']));
-							} else {
-								$cmd->setCollectDate(date('Y-m-d H:i:s', $module['dashboard_data']['time_utc']));
-							}
-							$cmd->event($value);
+						if ($key == 'max_temp') {
+							$collectDate = date('Y-m-d H:i:s', $module['dashboard_data']['date_max_temp']);
+						} else if ($key == 'min_temp') {
+							$collectDate = date('Y-m-d H:i:s', $module['dashboard_data']['date_min_temp']);
+						} else if ($key == 'max_wind_str') {
+							$collectDate = date('Y-m-d H:i:s', $module['dashboard_data']['date_max_wind_str']);
+						} else {
+							$collectDate = date('Y-m-d H:i:s', $module['dashboard_data']['time_utc']);
 						}
+						$eqLogic->checkAndUpdateCmd(strtolower($key),$value,$collectDate);
 					}
-					$eqLogic->refreshWidget();
 				}
 			}
 		} catch (Exception $e) {
 			return '';
 		}
 	}
-
+	
 	/*     * *********************Methode d'instance************************* */
-
+	
 	public function postSave() {
-		if (in_array($this->getConfiguration('type'), array('station'))) {
-			$netatmoWeatherCmd = $this->getCmd(null, 'pressure');
-			if (!is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd = new netatmoWeatherCmd();
-				$netatmoWeatherCmd->setName(__('Pression', __FILE__));
-				$netatmoWeatherCmd->setIsHistorized(1);
-			}
-			$netatmoWeatherCmd->setEqLogic_id($this->getId());
-			$netatmoWeatherCmd->setLogicalId('pressure');
-			$netatmoWeatherCmd->setUnite('Pa');
-			$netatmoWeatherCmd->setType('info');
-			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->setGeneric_type('PRESSURE');
-			$netatmoWeatherCmd->save();
-		} else {
-			$netatmoWeatherCmd = $this->getCmd(null, 'pressure');
-			if (is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd->remove();
-			}
+		if ($this->getConfiguration('applyType') != $this->getConfiguration('type')) {
+			$this->applyType();
 		}
-
-		if (in_array($this->getConfiguration('type'), array('station'))) {
-			$netatmoWeatherCmd = $this->getCmd(null, 'absolutepressure');
-			if (!is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd = new netatmoWeatherCmd();
-				$netatmoWeatherCmd->setName(__('Pression Absolue', __FILE__));
-				$netatmoWeatherCmd->setIsHistorized(1);
-			}
-			$netatmoWeatherCmd->setEqLogic_id($this->getId());
-			$netatmoWeatherCmd->setLogicalId('absolutepressure');
-			$netatmoWeatherCmd->setUnite('Pa');
-			$netatmoWeatherCmd->setType('info');
-			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->setGeneric_type('PRESSURE');
-			$netatmoWeatherCmd->save();
-		} else {
-			$netatmoWeatherCmd = $this->getCmd(null, 'absolutepressure');
-			if (is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd->remove();
-			}
+		$cmd = $this->getCmd(null, 'refresh');
+		if (!is_object($cmd)) {
+			$cmd = new netatmoWeatherCmd();
+			$cmd->setName(__('Rafraichir', __FILE__));
 		}
-
-		if (in_array($this->getConfiguration('type'), array('module_int', 'station'))) {
-			$netatmoWeatherCmd = $this->getCmd(null, 'co2');
-			if (!is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd = new netatmoWeatherCmd();
-				$netatmoWeatherCmd->setName(__('CO2', __FILE__));
-				$netatmoWeatherCmd->setIsHistorized(1);
-			}
-			$netatmoWeatherCmd->setEqLogic_id($this->getId());
-			$netatmoWeatherCmd->setLogicalId('co2');
-			$netatmoWeatherCmd->setUnite('ppm');
-			$netatmoWeatherCmd->setType('info');
-			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->setGeneric_type('CO2');
-			$netatmoWeatherCmd->save();
-		} else {
-			$netatmoWeatherCmd = $this->getCmd(null, 'co2');
-			if (is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd->remove();
-			}
-		}
-
-		if (in_array($this->getConfiguration('type'), array('station'))) {
-			$netatmoWeatherCmd = $this->getCmd(null, 'noise');
-			if (!is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd = new netatmoWeatherCmd();
-				$netatmoWeatherCmd->setName(__('Noise', __FILE__));
-			}
-			$netatmoWeatherCmd->setEqLogic_id($this->getId());
-			$netatmoWeatherCmd->setLogicalId('noise');
-			$netatmoWeatherCmd->setUnite('db');
-			$netatmoWeatherCmd->setType('info');
-			$netatmoWeatherCmd->setGeneric_type('NOISE');
-			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->setIsHistorized(1);
-			$netatmoWeatherCmd->save();
-		} else {
-			$netatmoWeatherCmd = $this->getCmd(null, 'noise');
-			if (is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd->remove();
-			}
-		}
-
-		if (in_array($this->getConfiguration('type'), array('module_ext', 'module_int', 'station'))) {
-			$netatmoWeatherCmd = $this->getCmd(null, 'temperature');
-			if (!is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd = new netatmoWeatherCmd();
-				$netatmoWeatherCmd->setName(__('Température', __FILE__));
-				$netatmoWeatherCmd->setIsHistorized(1);
-			}
-			$netatmoWeatherCmd->setEqLogic_id($this->getId());
-			$netatmoWeatherCmd->setLogicalId('temperature');
-			$netatmoWeatherCmd->setUnite('°C');
-			$netatmoWeatherCmd->setType('info');
-			$netatmoWeatherCmd->setGeneric_type('TEMPERATURE');
-			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->save();
-		} else {
-			$netatmoWeatherCmd = $this->getCmd(null, 'temperature');
-			if (is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd->remove();
-			}
-		}
-
-		if (in_array($this->getConfiguration('type'), array('module_ext', 'module_int', 'station'))) {
-			$netatmoWeatherCmd = $this->getCmd(null, 'min_temp');
-			if (!is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd = new netatmoWeatherCmd();
-				$netatmoWeatherCmd->setName(__('Température min', __FILE__));
-				$netatmoWeatherCmd->setIsHistorized(1);
-			}
-			$netatmoWeatherCmd->setEqLogic_id($this->getId());
-			$netatmoWeatherCmd->setLogicalId('min_temp');
-			$netatmoWeatherCmd->setUnite('°C');
-			$netatmoWeatherCmd->setType('info');
-			$netatmoWeatherCmd->setGeneric_type('TEMPERATURE');
-			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->save();
-		} else {
-			$netatmoWeatherCmd = $this->getCmd(null, 'min_temp');
-			if (is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd->remove();
-			}
-		}
-
-		if (in_array($this->getConfiguration('type'), array('module_ext', 'module_int', 'station'))) {
-			$netatmoWeatherCmd = $this->getCmd(null, 'max_temp');
-			if (!is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd = new netatmoWeatherCmd();
-				$netatmoWeatherCmd->setName(__('Température max', __FILE__));
-				$netatmoWeatherCmd->setIsHistorized(1);
-			}
-			$netatmoWeatherCmd->setEqLogic_id($this->getId());
-			$netatmoWeatherCmd->setLogicalId('max_temp');
-			$netatmoWeatherCmd->setUnite('°C');
-			$netatmoWeatherCmd->setType('info');
-			$netatmoWeatherCmd->setGeneric_type('TEMPERATURE');
-			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->save();
-		} else {
-			$netatmoWeatherCmd = $this->getCmd(null, 'max_temp');
-			if (is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd->remove();
-			}
-		}
-
-		if (in_array($this->getConfiguration('type'), array('module_ext', 'module_int', 'station'))) {
-			$netatmoWeatherCmd = $this->getCmd(null, 'humidity');
-			if (!is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd = new netatmoWeatherCmd();
-				$netatmoWeatherCmd->setName(__('Humidité', __FILE__));
-				$netatmoWeatherCmd->setIsHistorized(1);
-			}
-			$netatmoWeatherCmd->setEqLogic_id($this->getId());
-			$netatmoWeatherCmd->setLogicalId('humidity');
-			$netatmoWeatherCmd->setUnite('%');
-			$netatmoWeatherCmd->setType('info');
-			$netatmoWeatherCmd->setGeneric_type('HUMIDITY');
-			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->save();
-		} else {
-			$netatmoWeatherCmd = $this->getCmd(null, 'humidity');
-			if (is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd->remove();
-			}
-		}
-
-		if (in_array($this->getConfiguration('type'), array('module_rain'))) {
-			$netatmoWeatherCmd = $this->getCmd(null, 'rain');
-			if (!is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd = new netatmoWeatherCmd();
-				$netatmoWeatherCmd->setName(__('Pluie', __FILE__));
-				$netatmoWeatherCmd->setIsHistorized(1);
-			}
-			$netatmoWeatherCmd->setEqLogic_id($this->getId());
-			$netatmoWeatherCmd->setLogicalId('rain');
-			$netatmoWeatherCmd->setUnite('mm');
-			$netatmoWeatherCmd->setType('info');
-			$netatmoWeatherCmd->setGeneric_type('RAIN_TOTAL');
-			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->save();
-
-			$netatmoWeatherCmd = $this->getCmd(null, 'sum_rain_24');
-			if (!is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd = new netatmoWeatherCmd();
-				$netatmoWeatherCmd->setName(__('Pluie 24H', __FILE__));
-				$netatmoWeatherCmd->setIsHistorized(0);
-			}
-			$netatmoWeatherCmd->setEqLogic_id($this->getId());
-			$netatmoWeatherCmd->setLogicalId('sum_rain_24');
-			$netatmoWeatherCmd->setUnite('mm');
-			$netatmoWeatherCmd->setType('info');
-			$netatmoWeatherCmd->setGeneric_type('RAIN_TOTAL');
-			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->save();
-
-			$netatmoWeatherCmd = $this->getCmd(null, 'sum_rain_1');
-			if (!is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd = new netatmoWeatherCmd();
-				$netatmoWeatherCmd->setName(__('Pluie 1H', __FILE__));
-				$netatmoWeatherCmd->setIsHistorized(0);
-			}
-
-			$netatmoWeatherCmd->setEqLogic_id($this->getId());
-			$netatmoWeatherCmd->setLogicalId('sum_rain_1');
-			$netatmoWeatherCmd->setUnite('mm');
-			$netatmoWeatherCmd->setType('info');
-			$netatmoWeatherCmd->setGeneric_type('RAIN_TOTAL');
-			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->save();
-		} else {
-			$netatmoWeatherCmd = $this->getCmd(null, 'rain');
-			if (is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd->remove();
-			}
-			$netatmoWeatherCmd = $this->getCmd(null, 'sum_rain_24');
-			if (is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd->remove();
-			}
-			$netatmoWeatherCmd = $this->getCmd(null, 'sum_rain_1');
-			if (is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd->remove();
-			}
-		}
-
-		if (in_array($this->getConfiguration('type'), array('module_wind'))) {
-			$netatmoWeatherCmd = $this->getCmd(null, 'windangle');
-			if (!is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd = new netatmoWeatherCmd();
-				$netatmoWeatherCmd->setName(__('Direction Vent', __FILE__));
-				$netatmoWeatherCmd->setIsHistorized(1);
-			}
-			$netatmoWeatherCmd->setEqLogic_id($this->getId());
-			$netatmoWeatherCmd->setLogicalId('windangle');
-			$netatmoWeatherCmd->setUnite('°');
-			$netatmoWeatherCmd->setType('info');
-			$netatmoWeatherCmd->setGeneric_type('WIND_DIRECTION');
-			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->save();
-
-			$netatmoWeatherCmd = $this->getCmd(null, 'windstrength');
-			if (!is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd = new netatmoWeatherCmd();
-				$netatmoWeatherCmd->setName(__('Vitesse Vent', __FILE__));
-				$netatmoWeatherCmd->setIsHistorized(1);
-			}
-			$netatmoWeatherCmd->setEqLogic_id($this->getId());
-			$netatmoWeatherCmd->setLogicalId('windstrength');
-			$netatmoWeatherCmd->setUnite('km/h');
-			$netatmoWeatherCmd->setType('info');
-			$netatmoWeatherCmd->setGeneric_type('WIND_SPEED');
-			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->save();
-
-			$netatmoWeatherCmd = $this->getCmd(null, 'gustangle');
-			if (!is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd = new netatmoWeatherCmd();
-				$netatmoWeatherCmd->setName(__('Direction rafale', __FILE__));
-				$netatmoWeatherCmd->setIsHistorized(0);
-			}
-
-			$netatmoWeatherCmd->setEqLogic_id($this->getId());
-			$netatmoWeatherCmd->setLogicalId('gustangle');
-			$netatmoWeatherCmd->setUnite('°');
-			$netatmoWeatherCmd->setType('info');
-			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->save();
-
-			$netatmoWeatherCmd = $this->getCmd(null, 'guststrength');
-			if (!is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd = new netatmoWeatherCmd();
-				$netatmoWeatherCmd->setName(__('Vitesse rafale', __FILE__));
-				$netatmoWeatherCmd->setIsHistorized(0);
-			}
-
-			$netatmoWeatherCmd->setEqLogic_id($this->getId());
-			$netatmoWeatherCmd->setLogicalId('guststrength');
-			$netatmoWeatherCmd->setUnite('km/h');
-			$netatmoWeatherCmd->setType('info');
-			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->save();
-
-			$netatmoWeatherCmd = $this->getCmd(null, 'max_wind_str');
-			if (!is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd = new netatmoWeatherCmd();
-				$netatmoWeatherCmd->setName(__('Vitesse Max', __FILE__));
-				$netatmoWeatherCmd->setIsHistorized(0);
-			}
-
-			$netatmoWeatherCmd->setEqLogic_id($this->getId());
-			$netatmoWeatherCmd->setLogicalId('max_wind_str');
-			$netatmoWeatherCmd->setUnite('km/h');
-			$netatmoWeatherCmd->setType('info');
-			$netatmoWeatherCmd->setSubType('numeric');
-			$netatmoWeatherCmd->save();
-
-		} else {
-			$netatmoWeatherCmd = $this->getCmd(null, 'windangle');
-			if (is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd->remove();
-			}
-			$netatmoWeatherCmd = $this->getCmd(null, 'windstrength');
-			if (is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd->remove();
-			}
-			$netatmoWeatherCmd = $this->getCmd(null, 'gustangle');
-			if (is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd->remove();
-			}
-			$netatmoWeatherCmd = $this->getCmd(null, 'guststrength');
-			if (is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd->remove();
-			}
-			$netatmoWeatherCmd = $this->getCmd(null, 'max_wind_str');
-			if (is_object($netatmoWeatherCmd)) {
-				$netatmoWeatherCmd->remove();
-			}
-		}
-
-		$refresh = $this->getCmd(null, 'refresh');
-		if (!is_object($refresh)) {
-			$refresh = new netatmoWeatherCmd();
-			$refresh->setName(__('Rafraichir', __FILE__));
-		}
-		$refresh->setEqLogic_id($this->getId());
-		$refresh->setLogicalId('refresh');
-		$refresh->setType('action');
-		$refresh->setSubType('other');
-		$refresh->save();
+		$cmd->setEqLogic_id($this->getId());
+		$cmd->setLogicalId('refresh');
+		$cmd->setType('action');
+		$cmd->setSubType('other');
+		$cmd->save();
 	}
-
-	public function toHtml($_version = 'dashboard') {
-		$replace = $this->preToHtml($_version);
-		if (!is_array($replace)) {
-			return $replace;
+	
+	public function applyType(){
+		$this->setConfiguration('applyType', $this->getConfiguration('type'));
+		$supported_commands = self::getGConfig($this->getConfiguration('type').'::cmd');
+		$commands = array('commands');
+		foreach ($supported_commands as $supported_command) {
+			$commands['commands'][] = self::getGConfig('commands::'.$supported_command);
 		}
-		$version = jeedom::versionAlias($_version);
-		foreach ($this->getCmd() as $cmd) {
-			if ($cmd->getType() == 'info') {
-				$replace['#' . $cmd->getLogicalId() . '_history#'] = '';
-				$replace['#' . $cmd->getLogicalId() . '#'] = $cmd->execCmd();
-				$replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
-				$replace['#' . $cmd->getLogicalId() . '_collectDate#'] = $cmd->getCollectDate();
-				if ($cmd->getIsHistorized() == 1) {
-					$replace['#' . $cmd->getLogicalId() . '_history#'] = 'history cursor';
-				}
-			} else {
-				$replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
-			}
-		}
-		$html = template_replace($replace, getTemplate('core', $version, strtolower($this->getConfiguration('type')), 'netatmoWeather'));
-		cache::set('widgetHtml' . $_version . $this->getId(), $html, 0);
-		return $html;
+		$this->import($commands);
 	}
-
 }
 
 class netatmoWeatherCmd extends cmd {
 	/*     * *************************Attributs****************************** */
-
-	public static $_widgetPossibility = array('custom' => false);
-
+	
+	
 	/*     * ***********************Methode static*************************** */
-
+	
 	/*     * *********************Methode d'instance************************* */
-
+	
 	public function dontRemoveCmd() {
 		return true;
 	}
-
+	
 	public function execute($_options = array()) {
 		if ($this->getLogicalId() == 'refresh') {
 			netatmoWeather::cron15();
 		}
 	}
-
+	
 	/*     * **********************Getteur Setteur*************************** */
 }
 
