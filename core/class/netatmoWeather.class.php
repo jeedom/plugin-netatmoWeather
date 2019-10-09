@@ -87,27 +87,27 @@ class netatmoWeather extends eqLogic {
 				$eqLogic = new netatmoWeather();
 				$eqLogic->setIsVisible(1);
 				$eqLogic->setIsEnable(1);
+				$eqLogic->setName($device['station_name']);
+				$eqLogic->setCategory('heating', 1);
 			}
 			$eqLogic->setEqType_name('netatmoWeather');
-			$eqLogic->setName($device['station_name']);
 			$eqLogic->setLogicalId($device['_id']);
 			$eqLogic->setConfiguration('type', $device['type']);
-			$eqLogic->setCategory('heating', 1);
 			$eqLogic->save();
 		}
 		foreach ($devicelist['modules'] as $module) {
 			$eqLogic = eqLogic::byLogicalId($module['_id'], 'netatmoWeather');
 			if (!is_object($eqLogic)) {
 				$eqLogic = new netatmoWeather();
+				$eqLogic->setName($module['module_name']);
+				$eqLogic->setIsEnable(1);
+				$eqLogic->setCategory('heating', 1);
+				$eqLogic->setIsVisible(1);
 			}
 			$eqLogic->setConfiguration('battery_type', self::getGConfig($module['type'].'::bat_type'));
 			$eqLogic->setEqType_name('netatmoWeather');
-			$eqLogic->setIsEnable(1);
-			$eqLogic->setName($module['module_name']);
 			$eqLogic->setLogicalId($module['_id']);
 			$eqLogic->setConfiguration('type', $module['type']);
-			$eqLogic->setCategory('heating', 1);
-			$eqLogic->setIsVisible(1);
 			$eqLogic->save();
 		}
 	}
