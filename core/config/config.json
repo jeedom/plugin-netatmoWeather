@@ -80,7 +80,7 @@
       },
       "configuration":{
         "minValue" : 0,
-        "maxValue" : 2000
+        "maxValue" : 5000
       }
     },
     "noise" : {
@@ -97,7 +97,7 @@
       },
       "configuration":{
         "minValue" : 0,
-        "maxValue" : 80
+        "maxValue" : 100
       }
     },
     "temperature" : {
