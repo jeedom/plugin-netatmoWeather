@@ -135,7 +135,7 @@ class netatmoWeather extends eqLogic {
 				$eqLogic->setConfiguration('firmware', $device['firmware']);
 				$eqLogic->setConfiguration('wifi_status', $device['wifi_status']);
 				$eqLogic->save(true);
-				if(isset($devicelist['dashboard_data']) && count($devicelist['dashboard_data']) > 0){
+				if(isset($device['dashboard_data']) && count($device['dashboard_data']) > 0){
 					foreach ($device['dashboard_data'] as $key => $value) {
 						if ($key == 'max_temp') {
 							$collectDate = date('Y-m-d H:i:s', $device['dashboard_data']['date_max_temp']);
