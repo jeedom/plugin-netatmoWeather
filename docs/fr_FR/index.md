@@ -1,8 +1,7 @@
 Plugin permettant de récupérer les informations des stations météo
 Netatmo.
 
-Configuration du plugin 
-=======================
+# Configuration du plugin
 
 Une fois le plugin installé, il vous faut renseigner vos informations de
 connexion Netatmo :
@@ -21,8 +20,7 @@ connexion Netatmo :
     Netamo pour découvrir automatiquement vos équipements Netamo. A
     faire après avoir sauvegardé les paramètres précedent.
 
-Recupération des informations de connexion 
-==========================================
+# Recupération des informations de connexion
 
 Pour intégrer votre station, vous devez posséder un client\_id et un
 client\_secret généré sur le site <http://dev.netatmo.com>.
@@ -60,8 +58,7 @@ précedent)
 > Attention il faut bien que l’url de callback soit à "None" sinon ca ne
 > marchera pas.
 
-Configuration des équipements 
-=============================
+# Configuration des équipements
 
 La configuration des équipements Netatmo est accessible à partir du menu
 plugin :
@@ -111,8 +108,7 @@ En dessous vous retrouvez la liste des commandes :
 
 -   Tester : permet de tester la commande
 
-Widget 
-======
+# Widget
 
 Voici le widget standard pour une station sur le dashboard :
 
@@ -122,11 +118,12 @@ Et en mobile :
 
 ![netatmoWeather7](../images/netatmoWeather7.png)
 
-FAQ 
-===
+# FAQ
 
-Quelle est la fréquence de rafraîchissement ?
+>**Quelle est la fréquence de rafraîchissement ?**
+>
+>Le systeme recupère les informations toutes les 15 min.
 
-:   Le systeme recupère les informations toutes les 15 min.
-
-
+>**J'ai bien mes sondes mais aucune valeur qui ne remonte**
+>
+>Ca arrive quand il y a un soucis coté mise à jour sur les modules ou Netatmo. Le plus simple est d'Ajouter / Supprimer un module et de suivre la démarche ca forcera une mise à jour de tout et devrait corriger le soucis.
