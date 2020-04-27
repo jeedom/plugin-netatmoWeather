@@ -10,7 +10,7 @@
 
 -   **ID del cliente** : 
 
--   **** : 
+-   **Client secret** : 
 
 -   **Nombre de usuario** : 
 
@@ -72,7 +72,7 @@ equipos) :
 
 > **Punta**
 >
-> 
+> Como en muchos lugares de Jeedom, coloca el mouse en el extremo izquierdo
 > abre un menú de acceso rápido (puedes
 > desde tu perfil siempre déjalo visible).
 

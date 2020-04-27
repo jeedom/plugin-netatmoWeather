@@ -9,21 +9,21 @@
         "Netatmo Welcome": "",
         "Netatmo Thermostat": "",
         "Synchroniser": "Sincronizzare",
-        "Synchroniser mes équipements": "",
-        "Synchronisation réussie": "",
+        "Synchroniser mes équipements": "Sincronizza con i miei dispositivi",
+        "Synchronisation réussie": "Sincronizzazione avvenuta con successo",
         "Cela récupérera les identifiants configurés dans le plugin Netatmo Welcome, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "",
         "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": ""
     },
     "plugins\/netatmoWeather\/desktop\/modal\/health.php": {
         "Image": "Immagine",
-        "Module": "",
+        "Module": "Modulo",
         "ID": "",
-        "Batterie": "",
-        "Serial": "",
+        "Batterie": "Batteria",
+        "Serial": "Serial",
         "Firmware": "",
         "Wifi": "",
         "RF": "",
-        "Date création": "",
+        "Date création": "Data di creazione",
         "Secteur": ""
     },
     "plugins\/netatmoWeather\/desktop\/php\/netatmoWeather.php": {
@@ -56,7 +56,7 @@
         "Réception réseaux": "",
         "Météo Netatmo": "",
         "Nom": "Nome",
-        "Option": "",
+        "Option": "Opzione",
         "Action": "Azione"
     },
     "plugins\/netatmoWeather\/desktop\/js\/netatmoWeather.js": {

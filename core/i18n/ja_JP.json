@@ -9,21 +9,21 @@
         "Netatmo Welcome": "",
         "Netatmo Thermostat": "",
         "Synchroniser": "同期",
-        "Synchroniser mes équipements": "",
-        "Synchronisation réussie": "",
+        "Synchroniser mes équipements": "私の機器を同期",
+        "Synchronisation réussie": "正常な同期",
         "Cela récupérera les identifiants configurés dans le plugin Netatmo Welcome, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "",
         "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": ""
     },
     "plugins\/netatmoWeather\/desktop\/modal\/health.php": {
         "Image": "画像",
-        "Module": "",
+        "Module": "モジュール",
         "ID": "",
-        "Batterie": "",
-        "Serial": "",
-        "Firmware": "",
+        "Batterie": "バッテリー",
+        "Serial": "シリアル",
+        "Firmware": "ファームウェア",
         "Wifi": "",
         "RF": "",
-        "Date création": "",
+        "Date création": "作成日",
         "Secteur": ""
     },
     "plugins\/netatmoWeather\/desktop\/php\/netatmoWeather.php": {
@@ -52,11 +52,11 @@
         "Module pluie": "",
         "Anémomètre": "",
         "Identifiant": "ログイン",
-        "Firmware": "",
+        "Firmware": "ファームウェア",
         "Réception réseaux": "",
         "Météo Netatmo": "",
         "Nom": "表題",
-        "Option": "",
+        "Option": "オプション",
         "Action": "アクション"
     },
     "plugins\/netatmoWeather\/desktop\/js\/netatmoWeather.js": {

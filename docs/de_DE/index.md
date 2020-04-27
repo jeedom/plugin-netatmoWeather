@@ -72,7 +72,7 @@ Ausrüstung) :
 
 > **Spitze**
 >
-> 
+> Platzieren Sie wie an vielen Stellen in Jeedom die Maus ganz links
 > ruft ein Schnellzugriffsmenü auf (Sie können
 > von deinem Profil immer sichtbar lassen).
 

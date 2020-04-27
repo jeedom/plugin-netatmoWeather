@@ -8,9 +8,9 @@
 
 ![netatmoWeather2](../images/netatmoWeather2.png)
 
--   **** : 
+-   **Client ID** : 
 
--   **** : 
+-   **Client secret** : 
 
 -   **Username** : 
 
@@ -72,7 +72,7 @@ equipment) :
 
 > **Tip**
 >
-> 
+> As in many places on Jeedom, place the mouse on the far left
 > brings up a quick access menu (you can
 > from your profile always leave it visible).
 

@@ -1,28 +1,28 @@
 {
     "plugins\/netatmoWeather\/plugin_info\/configuration.php": {
         "Client ID": "ID del cliente",
-        "Client secret": "",
+        "Client secret": "Client secret",
         "Nom d'utilisateur": "Nombre de usuario",
         "Mot de passe": "Contraseña",
-        "Récupérer aussi les stations des amis": "",
-        "Récupérer les infos du plugin": "",
-        "Netatmo Welcome": "",
-        "Netatmo Thermostat": "",
+        "Récupérer aussi les stations des amis": "También consigue estaciones de amigos",
+        "Récupérer les infos du plugin": "Obtener información del plugin",
+        "Netatmo Welcome": "Netatmo Welcome",
+        "Netatmo Thermostat": "Netatmo Thermostat",
         "Synchroniser": "Sincronizar",
-        "Synchroniser mes équipements": "",
-        "Synchronisation réussie": "",
-        "Cela récupérera les identifiants configurés dans le plugin Netatmo Welcome, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "",
-        "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": ""
+        "Synchroniser mes équipements": "Sincronizar mi equipo",
+        "Synchronisation réussie": "Sincronización exitosa",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Welcome, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "Esto recuperará los identificadores configurados en el plugin Welcome de Netatmo, será necesario guardar antes de comenzar la sincronización. ¿Quieres proceder?",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "Esto recuperará los identificadores configurados en el plugin Thermostat de Netatmo, será necesario guardar antes de comenzar la sincronización. ¿Quieres proceder?"
     },
     "plugins\/netatmoWeather\/desktop\/modal\/health.php": {
         "Image": "Imagen",
         "Module": "Modulo",
         "ID": "Identificación",
         "Batterie": "Batería",
-        "Serial": "",
-        "Firmware": "",
-        "Wifi": "",
-        "RF": "",
+        "Serial": "Serial",
+        "Firmware": "Firmware",
+        "Wifi": "Wifi",
+        "RF": "RF",
         "Date création": "Fecha de creación",
         "Secteur": "Sector"
     },
@@ -52,18 +52,18 @@
         "Module pluie": "",
         "Anémomètre": "",
         "Identifiant": "Identificador",
-        "Firmware": "",
+        "Firmware": "Firmware",
         "Réception réseaux": "",
         "Météo Netatmo": "",
         "Nom": "Nombre",
-        "Option": "",
+        "Option": "Opción",
         "Action": "Acción"
     },
     "plugins\/netatmoWeather\/desktop\/js\/netatmoWeather.js": {
-        "Santé NetatmoWeather": "",
+        "Santé NetatmoWeather": "Salud NetatmoWeather",
         "Nom": "Nombre",
         "Min": "Bajo",
-        "Max": "",
+        "Max": "Max",
         "Unité": "Unidad",
         "Afficher": "Mostrar",
         "Historiser": "Guardar historial",
@@ -74,7 +74,7 @@
         "Aucune methode correspondante à : ": "Ningún método correspondiente a:"
     },
     "plugins\/netatmoWeather\/core\/class\/netatmoWeather.class.php": {
-        "Erreur sur synchro netatmo weather ": "",
+        "Erreur sur synchro netatmo weather ": "Error de sincronización netatmo weather",
         "Rafraichir": "Refrescar"
     }
 }
