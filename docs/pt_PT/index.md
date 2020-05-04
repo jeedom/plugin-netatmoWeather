@@ -1,129 +1,129 @@
+Plug-in para recuperar informações de estações meteorológicas
+Netatmo.
 
-.
+# Configuração do plugin
 
-# Configuração do 
-
-
- :
+Após a instalação do plug-in, é necessário preencher suas informações
+Conexão Netatmo :
 
 ![netatmoWeather2](../images/netatmoWeather2.png)
 
--   **** : 
+-   **ID do cliente** : seu ID de cliente (consulte a seção de configuração)
 
--   **** : 
+-   **Cliente secreto** : seu cliente secreto (consulte a seção de configuração)
 
--   **Nome de Usuário** : 
+-   **Nome de Usuário** : nome de usuário da sua conta netatmo
 
--   **Senha** : 
+-   **Senha** : senha para sua conta Netatmo
 
--   **Sincronizar** : 
-    
-    .
+-   **Synchroniser** : permite sincronizar o Jeedom com sua conta
+    Netamo para descobrir automaticamente seu equipamento Netamo. Um
+    faça depois de salvar as configurações anteriores.
 
-# 
+# Recuperando informações de conexão
 
+Para integrar sua estação, você deve ter um cliente\_id e um
+client\_secret généré sur le site <http://dev.netatmo.com>.
 
-:>.
-
- :
+Uma vez clique em Iniciar :
 
 ![netatmoWeather10](../images/netatmoWeather10.png)
 
-"
+Em seguida, "crie um aplicativo"
 
 ![netatmoWeather11](../images/netatmoWeather11.png)
 
-
+Identifique-se, com seu email e senha
 
 ![netatmoWeather12](../images/netatmoWeather12.png)
 
-
- :
+Preencha os campos "Nome" e "Descrição" (o que você quiser
+coloque isso não importa) :
 
 ![netatmoWeather13](../images/netatmoWeather13.png)
 
-"
-"
+Em seguida, na parte inferior da página, marque a caixa "Aceito os termos de uso"
+depois clique em "Criar"
 
 ![netatmoWeather14](../images/netatmoWeather14.png)
 
-
-
-
+Recupere as informações "ID do cliente" e "Cliente secreto" e copie o
+na parte de configuração do plug-in no Jeedom (consulte o capítulo
+anterior)
 
 ![netatmoWeather15](../images/netatmoWeather15.png)
 
-> ****
+> **Important**
 >
-> 
-> .
+> Observe que o URL de retorno de chamada deve ser "Nenhum", caso contrário, não
+> não vai funcionar.
 
-# 
+# Configuração do equipamento
 
-
- :
+A configuração do equipamento Netatmo pode ser acessada no menu
+plugin :
 
 ![netatmoWeather3](../images/netatmoWeather3.png)
 
-
- :
+É assim que a página do plugin Netatmo se parece (aqui com 2
+equipamento) :
 
 ![netatmoWeather4](../images/netatmoWeather4.png)
 
-> ****
+> **Tip**
 >
-> 
-> 
-> .
+> Como em muitos lugares em Jeedom, coloque o mouse na extremidade esquerda
+> abre um menu de acesso rápido (você pode
+> do seu perfil, deixe-o sempre visível).
 
- :
+Depois de clicar em um equipamento, você obtém :
 
 ![netatmoWeather5](../images/netatmoWeather5.png)
 
- :
+Aqui você encontra toda a configuração do seu equipamento :
 
--   **** : 
+-   **Nome do dispositivo Netatmo** : nome do seu equipamento Netatmo
 
--   **Objeto pai** : 
-    
+-   **Objeto pai** : indica o objeto pai ao qual pertence
+    o equipamento
 
--   **Ativar** : 
+-   **Activer** : torna seu equipamento ativo
 
--   **Visivél** : 
+-   **Visible** : torna visível no painel
 
--   **Login** : 
+-   **Identifiant** : identificador único de equipamento
 
--   **o** : ,
-    
+-   **Type** : tipo de seu equipamento (estação, sonda interna,
+    sonda externa ...)
 
- :
+Abaixo você encontra a lista de pedidos :
 
--   
+-   o nome exibido no painel
 
--   Historicizar : 
+-   Historicizar : permite historiar os dados
 
--    : 
-    
-    
+-   configuração avançada (pequenas rodas dentadas) : permite exibir
+    a configuração avançada do comando (método
+    história, widget ...)
 
--   Teste : 
+-   Teste : permite testar o comando
 
-# 
+# Widget
 
- :
+Aqui está o widget padrão para uma estação no painel :
 
 ![netatmoWeather6](../images/netatmoWeather6.png)
 
- :
+E no celular :
 
 ![netatmoWeather7](../images/netatmoWeather7.png)
 
-# 
+# FAQ
 
->** ?**
+>**Qual é a taxa de atualização ?**
 >
->.
+>O sistema recupera informações a cada 15 minutos.
 
->****
+>**Eu tenho minhas sondas, mas nenhum valor que remonta**
 >
->. .
+>Isso acontece quando há um problema listado, atualização nos módulos ou no Netatmo. A maneira mais fácil é adicionar / remover um módulo e seguir o processo forçará uma atualização de tudo e deve corrigir o problema.

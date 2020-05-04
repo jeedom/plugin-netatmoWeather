@@ -1,7 +1,7 @@
 {
     "plugins\/netatmoWeather\/plugin_info\/configuration.php": {
-        "Client ID": "",
-        "Client secret": "",
+        "Client ID": "Muşteri ID",
+        "Client secret": "Müşteri gizli şifre",
         "Nom d'utilisateur": "Kullanıcı adı ",
         "Mot de passe": "Şifre",
         "Récupérer aussi les stations des amis": "",
