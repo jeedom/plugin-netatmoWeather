@@ -1,29 +1,22 @@
-Plugin zum Abrufen von Informationen von Wetterstationen
-Netatmo.
+# Netatmo Wetter Plugin
+
+Plugin zum Abrufen von Informationen von Wetterstationen Netatmo.
 
 # Plugin Konfiguration
 
-Sobald das Plugin installiert ist, müssen Sie Ihre Informationen eingeben
-Netatmo-Verbindung :
+Sobald das Plugin installiert ist, müssen Sie Ihre Netatmo-Verbindungsinformationen eingeben :
 
 ![netatmoWeather2](../images/netatmoWeather2.png)
 
 -   **Kunden-ID** : Ihre Client-ID (siehe Konfigurationsabschnitt)
-
 -   **Geheimer Kunde** : Ihr geheimer Client (siehe Konfigurationsabschnitt)
-
 -   **Benutzername** : Benutzername Ihres Netatmo-Kontos
-
 -   **Passwort** : Passwort für Ihr Netatmo-Konto
-
--   **Synchroniser** : ermöglicht es Ihnen, Jeedom mit Ihrem Konto zu synchronisieren
-    Netamo, um Ihre Netamo-Geräte automatisch zu erkennen. A.
-    tun, nachdem Sie die vorherigen Einstellungen gespeichert haben.
+-   **Synchroniser** : Mit dieser Option können Sie Jeedom mit Ihrem Netamo-Konto synchronisieren, um Ihre Netamo-Geräte automatisch zu erkennen. Nach dem Speichern der vorherigen Parameter.
 
 # Verbindungsinformationen abrufen
 
-Um Ihre Station zu integrieren, müssen Sie einen Client\_id und einen haben
-client\_secret généré sur le site <http://dev.netatmo.com>.
+Pour intégrer votre station, vous devez posséder un client\_id et unclient\_secret généré sur le site <http://dev.netatmo.com>.
 
 Klicken Sie einmal auf Start :
 
@@ -37,44 +30,35 @@ Identifizieren Sie sich mit Ihrer E-Mail-Adresse und Ihrem Passwort
 
 ![netatmoWeather12](../images/netatmoWeather12.png)
 
-Füllen Sie die Felder "Name" und "Beschreibung" aus (was auch immer Sie wollen
-es ist egal) :
+Füllen Sie die Felder "Name" und "Beschreibung" aus (was auch immer Sie eingeben, spielt keine Rolle) :
 
 ![netatmoWeather13](../images/netatmoWeather13.png)
 
-Aktivieren Sie dann unten auf der Seite das Kontrollkästchen "Ich akzeptiere die Nutzungsbedingungen"
-Klicken Sie dann auf "Erstellen"
+Aktivieren Sie dann ganz unten auf der Seite das Kontrollkästchen "Ich akzeptiere die Nutzungsbedingungen" und klicken Sie auf "Erstellen""
 
 ![netatmoWeather14](../images/netatmoWeather14.png)
 
-Rufen Sie die Informationen "CLient ID" und "Secret Client" ab und kopieren Sie die
-im Konfigurationsteil des Plugins in Jeedom (siehe Kapitel
-vorherige)
+Stellen Sie die Informationen "CLient ID" und "Secret Client" wieder her und kopieren Sie sie in den Konfigurationsteil des Plugins in Jeedom (siehe vorheriges Kapitel).
 
 ![netatmoWeather15](../images/netatmoWeather15.png)
 
 > **Important**
 >
-> Bitte beachten Sie, dass die Rückruf-URL "Keine" sein muss, andernfalls nicht
-> wird nicht funktionieren.
+> Bitte beachten Sie, dass die Rückruf-URL "Keine" sein muss, sonst funktioniert es nicht.
 
 # Gerätekonfiguration
 
-Die Konfiguration der Netatmo-Ausrüstung ist über das Menü zugänglich
-Plugin :
+Auf die Konfiguration der Netatmo-Geräte kann über das Menuplugin zugegriffen werden :
 
 ![netatmoWeather3](../images/netatmoWeather3.png)
 
-So sieht die Netatmo-Plugin-Seite aus (hier mit bereits 2
-Ausrüstung) :
+So sieht die Netatmo-Plugin-Seite aus (hier mit bereits 2 Geräten) :
 
 ![netatmoWeather4](../images/netatmoWeather4.png)
 
 > **Tip**
 >
-> Platzieren Sie wie an vielen Stellen in Jeedom die Maus ganz links
-> ruft ein Schnellzugriffsmenü auf (Sie können
-> von deinem Profil immer sichtbar lassen).
+> Wie an vielen Stellen in Jeedom wird durch Platzieren der Maus ganz links ein Schnellzugriffsmenü angezeigt (Sie können es jederzeit in Ihrem Profil sichtbar lassen)..
 
 Sobald Sie auf ein Gerät klicken, erhalten Sie :
 
@@ -83,29 +67,17 @@ Sobald Sie auf ein Gerät klicken, erhalten Sie :
 Hier finden Sie die gesamte Konfiguration Ihrer Geräte :
 
 -   **Name des Netatmo-Geräts** : Name Ihrer Netatmo-Ausrüstung
-
--   **Übergeordnetes Objekt** : gibt das übergeordnete Objekt an, zu dem es gehört
-    Ausrüstung
-
+-   **Übergeordnetes Objekt** : Gibt das übergeordnete Objekt an, zu dem das Gerät gehört
 -   **Activer** : macht Ihre Ausrüstung aktiv
-
 -   **Visible** : macht es auf dem Dashboard sichtbar
-
 -   **Identifiant** : eindeutige Gerätekennung
-
--   **Type** : Art Ihrer Ausrüstung (Station, Innensonde,
-    Außensonde…)
+-   **Type** : Art Ihrer Ausrüstung (Station, Innensonde, Außensonde…)
 
 Nachfolgend finden Sie die Liste der Bestellungen :
 
 -   Der im Dashboard angezeigte Name
-
 -   Chronik : ermöglicht das Historisieren der Daten
-
--   erweiterte Konfiguration (kleine gekerbte Räder) : Anzeigen
-    die erweiterte Konfiguration des Befehls (Methode
-    Geschichte, Widget…)
-
+-   erweiterte Konfiguration (kleine gekerbte Räder) : Zeigt die erweiterte Konfiguration des Befehls an (Protokollierungsmethode, Widget usw.)
 -   Test : Wird zum Testen des Befehls verwendet
 
 # Widget

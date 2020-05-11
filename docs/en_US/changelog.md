@@ -1,3 +1,7 @@
+>**IMPORTANT**
+>
+>As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text.
+
 # 10/09/2019
 
 - Support PHP 7.3
