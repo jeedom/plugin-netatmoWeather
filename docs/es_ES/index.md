@@ -12,7 +12,7 @@ Una vez que se instala el complemento, debe ingresar la información de conexió
 -   **Client secret** : su cliente secreto (vea la sección de configuración)
 -   **Nombre de usuario** : nombre de usuario de su cuenta netatmo
 -   **Contraseña** : contraseña para su cuenta de Netatmo
--   **Synchroniser** : le permite sincronizar Jeedom con su cuenta de Netamo para descubrir automáticamente su equipo Netamo. Para hacer después de guardar los parámetros anteriores.
+-   **Sincronizar** : le permite sincronizar Jeedom con su cuenta de Netamo para descubrir automáticamente su equipo Netamo. Para hacer después de guardar los parámetros anteriores.
 
 # Recuperando información de conexión
 
@@ -42,7 +42,7 @@ Recupere la información de "ID de cliente" y "Cliente secreto" y cópielos en l
 
 ![netatmoWeather15](../images/netatmoWeather15.png)
 
-> **Important**
+> **Importante**
 >
 > Tenga en cuenta que la URL de devolución de llamada debe ser "Ninguna", de lo contrario no funcionará.
 
@@ -56,7 +56,7 @@ Así es como se ve la página del complemento Netatmo (aquí con 2 equipos ya) :
 
 ![netatmoWeather4](../images/netatmoWeather4.png)
 
-> **Tip**
+> **Punta**
 >
 > Como en muchos lugares de Jeedom, colocar el mouse en el extremo izquierdo permite que aparezca un menú de acceso rápido (siempre puede dejarlo visible desde su perfil).
 
@@ -68,12 +68,12 @@ Aquí encontrarás toda la configuración de tu equipo :
 
 -   **Nombre del dispositivo Netatmo** : nombre de su equipo Netatmo
 -   **Objeto padre** : indica el objeto padre al que pertenece el equipo
--   **Activer** : activa su equipo
+-   **Activar** : activa su equipo
 -   **Visible** : lo hace visible en el tablero
--   **Identifiant** : identificador de equipo único
--   **Type** : tipo de su equipo (estación, sonda interior, sonda exterior ...)
+-   **Identificador** : identificador de equipo único
+-   **Tipo** : tipo de su equipo (estación, sonda interior, sonda exterior ...)
 
-A continuación encontrará la lista de pedidos. :
+A continuación encontrará la lista de pedidos :
 
 -   el nombre que se muestra en el tablero
 -   Guardar historial : permite historizar los datos
@@ -94,7 +94,7 @@ Y en el móvil :
 
 >**¿Cuál es la frecuencia de actualización? ?**
 >
->El sistema recupera información cada 15 minutos..
+>El sistema recupera información cada 15 minutos.
 
 >**Tengo mis sondas pero no hay ningún valor que regrese**
 >

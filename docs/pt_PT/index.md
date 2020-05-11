@@ -12,7 +12,7 @@ Depois que o plug-in estiver instalado, você precisará inserir suas informaç�
 -   **Cliente secreto** : seu cliente secreto (consulte a seção de configuração)
 -   **Nome de Usuário** : nome de usuário da sua conta netatmo
 -   **Senha** : senha para sua conta Netatmo
--   **Synchroniser** : permite sincronizar o Jeedom com sua conta Netamo para descobrir automaticamente seu equipamento Netamo. A fazer depois de salvar os parâmetros anteriores.
+-   **Sincronizar** : permite sincronizar o Jeedom com sua conta Netamo para descobrir automaticamente seu equipamento Netamo. A fazer depois de salvar os parâmetros anteriores.
 
 # Recuperando informações de conexão
 
@@ -42,7 +42,7 @@ Recupere as informações "ID do cliente" e "Cliente secreto" e copie-as na part
 
 ![netatmoWeather15](../images/netatmoWeather15.png)
 
-> **Important**
+> **IMPORTANTE**
 >
 > Observe que o URL de retorno de chamada deve ser "Nenhum", caso contrário, não funcionará.
 
@@ -56,7 +56,7 @@ A configuração do equipamento Netatmo pode ser acessada no menu plug-in :
 
 ![netatmoWeather4](../images/netatmoWeather4.png)
 
-> **Tip**
+> **Dica**
 >
 > Como em muitos lugares do Jeedom, posicionar o mouse na extremidade esquerda permite que um menu de acesso rápido apareça (você sempre pode deixá-lo visível em seu perfil).
 
@@ -68,10 +68,10 @@ Aqui você encontra toda a configuração do seu equipamento :
 
 -   **Nome do dispositivo Netatmo** : nome do seu equipamento Netatmo
 -   **Objeto pai** : indica o objeto pai ao qual o equipamento pertence
--   **Activer** : torna seu equipamento ativo
--   **Visible** : torna visível no painel
--   **Identifiant** : identificador único de equipamento
--   **Type** : tipo de seu equipamento (estação, sonda interna, sonda externa ...)
+-   **Ativar** : torna seu equipamento ativo
+-   **Visivél** : torna visível no painel
+-   **Login** : identificador único de equipamento
+-   **Tipo** : tipo de seu equipamento (estação, sonda interna, sonda externa ...)
 
 Abaixo você encontra a lista de pedidos :
 

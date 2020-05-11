@@ -12,7 +12,7 @@ Once the plugin is installed, you need to enter your Netatmo connection informat
 -   **Client secret** : your secret client (see configuration section)
 -   **Username** : username of your netatmo account
 -   **Password** : password for your Netatmo account
--   **Synchroniser** : allows you to synchronize Jeedom with your Netamo account to automatically discover your Netamo equipment. To do after saving the previous parameters.
+-   **Synchronize** : allows you to synchronize Jeedom with your Netamo account to automatically discover your Netamo equipment. To do after saving the previous parameters.
 
 # Retrieving connection information
 
@@ -68,9 +68,9 @@ Here you find all the configuration of your equipment :
 
 -   **Name of the Netatmo device** : name of your Netatmo equipment
 -   **Parent object** : indicates the parent object to which the equipment belongs
--   **Activer** : makes your equipment active
+-   **Activate** : makes your equipment active
 -   **Visible** : makes it visible on the dashboard
--   **Identifiant** : unique equipment identifier
+-   **Login** : unique equipment identifier
 -   **Type** : type of your equipment (station, indoor probe, outdoor probe…)
 
 Below you find the list of orders :

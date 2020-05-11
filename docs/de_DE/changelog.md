@@ -1,6 +1,6 @@
->**IMPORTANT**
+>**Wichtig**
 >
->Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt.
+>Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
 
 # 10/09/2019
 
@@ -8,7 +8,7 @@
 - Anpassung für jeedom v4
 - Neugestaltung der Link Engine mit Netatmo
 
-Wichtig : Das Widget ist nicht mehr spezifisch und wechselt zu Kern-Widgets (nicht mehr konfigurierbar).
+Wichtig : Das Widget ist nicht mehr spezifisch und wechselt zu Kern-Widgets (nicht mehr konfigurierbar)
 
 # 03/04/2019
 

@@ -71,7 +71,7 @@
     },
     "plugins\/netatmoWeather\/core\/ajax\/netatmoWeather.ajax.php": {
         "401 - Accès non autorisé": "401 - Acesso não autorizado",
-        "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
+        "Aucune methode correspondante à : ": "Aucune methode correspondante à :"
     },
     "plugins\/netatmoWeather\/core\/class\/netatmoWeather.class.php": {
         "Erreur sur synchro netatmo weather ": "Erro de sincronização netatmo weather",

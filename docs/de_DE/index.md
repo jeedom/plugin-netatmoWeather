@@ -12,7 +12,7 @@ Sobald das Plugin installiert ist, müssen Sie Ihre Netatmo-Verbindungsinformati
 -   **Geheimer Kunde** : Ihr geheimer Client (siehe Konfigurationsabschnitt)
 -   **Benutzername** : Benutzername Ihres Netatmo-Kontos
 -   **Passwort** : Passwort für Ihr Netatmo-Konto
--   **Synchroniser** : Mit dieser Option können Sie Jeedom mit Ihrem Netamo-Konto synchronisieren, um Ihre Netamo-Geräte automatisch zu erkennen. Nach dem Speichern der vorherigen Parameter.
+-   **Synchronize** : Mit dieser Option können Sie Jeedom mit Ihrem Netamo-Konto synchronisieren, um Ihre Netamo-Geräte automatisch zu erkennen. Nach dem Speichern der vorherigen Parameter.
 
 # Verbindungsinformationen abrufen
 
@@ -38,11 +38,11 @@ Aktivieren Sie dann ganz unten auf der Seite das Kontrollkästchen "Ich akzeptie
 
 ![netatmoWeather14](../images/netatmoWeather14.png)
 
-Stellen Sie die Informationen "CLient ID" und "Secret Client" wieder her und kopieren Sie sie in den Konfigurationsteil des Plugins in Jeedom (siehe vorheriges Kapitel).
+Stellen Sie die Informationen "CLient ID" und "Secret Client" wieder her und kopieren Sie sie in den Konfigurationsteil des Plugins in Jeedom (siehe vorheriges Kapitel)
 
 ![netatmoWeather15](../images/netatmoWeather15.png)
 
-> **Important**
+> **Wichtig**
 >
 > Bitte beachten Sie, dass die Rückruf-URL "Keine" sein muss, sonst funktioniert es nicht.
 
@@ -56,9 +56,9 @@ So sieht die Netatmo-Plugin-Seite aus (hier mit bereits 2 Geräten) :
 
 ![netatmoWeather4](../images/netatmoWeather4.png)
 
-> **Tip**
+> **Spitze**
 >
-> Wie an vielen Stellen in Jeedom wird durch Platzieren der Maus ganz links ein Schnellzugriffsmenü angezeigt (Sie können es jederzeit in Ihrem Profil sichtbar lassen)..
+> Wie an vielen Stellen in Jeedom wird durch Platzieren der Maus ganz links ein Schnellzugriffsmenü angezeigt (Sie können es jederzeit in Ihrem Profil sichtbar lassen).
 
 Sobald Sie auf ein Gerät klicken, erhalten Sie :
 
@@ -68,10 +68,10 @@ Hier finden Sie die gesamte Konfiguration Ihrer Geräte :
 
 -   **Name des Netatmo-Geräts** : Name Ihrer Netatmo-Ausrüstung
 -   **Übergeordnetes Objekt** : Gibt das übergeordnete Objekt an, zu dem das Gerät gehört
--   **Activer** : macht Ihre Ausrüstung aktiv
--   **Visible** : macht es auf dem Dashboard sichtbar
--   **Identifiant** : eindeutige Gerätekennung
--   **Type** : Art Ihrer Ausrüstung (Station, Innensonde, Außensonde…)
+-   **Aktivieren** : macht Ihre Ausrüstung aktiv
+-   **Sichtbar** : macht es auf dem Dashboard sichtbar
+-   **Login** : eindeutige Gerätekennung
+-   **Typ** : Art Ihrer Ausrüstung (Station, Innensonde, Außensonde…)
 
 Nachfolgend finden Sie die Liste der Bestellungen :
 
