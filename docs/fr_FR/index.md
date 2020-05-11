@@ -38,7 +38,7 @@ Puis tout en bas de la page cochez la case "I accept the terms of use"puis cliqu
 
 ![netatmoWeather14](../images/netatmoWeather14.png)
 
-Recuperer les informations "CLient id" et "Client secret" et copier lesdans la partie configuration du plugin dans Jeedom (voir chapitreprécedent)
+Recuperer les informations "CLient id" et "Client secret" et copier les dans la partie configuration du plugin dans Jeedom (voir chapitreprécedent)
 
 ![netatmoWeather15](../images/netatmoWeather15.png)
 
