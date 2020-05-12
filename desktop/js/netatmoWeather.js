@@ -15,6 +15,8 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
+$("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
+
 $('#bt_healthNetatmoWeather').on('click', function () {
   $('#md_modal').dialog({title: "{{Santé NetatmoWeather}}"});
   $('#md_modal').load('index.php?v=d&plugin=netatmoWeather&modal=health').dialog('open');

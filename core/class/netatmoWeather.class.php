@@ -135,20 +135,22 @@ class netatmoWeather extends eqLogic {
 				$eqLogic->setConfiguration('firmware', $device['firmware']);
 				$eqLogic->setConfiguration('wifi_status', $device['wifi_status']);
 				$eqLogic->save(true);
-				foreach ($device['dashboard_data'] as $key => $value) {
-					if ($key == 'max_temp') {
-						$collectDate = date('Y-m-d H:i:s', $device['dashboard_data']['date_max_temp']);
-					} else if ($key == 'min_temp') {
-						$collectDate = date('Y-m-d H:i:s', $device['dashboard_data']['date_min_temp']);
-					} else if ($key == 'max_wind_str') {
-						$collectDate = date('Y-m-d H:i:s', $device['dashboard_data']['date_max_wind_str']);
-					} else {
-						$collectDate = date('Y-m-d H:i:s', $device['dashboard_data']['time_utc']);
+				if(isset($device['dashboard_data']) && count($device['dashboard_data']) > 0){
+					foreach ($device['dashboard_data'] as $key => $value) {
+						if ($key == 'max_temp') {
+							$collectDate = date('Y-m-d H:i:s', $device['dashboard_data']['date_max_temp']);
+						} else if ($key == 'min_temp') {
+							$collectDate = date('Y-m-d H:i:s', $device['dashboard_data']['date_min_temp']);
+						} else if ($key == 'max_wind_str') {
+							$collectDate = date('Y-m-d H:i:s', $device['dashboard_data']['date_max_wind_str']);
+						} else {
+							$collectDate = date('Y-m-d H:i:s', $device['dashboard_data']['time_utc']);
+						}
+						$eqLogic->checkAndUpdateCmd(strtolower($key),$value,$collectDate);
 					}
-					$eqLogic->checkAndUpdateCmd(strtolower($key),$value,$collectDate);
 				}
 			}
-			if(count($devicelist['modules']) > 0){
+			if(isset($devicelist['modules']) &&  count($devicelist['modules']) > 0){
 				foreach ($devicelist['modules'] as $module) {
 					$eqLogic = eqLogic::byLogicalId($module["_id"], 'netatmoWeather');
 					if(!is_object($eqLogic)){
