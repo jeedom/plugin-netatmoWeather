@@ -7,5 +7,22 @@
     "require": "3.2",
     "category": "weather",
     "changelog": "https:\/\/doc.jeedom.com\/#language#\/plugins\/weather\/netatmoWeather\/changelog",
-    "documentation": "https:\/\/doc.jeedom.com\/#language#\/plugins\/weather\/netatmoWeather\/"
+    "documentation": "https:\/\/doc.jeedom.com\/#language#\/plugins\/weather\/netatmoWeather\/",
+    "language": [
+        "fr_FR",
+        "en_US",
+        "de_DE",
+        "sp_SP",
+        "ru_RU",
+        "id_ID",
+        "it_IT"
+    ],
+    "compatibility": [
+        "miniplus",
+        "smart",
+        "rpi",
+        "docker",
+        "diy",
+        "v4"
+    ]
 }
