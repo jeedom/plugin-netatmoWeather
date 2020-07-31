@@ -7,7 +7,7 @@
         "Récupérer aussi les stations des amis": "Obter também estações de amigos",
         "Récupérer les infos du plugin": "Obter informações do plug-in",
         "Netatmo Welcome": "Netatmo Welcome",
-        "Netatmo Thermostat": "Netatmo Thermostat",
+        "Netatmo Thermostat": "Termostato Netatmo",
         "Synchroniser": "Sincronizar",
         "Synchroniser mes équipements": "Sincronizar o meu equipamento",
         "Synchronisation réussie": "Sincronização bem-sucedida",
@@ -76,5 +76,8 @@
     "plugins\/netatmoWeather\/core\/class\/netatmoWeather.class.php": {
         "Erreur sur synchro netatmo weather ": "Erro de sincronização netatmo weather",
         "Rafraichir": "Legal"
+    },
+    "info.json": {
+        "Permet de récupérer les informations des stations météo Netatmo.": "Permite recuperar informações das estações meteorológicas da Netatmo"
     }
 }

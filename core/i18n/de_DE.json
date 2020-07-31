@@ -46,7 +46,7 @@
         "Activer": "Aktivieren",
         "Visible": "Sichtbar",
         "Type": "Typ",
-        "Station": "Station",
+        "Station": "Bahnhof",
         "Module extérieur": "Außenmodul",
         "Module intérieur": "Innenmodul",
         "Module pluie": "Regenmodul",
@@ -56,7 +56,7 @@
         "Réception réseaux": "Netzwerkempfang",
         "Météo Netatmo": "Wetter Netatmo",
         "Nom": "Name",
-        "Option": "Option",
+        "Option": "Möglichkeit",
         "Action": "Aktion"
     },
     "plugins\/netatmoWeather\/desktop\/js\/netatmoWeather.js": {
@@ -76,5 +76,8 @@
     "plugins\/netatmoWeather\/core\/class\/netatmoWeather.class.php": {
         "Erreur sur synchro netatmo weather ": "Synchronisationsfehler Netatmo Wetter",
         "Rafraichir": "Aktualisieren"
+    },
+    "info.json": {
+        "Permet de récupérer les informations des stations météo Netatmo.": "Ermöglicht das Abrufen von Informationen von Netatmo-Wetterstationen"
     }
 }
