@@ -27,6 +27,7 @@ class netatmoWeather extends eqLogic {
 	private static $_client = null;
 	private static $_globalConfig = null;
 	public static $_widgetPossibility = array('custom' => true);
+	public static $_encryptConfigKey = array('password','password','client_id','client_secret');
 	
 	/*     * ***********************Methode static*************************** */
 	
