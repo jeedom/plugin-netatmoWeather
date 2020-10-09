@@ -1,0 +1,83 @@
+{
+    "plugins\/netatmoWeather\/plugin_info\/configuration.php": {
+        "Client ID": "ID Client",
+        "Client secret": "Chiave segreta",
+        "Nom d'utilisateur": "Nome utente",
+        "Mot de passe": "Password",
+        "Récupérer aussi les stations des amis": "",
+        "Récupérer les infos du plugin": "",
+        "Netatmo Welcome": "",
+        "Netatmo Thermostat": "",
+        "Synchroniser": "Sincronizzare",
+        "Synchroniser mes équipements": "Sincronizza con i miei dispositivi",
+        "Synchronisation réussie": "Sincronizzazione avvenuta con successo",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Welcome, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": ""
+    },
+    "plugins\/netatmoWeather\/desktop\/modal\/health.php": {
+        "Image": "Immagine",
+        "Module": "Modulo",
+        "ID": "",
+        "Batterie": "Batteria",
+        "Serial": "Serial",
+        "Firmware": "",
+        "Wifi": "",
+        "RF": "",
+        "Date création": "Data di creazione",
+        "Secteur": ""
+    },
+    "plugins\/netatmoWeather\/desktop\/php\/netatmoWeather.php": {
+        "401 - Accès non autorisé": "401 - Accesso non autorizzato",
+        "Gestion": "Gestione",
+        "Configuration": "Configurazione",
+        "Santé": "Salute",
+        "Mes Stations": "",
+        "Rechercher": "Ricercare",
+        "Vous n’avez pas encore de station Netatmo, cliquez sur configuration et cliquez sur synchroniser pour commencer": "",
+        "Configuration avancée": "Configurazione avanzata",
+        "Dupliquer": "Duplicato",
+        "Sauvegarder": "Salva",
+        "Supprimer": "Rimuovere",
+        "Equipement": "Dispositivo",
+        "Commandes": "Comandi",
+        "Nom de l'équipement météo Netatmo": "",
+        "Objet parent": "Oggetto padre",
+        "Aucun": "Nessuno",
+        "Activer": "Attivare",
+        "Visible": "Visibile",
+        "Type": "Tipo",
+        "Station": "",
+        "Module extérieur": "",
+        "Module intérieur": "",
+        "Module pluie": "",
+        "Anémomètre": "",
+        "Identifiant": "Accesso",
+        "Firmware": "",
+        "Réception réseaux": "",
+        "Météo Netatmo": "",
+        "Nom": "Nome",
+        "Option": "Opzione",
+        "Action": "Azione"
+    },
+    "plugins\/netatmoWeather\/desktop\/js\/netatmoWeather.js": {
+        "Santé NetatmoWeather": "",
+        "Nom": "Nome",
+        "Min": "",
+        "Max": "",
+        "Unité": "Unità",
+        "Afficher": "Mostra",
+        "Historiser": "Storicizza",
+        "Tester": "Prova"
+    },
+    "plugins\/netatmoWeather\/core\/ajax\/netatmoWeather.ajax.php": {
+        "401 - Accès non autorisé": "401 - Accesso non autorizzato",
+        "Aucune methode correspondante à : ": "Nessun metodo corrispondente a:"
+    },
+    "plugins\/netatmoWeather\/core\/class\/netatmoWeather.class.php": {
+        "Erreur sur synchro netatmo weather ": "",
+        "Rafraichir": "Aggiorna"
+    },
+    "info.json": {
+        "Permet de récupérer les informations des stations météo Netatmo.": ""
+    }
+}

@@ -1,19 +1,25 @@
-# 09/10/2019
+# Changelog Netatmo Station
 
-- Support PHP 7.3
-- Adaptation pour jeedom v4
-- Refonte du moteur de lien avec Netatmo
+>**Importante**
+>
+>Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
-IMPORTANT : le widget n'est plus spécifique et passe sur les widgets core (plus configurable)
+# 10/09/2019
+
+- Soporte PHP 7.3
+- Adaptación para jeedom v4
+- Rediseño del motor de enlace con Netatmo
+
+Importante : el widget ya no es específico y cambia a widgets principales (ya no se puede configurar)
 
 # 04/03/2019
 
-- Possibilité de redimensionner les widgets du plugin
+- Posibilidad de redimensionar widgets de complementos
 
 # 04/04/2018
 
-- Correction du widget anémometre
+- Corrección del widget anemómetro
 
 # 03/04/2018
 
-- Correction des images
+- Corrección de imagen

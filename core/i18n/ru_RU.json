@@ -1,0 +1,83 @@
+{
+    "plugins\/netatmoWeather\/plugin_info\/configuration.php": {
+        "Client ID": "Идентификатор клиента",
+        "Client secret": "секрет покупателя",
+        "Nom d'utilisateur": "Имя пользователя",
+        "Mot de passe": "Пароль",
+        "Récupérer aussi les stations des amis": "",
+        "Récupérer les infos du plugin": "",
+        "Netatmo Welcome": "",
+        "Netatmo Thermostat": "",
+        "Synchroniser": "Синхронизировать",
+        "Synchroniser mes équipements": "Синхронизировать мое оборудование",
+        "Synchronisation réussie": "Успешная синхронизация",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Welcome, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": ""
+    },
+    "plugins\/netatmoWeather\/desktop\/modal\/health.php": {
+        "Image": "Изображение",
+        "Module": "Модуль",
+        "ID": "Идентификатор",
+        "Batterie": "Аккумулятор",
+        "Serial": "последовательный",
+        "Firmware": "прошивки",
+        "Wifi": "",
+        "RF": "",
+        "Date création": "дата создания",
+        "Secteur": ""
+    },
+    "plugins\/netatmoWeather\/desktop\/php\/netatmoWeather.php": {
+        "401 - Accès non autorisé": "401 - Несанкционированный доступ",
+        "Gestion": "Управление",
+        "Configuration": "Конфигурация",
+        "Santé": "Здоровье",
+        "Mes Stations": "",
+        "Rechercher": "поиск",
+        "Vous n’avez pas encore de station Netatmo, cliquez sur configuration et cliquez sur synchroniser pour commencer": "",
+        "Configuration avancée": "Расширенные настройки",
+        "Dupliquer": "дубликат",
+        "Sauvegarder": "Сохранить",
+        "Supprimer": "удаление",
+        "Equipement": "Оборудование",
+        "Commandes": "Команды",
+        "Nom de l'équipement météo Netatmo": "",
+        "Objet parent": "Родительский объект",
+        "Aucun": "Нет",
+        "Activer": "активировать",
+        "Visible": "Видимый",
+        "Type": "Тип",
+        "Station": "",
+        "Module extérieur": "",
+        "Module intérieur": "",
+        "Module pluie": "",
+        "Anémomètre": "",
+        "Identifiant": "Войти",
+        "Firmware": "прошивки",
+        "Réception réseaux": "",
+        "Météo Netatmo": "",
+        "Nom": "Имя",
+        "Option": "Опция",
+        "Action": "Действие"
+    },
+    "plugins\/netatmoWeather\/desktop\/js\/netatmoWeather.js": {
+        "Santé NetatmoWeather": "",
+        "Nom": "Имя",
+        "Min": "Мин",
+        "Max": "Макс",
+        "Unité": "Устройство",
+        "Afficher": "дисплей",
+        "Historiser": "История",
+        "Tester": "Тест"
+    },
+    "plugins\/netatmoWeather\/core\/ajax\/netatmoWeather.ajax.php": {
+        "401 - Accès non autorisé": "401 - Несанкционированный доступ",
+        "Aucune methode correspondante à : ": "Aucune methode correspondante à :"
+    },
+    "plugins\/netatmoWeather\/core\/class\/netatmoWeather.class.php": {
+        "Erreur sur synchro netatmo weather ": "",
+        "Rafraichir": "Обновить"
+    },
+    "info.json": {
+        "Permet de récupérer les informations des stations météo Netatmo.": ""
+    }
+}

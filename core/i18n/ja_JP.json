@@ -1,0 +1,83 @@
+{
+    "plugins\/netatmoWeather\/plugin_info\/configuration.php": {
+        "Client ID": "顧客ID",
+        "Client secret": "秘密の買い物客",
+        "Nom d'utilisateur": "ユーザー名",
+        "Mot de passe": "パスワード",
+        "Récupérer aussi les stations des amis": "",
+        "Récupérer les infos du plugin": "",
+        "Netatmo Welcome": "",
+        "Netatmo Thermostat": "",
+        "Synchroniser": "同期",
+        "Synchroniser mes équipements": "私の機器を同期",
+        "Synchronisation réussie": "正常な同期",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Welcome, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": ""
+    },
+    "plugins\/netatmoWeather\/desktop\/modal\/health.php": {
+        "Image": "画像",
+        "Module": "モジュール",
+        "ID": "",
+        "Batterie": "バッテリー",
+        "Serial": "シリアル",
+        "Firmware": "ファームウェア",
+        "Wifi": "",
+        "RF": "",
+        "Date création": "作成日",
+        "Secteur": ""
+    },
+    "plugins\/netatmoWeather\/desktop\/php\/netatmoWeather.php": {
+        "401 - Accès non autorisé": "401-不正アクセス",
+        "Gestion": "管理",
+        "Configuration": "コンフィギュレーション",
+        "Santé": "健康",
+        "Mes Stations": "",
+        "Rechercher": "検索",
+        "Vous n’avez pas encore de station Netatmo, cliquez sur configuration et cliquez sur synchroniser pour commencer": "",
+        "Configuration avancée": "高度な構成",
+        "Dupliquer": "重複",
+        "Sauvegarder": "セーブ",
+        "Supprimer": "取り除きます",
+        "Equipement": "設備",
+        "Commandes": "コマンド",
+        "Nom de l'équipement météo Netatmo": "",
+        "Objet parent": "親オブジェクト",
+        "Aucun": "何でもありません",
+        "Activer": "アクティブ",
+        "Visible": "目に見えます",
+        "Type": "タイプ",
+        "Station": "",
+        "Module extérieur": "",
+        "Module intérieur": "",
+        "Module pluie": "",
+        "Anémomètre": "",
+        "Identifiant": "ログイン",
+        "Firmware": "ファームウェア",
+        "Réception réseaux": "",
+        "Météo Netatmo": "",
+        "Nom": "表題",
+        "Option": "オプション",
+        "Action": "アクション"
+    },
+    "plugins\/netatmoWeather\/desktop\/js\/netatmoWeather.js": {
+        "Santé NetatmoWeather": "",
+        "Nom": "表題",
+        "Min": "低いです",
+        "Max": "マックス",
+        "Unité": "団結",
+        "Afficher": "ディスプレイ",
+        "Historiser": "Historicize",
+        "Tester": "テスト"
+    },
+    "plugins\/netatmoWeather\/core\/ajax\/netatmoWeather.ajax.php": {
+        "401 - Accès non autorisé": "401-不正アクセス",
+        "Aucune methode correspondante à : ": "以下に対応するメソッドはありません："
+    },
+    "plugins\/netatmoWeather\/core\/class\/netatmoWeather.class.php": {
+        "Erreur sur synchro netatmo weather ": "",
+        "Rafraichir": "クール"
+    },
+    "info.json": {
+        "Permet de récupérer les informations des stations météo Netatmo.": ""
+    }
+}

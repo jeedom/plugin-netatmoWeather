@@ -1,0 +1,83 @@
+{
+    "plugins\/netatmoWeather\/plugin_info\/configuration.php": {
+        "Client ID": "ID pelanggan",
+        "Client secret": "Pembelanja rahasia",
+        "Nom d'utilisateur": "Nama pemakai",
+        "Mot de passe": "Password",
+        "Récupérer aussi les stations des amis": "",
+        "Récupérer les infos du plugin": "",
+        "Netatmo Welcome": "",
+        "Netatmo Thermostat": "",
+        "Synchroniser": "Menyinkronkan",
+        "Synchroniser mes équipements": "Sinkronisasi Koubachi sensor saya",
+        "Synchronisation réussie": "Sinkronisasi berhasil",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Welcome, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": ""
+    },
+    "plugins\/netatmoWeather\/desktop\/modal\/health.php": {
+        "Image": "Gambar",
+        "Module": "Modul",
+        "ID": "",
+        "Batterie": "Baterai",
+        "Serial": "Serial",
+        "Firmware": "Firmware",
+        "Wifi": "",
+        "RF": "",
+        "Date création": "Tanggal pembuatan",
+        "Secteur": ""
+    },
+    "plugins\/netatmoWeather\/desktop\/php\/netatmoWeather.php": {
+        "401 - Accès non autorisé": "401 - Akses tidak sah",
+        "Gestion": "Manajemen",
+        "Configuration": "Konfigurasi",
+        "Santé": "Bidang Kesehatan",
+        "Mes Stations": "",
+        "Rechercher": "Pencarian",
+        "Vous n’avez pas encore de station Netatmo, cliquez sur configuration et cliquez sur synchroniser pour commencer": "",
+        "Configuration avancée": "Konfigurasi lanjutan",
+        "Dupliquer": "Duplikat",
+        "Sauvegarder": "Menyimpan",
+        "Supprimer": "Menghapus",
+        "Equipement": "Peralatan",
+        "Commandes": "Perintah",
+        "Nom de l'équipement météo Netatmo": "",
+        "Objet parent": "Objek induk",
+        "Aucun": "Tak ada",
+        "Activer": "Mengaktifkan",
+        "Visible": "Terlihat",
+        "Type": "Jenis",
+        "Station": "",
+        "Module extérieur": "",
+        "Module intérieur": "",
+        "Module pluie": "",
+        "Anémomètre": "",
+        "Identifiant": "Mengidentifikasi",
+        "Firmware": "Firmware",
+        "Réception réseaux": "",
+        "Météo Netatmo": "",
+        "Nom": "Nama",
+        "Option": "Pilihan",
+        "Action": "Tindakan"
+    },
+    "plugins\/netatmoWeather\/desktop\/js\/netatmoWeather.js": {
+        "Santé NetatmoWeather": "",
+        "Nom": "Nama",
+        "Min": "",
+        "Max": "",
+        "Unité": "Satuan",
+        "Afficher": "Memenitikan",
+        "Historiser": "Historicize",
+        "Tester": "Coba"
+    },
+    "plugins\/netatmoWeather\/core\/ajax\/netatmoWeather.ajax.php": {
+        "401 - Accès non autorisé": "401 - Akses tidak sah",
+        "Aucune methode correspondante à : ": "Aucune methode correspondante à :"
+    },
+    "plugins\/netatmoWeather\/core\/class\/netatmoWeather.class.php": {
+        "Erreur sur synchro netatmo weather ": "",
+        "Rafraichir": "Dingin"
+    },
+    "info.json": {
+        "Permet de récupérer les informations des stations météo Netatmo.": ""
+    }
+}

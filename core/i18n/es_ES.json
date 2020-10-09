@@ -1,0 +1,83 @@
+{
+    "plugins\/netatmoWeather\/plugin_info\/configuration.php": {
+        "Client ID": "ID del cliente",
+        "Client secret": "Client secret",
+        "Nom d'utilisateur": "Nombre de usuario",
+        "Mot de passe": "Contraseña",
+        "Récupérer aussi les stations des amis": "También consigue estaciones de amigos",
+        "Récupérer les infos du plugin": "Obtener información del plugin",
+        "Netatmo Welcome": "Netatmo Welcome",
+        "Netatmo Thermostat": "Netatmo Thermostat",
+        "Synchroniser": "Sincronizar",
+        "Synchroniser mes équipements": "Sincronizar mi equipo",
+        "Synchronisation réussie": "Sincronización exitosa",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Welcome, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "Esto recuperará los identificadores configurados en el plugin Welcome de Netatmo, será necesario guardar antes de comenzar la sincronización. ¿Quieres proceder?",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "Esto recuperará los identificadores configurados en el plugin Thermostat de Netatmo, será necesario guardar antes de comenzar la sincronización. ¿Quieres proceder?"
+    },
+    "plugins\/netatmoWeather\/desktop\/modal\/health.php": {
+        "Image": "Imagen",
+        "Module": "Modulo",
+        "ID": "Identificación",
+        "Batterie": "Batería",
+        "Serial": "Serial",
+        "Firmware": "Firmware",
+        "Wifi": "Wifi",
+        "RF": "RF",
+        "Date création": "Fecha de creación",
+        "Secteur": "Sector"
+    },
+    "plugins\/netatmoWeather\/desktop\/php\/netatmoWeather.php": {
+        "401 - Accès non autorisé": "401 - Acceso no autorizado",
+        "Gestion": "Gestión",
+        "Configuration": "Configuración",
+        "Santé": "Salud",
+        "Mes Stations": "Mis estaciones",
+        "Rechercher": "Buscar",
+        "Vous n’avez pas encore de station Netatmo, cliquez sur configuration et cliquez sur synchroniser pour commencer": "Aún no tiene una estación Netatmo, haga clic en configuración y haga clic en sincronizar para comenzar",
+        "Configuration avancée": "Configuración avanzada",
+        "Dupliquer": "Duplicar",
+        "Sauvegarder": "Guardar",
+        "Supprimer": "Borrar",
+        "Equipement": "Dispositivos",
+        "Commandes": "Comandos",
+        "Nom de l'équipement météo Netatmo": "Nombre del equipo meteorológico Netatmo",
+        "Objet parent": "Objeto padre",
+        "Aucun": "Ninguna",
+        "Activer": "Activar",
+        "Visible": "Visible",
+        "Type": "Tipo",
+        "Station": "Estacion",
+        "Module extérieur": "Módulo al aire libre",
+        "Module intérieur": "Módulo interior",
+        "Module pluie": "Módulo de lluvia",
+        "Anémomètre": "Anemómetro",
+        "Identifiant": "Identificador",
+        "Firmware": "Firmware",
+        "Réception réseaux": "Recepción de red",
+        "Météo Netatmo": "El tiempo Netatmo",
+        "Nom": "Nombre",
+        "Option": "Opción",
+        "Action": "Acción"
+    },
+    "plugins\/netatmoWeather\/desktop\/js\/netatmoWeather.js": {
+        "Santé NetatmoWeather": "Salud NetatmoWeather",
+        "Nom": "Nombre",
+        "Min": "Bajo",
+        "Max": "Max",
+        "Unité": "Unidad",
+        "Afficher": "Mostrar",
+        "Historiser": "Guardar historial",
+        "Tester": "Probar"
+    },
+    "plugins\/netatmoWeather\/core\/ajax\/netatmoWeather.ajax.php": {
+        "401 - Accès non autorisé": "401 - Acceso no autorizado",
+        "Aucune methode correspondante à : ": "Ningún método correspondiente a:"
+    },
+    "plugins\/netatmoWeather\/core\/class\/netatmoWeather.class.php": {
+        "Erreur sur synchro netatmo weather ": "Error de sincronización netatmo weather",
+        "Rafraichir": "Refrescar"
+    },
+    "info.json": {
+        "Permet de récupérer les informations des stations météo Netatmo.": "Le permite recuperar información de las estaciones meteorológicas de Netatmo"
+    }
+}
