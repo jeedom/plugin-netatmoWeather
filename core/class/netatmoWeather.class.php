@@ -85,7 +85,7 @@ class netatmoWeather extends eqLogic {
 				continue;
 			}
 			if(!isset($device['station_name']) || $device['station_name'] == ''){
-				$device['station_name'] = $device['_id';
+				$device['station_name'] = $device['_id'];
 			}
 			if (!is_object($eqLogic)) {
 				$eqLogic = new netatmoWeather();
@@ -102,7 +102,7 @@ class netatmoWeather extends eqLogic {
 		foreach ($devicelist['modules'] as &$module) {
 			$eqLogic = eqLogic::byLogicalId($module['_id'], 'netatmoWeather');
 			if(!isset($module['module_name']) || $module['module_name'] == ''){
-				$module['module_name'] = $module['_id';
+				$module['module_name'] = $module['_id'];
 			}
 			if (!is_object($eqLogic)) {
 				$eqLogic = new netatmoWeather();
