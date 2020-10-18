@@ -79,10 +79,13 @@ class netatmoWeather extends eqLogic {
 		$getFriends = config::byKey('getFriendsDevices', 'netatmoWeather', 0);
 		$devicelist = self::getClient()->api("devicelist", "POST", array("app_type" => 'app_station'));
 		log::add('netatmoWeather', 'debug', json_encode($devicelist));
-		foreach ($devicelist['devices'] as $device) {
+		foreach ($devicelist['devices'] as &$device) {
 			$eqLogic = eqLogic::byLogicalId($device['_id'], 'netatmoWeather');
 			if (isset($device['read_only']) && $device['read_only'] === true && ($getFriends == '' || $getFriends == 0)) {
 				continue;
+			}
+			if(!isset($device['station_name']) || $device['station_name'] == ''){
+				$device['station_name'] = $device['_id';
 			}
 			if (!is_object($eqLogic)) {
 				$eqLogic = new netatmoWeather();
@@ -96,8 +99,11 @@ class netatmoWeather extends eqLogic {
 			$eqLogic->setConfiguration('type', $device['type']);
 			$eqLogic->save();
 		}
-		foreach ($devicelist['modules'] as $module) {
+		foreach ($devicelist['modules'] as &$module) {
 			$eqLogic = eqLogic::byLogicalId($module['_id'], 'netatmoWeather');
+			if(!isset($module['module_name']) || $module['module_name'] == ''){
+				$module['module_name'] = $module['_id';
+			}
 			if (!is_object($eqLogic)) {
 				$eqLogic = new netatmoWeather();
 				$eqLogic->setName($module['module_name']);
