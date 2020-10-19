@@ -2,6 +2,8 @@
     "changelog.md": {
         "Changelog Netatmo Station": "Changelog Netatmo Station",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto",
+        "19\/10\/2020": "19\/10\/2020",
+        "Correction de bug": "Corrección de errores",
         "09\/10\/2019": "10\/09\/2019",
         "Support PHP 7.3": "Soporte PHP 7.3",
         "Adaptation pour jeedom v4": "Adaptación para jeedom v4",
