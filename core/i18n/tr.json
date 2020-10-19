@@ -76,5 +76,8 @@
     "plugins\/netatmoWeather\/core\/class\/netatmoWeather.class.php": {
         "Erreur sur synchro netatmo weather ": "",
         "Rafraichir": "Yenile"
+    },
+    "info.json": {
+        "Permet de récupérer les informations des stations météo Netatmo.": ""
     }
 }
