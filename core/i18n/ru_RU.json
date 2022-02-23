@@ -4,15 +4,15 @@
         "Client secret": "секрет покупателя",
         "Nom d'utilisateur": "Имя пользователя",
         "Mot de passe": "Пароль",
-        "Récupérer aussi les stations des amis": "",
-        "Récupérer les infos du plugin": "",
-        "Netatmo Welcome": "",
-        "Netatmo Thermostat": "",
+        "Récupérer aussi les stations des amis": "Récupérer aussi les stations des amis",
+        "Récupérer les infos du plugin": "Récupérer les infos du plugin",
+        "Netatmo Welcome": "Netatmo Welcome",
+        "Netatmo Thermostat": "Netatmo Thermostat",
         "Synchroniser": "Синхронизировать",
         "Synchroniser mes équipements": "Синхронизировать мое оборудование",
         "Synchronisation réussie": "Успешная синхронизация",
-        "Cela récupérera les identifiants configurés dans le plugin Netatmo Welcome, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "",
-        "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": ""
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Welcome, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "Cela récupérera les identifiants configurés dans le plugin Netatmo Welcome, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ?",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ?"
     },
     "plugins\/netatmoWeather\/desktop\/modal\/health.php": {
         "Image": "Изображение",
@@ -21,46 +21,46 @@
         "Batterie": "Аккумулятор",
         "Serial": "последовательный",
         "Firmware": "прошивки",
-        "Wifi": "",
-        "RF": "",
+        "Wifi": "Wifi",
+        "RF": "RF",
         "Date création": "дата создания",
-        "Secteur": ""
+        "Secteur": "Secteur"
     },
     "plugins\/netatmoWeather\/desktop\/php\/netatmoWeather.php": {
         "401 - Accès non autorisé": "401 - Несанкционированный доступ",
         "Gestion": "Управление",
         "Configuration": "Конфигурация",
         "Santé": "Здоровье",
-        "Mes Stations": "",
+        "Mes Stations": "Mes Stations",
         "Rechercher": "поиск",
-        "Vous n’avez pas encore de station Netatmo, cliquez sur configuration et cliquez sur synchroniser pour commencer": "",
+        "Vous n’avez pas encore de station Netatmo, cliquez sur configuration et cliquez sur synchroniser pour commencer": "Vous n’avez pas encore de station Netatmo, cliquez sur configuration et cliquez sur synchroniser pour commencer",
         "Configuration avancée": "Расширенные настройки",
         "Dupliquer": "дубликат",
         "Sauvegarder": "Сохранить",
         "Supprimer": "удаление",
         "Equipement": "Оборудование",
         "Commandes": "Команды",
-        "Nom de l'équipement météo Netatmo": "",
+        "Nom de l'équipement météo Netatmo": "Nom de l'équipement météo Netatmo",
         "Objet parent": "Родительский объект",
         "Aucun": "Нет",
         "Activer": "активировать",
         "Visible": "Видимый",
         "Type": "Тип",
-        "Station": "",
-        "Module extérieur": "",
-        "Module intérieur": "",
-        "Module pluie": "",
-        "Anémomètre": "",
+        "Station": "Station",
+        "Module extérieur": "Module extérieur",
+        "Module intérieur": "Module intérieur",
+        "Module pluie": "Module pluie",
+        "Anémomètre": "Anémomètre",
         "Identifiant": "Войти",
         "Firmware": "прошивки",
-        "Réception réseaux": "",
-        "Météo Netatmo": "",
+        "Réception réseaux": "Réception réseaux",
+        "Météo Netatmo": "Météo Netatmo",
         "Nom": "Имя",
         "Option": "Опция",
         "Action": "Действие"
     },
     "plugins\/netatmoWeather\/desktop\/js\/netatmoWeather.js": {
-        "Santé NetatmoWeather": "",
+        "Santé NetatmoWeather": "Santé NetatmoWeather",
         "Nom": "Имя",
         "Min": "Мин",
         "Max": "Макс",
@@ -74,10 +74,10 @@
         "Aucune methode correspondante à : ": "Aucune methode correspondante à :"
     },
     "plugins\/netatmoWeather\/core\/class\/netatmoWeather.class.php": {
-        "Erreur sur synchro netatmo weather ": "",
+        "Erreur sur synchro netatmo weather ": "Erreur sur synchro netatmo weather",
         "Rafraichir": "Обновить"
     },
     "info.json": {
-        "Permet de récupérer les informations des stations météo Netatmo.": ""
+        "Permet de récupérer les informations des stations météo Netatmo.": "Permet de récupérer les informations des stations météo Netatmo"
     }
 }

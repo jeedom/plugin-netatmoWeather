@@ -4,15 +4,15 @@
         "Client secret": "Müşteri gizli şifre",
         "Nom d'utilisateur": "Kullanıcı adı",
         "Mot de passe": "Şifre",
-        "Récupérer aussi les stations des amis": "",
-        "Récupérer les infos du plugin": "",
-        "Netatmo Welcome": "",
-        "Netatmo Thermostat": "",
+        "Récupérer aussi les stations des amis": "Récupérer aussi les stations des amis",
+        "Récupérer les infos du plugin": "Récupérer les infos du plugin",
+        "Netatmo Welcome": "Netatmo Welcome",
+        "Netatmo Thermostat": "Netatmo Thermostat",
         "Synchroniser": "Senkeronize et",
         "Synchroniser mes équipements": "Cihazlarımı senkronize et",
         "Synchronisation réussie": "Sekronizasyon başarılı",
-        "Cela récupérera les identifiants configurés dans le plugin Netatmo Welcome, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "",
-        "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": ""
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Welcome, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "Cela récupérera les identifiants configurés dans le plugin Netatmo Welcome, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ?",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ?"
     },
     "plugins\/netatmoWeather\/desktop\/modal\/health.php": {
         "Image": "Fotoğraf",
@@ -20,47 +20,47 @@
         "ID": "Kimlik",
         "Batterie": "Batarya",
         "Serial": "Seri numarasi",
-        "Firmware": "",
-        "Wifi": "",
-        "RF": "",
+        "Firmware": "Firmware",
+        "Wifi": "Wifi",
+        "RF": "RF",
         "Date création": "Oluşturma tarihi",
-        "Secteur": ""
+        "Secteur": "Secteur"
     },
     "plugins\/netatmoWeather\/desktop\/php\/netatmoWeather.php": {
         "401 - Accès non autorisé": "401 - Yetkisiz erişim",
         "Gestion": "Idare",
         "Configuration": "Ayar",
         "Santé": "Sağlık",
-        "Mes Stations": "",
+        "Mes Stations": "Mes Stations",
         "Rechercher": "Arayın",
-        "Vous n’avez pas encore de station Netatmo, cliquez sur configuration et cliquez sur synchroniser pour commencer": "",
+        "Vous n’avez pas encore de station Netatmo, cliquez sur configuration et cliquez sur synchroniser pour commencer": "Vous n’avez pas encore de station Netatmo, cliquez sur configuration et cliquez sur synchroniser pour commencer",
         "Configuration avancée": "Gelişmiş ayarlar",
         "Dupliquer": "Kopyala",
         "Sauvegarder": "Kaydet",
         "Supprimer": "Sil",
         "Equipement": "Cihaz",
         "Commandes": "Komutalar",
-        "Nom de l'équipement météo Netatmo": "",
+        "Nom de l'équipement météo Netatmo": "Nom de l'équipement météo Netatmo",
         "Objet parent": "Üst nesne",
         "Aucun": "Hiçbir",
         "Activer": "Etkinleştir",
         "Visible": "Görülebilir",
         "Type": "Çeşit",
-        "Station": "",
-        "Module extérieur": "",
-        "Module intérieur": "",
-        "Module pluie": "",
-        "Anémomètre": "",
+        "Station": "Station",
+        "Module extérieur": "Module extérieur",
+        "Module intérieur": "Module intérieur",
+        "Module pluie": "Module pluie",
+        "Anémomètre": "Anémomètre",
         "Identifiant": "Kimlik numara",
-        "Firmware": "",
-        "Réception réseaux": "",
-        "Météo Netatmo": "",
+        "Firmware": "Firmware",
+        "Réception réseaux": "Réception réseaux",
+        "Météo Netatmo": "Météo Netatmo",
         "Nom": "İsim",
         "Option": "Opsiyon",
         "Action": "Eylem"
     },
     "plugins\/netatmoWeather\/desktop\/js\/netatmoWeather.js": {
-        "Santé NetatmoWeather": "",
+        "Santé NetatmoWeather": "Santé NetatmoWeather",
         "Nom": "İsim",
         "Min": "Minimum",
         "Max": "Maximum",
@@ -74,10 +74,10 @@
         "Aucune methode correspondante à : ": "Aşağıdakilere karşılık gelen bir yöntem yok:"
     },
     "plugins\/netatmoWeather\/core\/class\/netatmoWeather.class.php": {
-        "Erreur sur synchro netatmo weather ": "",
+        "Erreur sur synchro netatmo weather ": "Erreur sur synchro netatmo weather",
         "Rafraichir": "Yenile"
     },
     "info.json": {
-        "Permet de récupérer les informations des stations météo Netatmo.": ""
+        "Permet de récupérer les informations des stations météo Netatmo.": "Permet de récupérer les informations des stations météo Netatmo"
     }
 }
