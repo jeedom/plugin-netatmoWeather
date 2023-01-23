@@ -2,6 +2,8 @@
     "changelog.md": {
         "Changelog Netatmo Station": "Changelog Netatmo Station",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto",
+        "19\/10\/2020": "19\/10\/2020",
+        "Correction de bug": "Corrección de errores",
         "09\/10\/2019": "10\/09\/2019",
         "Support PHP 7.3": "Soporte PHP 7.3",
         "Adaptation pour jeedom v4": "Adaptación para jeedom v4",
@@ -37,6 +39,7 @@
         "permet de synchroniser Jeedom avec votre compte Netamo pour découvrir automatiquement vos équipements Netamo": "le permite sincronizar Jeedom con su cuenta de Netamo para descubrir automáticamente su equipo Netamo",
         "A faire après avoir sauvegardé les paramètres précedent": "Para hacer después de guardar los parámetros anteriores",
         "Recupération des informations de connexion": "Recuperando información de conexión",
+        "next_url=https%3A%2F%2Fdev.netatmo.com%2Fbusiness-showcase": "next_url=https%3A%2F%2Fdev.netatmo.com%2Fnegocio-exhibición",
         "Une fois dessus cliquez sur start": "Una vez que haga clic en Inicio",
         "Puis sur \"create an app": "Luego en \"crear una aplicación",
         "Identifiez vous, avec votre mail et mot de passe": "Identifícate con tu correo electrónico y contraseña",
