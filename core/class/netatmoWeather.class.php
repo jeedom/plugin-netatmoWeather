@@ -119,7 +119,7 @@ class netatmoWeather extends eqLogic {
 		}
 	}
 	
-	public static function cron15() {
+	public static function cron10() {
 		try {
 			try {
 				$devicelist = self::getClient()->api("devicelist", "POST", array("app_type" => 'app_station'));
