@@ -230,7 +230,7 @@ class netatmoWeatherCmd extends cmd {
 	
 	public function execute($_options = array()) {
 		if ($this->getLogicalId() == 'refresh') {
-			netatmoWeather::cron15();
+			netatmoWeather::cron10();
 		}
 	}
 	

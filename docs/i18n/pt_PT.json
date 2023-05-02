@@ -2,6 +2,8 @@
     "changelog.md": {
         "Changelog Netatmo Station": "Changelog Netatmo Station",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto",
+        "23\/01\/2023": "23\/01\/2023",
+        "Passage d'une mise à jour des données toute les 10min": "Passagem de uma atualização de dados a cada 10min",
         "19\/10\/2020": "19\/10\/2020",
         "Correction de bug": "Bug fix",
         "09\/10\/2019": "09\/09\/2019",
