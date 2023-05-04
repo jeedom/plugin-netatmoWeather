@@ -28,7 +28,7 @@ try {
 
 	if (init('action') == 'syncWithNetatmo') {
 		netatmoWeather::syncWithNetatmo();
-		netatmoWeather::cron15();
+		netatmoWeather::cron10();
 		ajax::success();
 	}
 
