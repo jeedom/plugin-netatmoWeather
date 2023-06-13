@@ -43,6 +43,7 @@
         "Nom de l'équipement météo Netatmo": "Name of the Netatmo weather equipment",
         "Objet parent": "Parent object",
         "Aucun": "None",
+        "Catégorie": "Category",
         "Activer": "Activate",
         "Visible": "Visible",
         "Type": "Type",
@@ -57,6 +58,7 @@
         "Météo Netatmo": "Netatmo Weather",
         "Nom": "Name",
         "Option": "Option",
+        "Etat": "State",
         "Action": "Action"
     },
     "plugins\/netatmoWeather\/desktop\/js\/netatmoWeather.js": {

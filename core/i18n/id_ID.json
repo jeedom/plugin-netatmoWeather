@@ -43,6 +43,7 @@
         "Nom de l'équipement météo Netatmo": "Nom de l'équipement météo Netatmo",
         "Objet parent": "Objek induk",
         "Aucun": "Tak ada",
+        "Catégorie": "Catégorie",
         "Activer": "Mengaktifkan",
         "Visible": "Terlihat",
         "Type": "Jenis",
@@ -57,6 +58,7 @@
         "Météo Netatmo": "Météo Netatmo",
         "Nom": "Nama",
         "Option": "Pilihan",
+        "Etat": "Etat",
         "Action": "Tindakan"
     },
     "plugins\/netatmoWeather\/desktop\/js\/netatmoWeather.js": {

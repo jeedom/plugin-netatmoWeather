@@ -43,6 +43,7 @@
         "Nom de l'équipement météo Netatmo": "Nom de l'équipement météo Netatmo",
         "Objet parent": "Üst nesne",
         "Aucun": "Hiçbir",
+        "Catégorie": "Catégorie",
         "Activer": "Etkinleştir",
         "Visible": "Görülebilir",
         "Type": "Çeşit",
@@ -57,6 +58,7 @@
         "Météo Netatmo": "Météo Netatmo",
         "Nom": "İsim",
         "Option": "Opsiyon",
+        "Etat": "Etat",
         "Action": "Eylem"
     },
     "plugins\/netatmoWeather\/desktop\/js\/netatmoWeather.js": {
