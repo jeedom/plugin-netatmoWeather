@@ -9,7 +9,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 
 <div class="row row-overflow">
 	<div class="col-xs-12 eqLogicThumbnailDisplay">
-		<legend><i class="fa fa-cog"></i>  {{Gestion}}</legend>
+		<legend><i class="fa fa-cog"></i> {{Gestion}}</legend>
 		<div class="eqLogicThumbnailContainer">
 			<div class="cursor eqLogicAction logoPrimary" data-action="gotoPluginConf">
 				<i class="fa fa-wrench"></i>
@@ -28,12 +28,12 @@ $eqLogics = eqLogic::byType($plugin->getId());
 		if (count($eqLogics) == 0) {
 			echo "<br/><br/><br/><center><span style='color:#767676;font-size:1.2em;font-weight: bold;'>{{Vous n’avez pas encore de station Netatmo, cliquez sur configuration et cliquez sur synchroniser pour commencer}}</span></center>";
 		} else {
-			?>
+		?>
 			<div class="eqLogicThumbnailContainer">
 				<?php
 				foreach ($eqLogics as $eqLogic) {
 					$opacity = ($eqLogic->getIsEnable()) ? '' : 'disableCard';
-					echo '<div class="eqLogicDisplayCard cursor '.$opacity.'" data-eqLogic_id="' . $eqLogic->getId() . '">';
+					echo '<div class="eqLogicDisplayCard cursor ' . $opacity . '" data-eqLogic_id="' . $eqLogic->getId() . '">';
 					if ($eqLogic->getConfiguration('type', '') != '') {
 						echo '<img src="plugins/netatmoWeather/core/img/' . $eqLogic->getConfiguration('type', '') . '.png" />';
 					} else {
@@ -61,7 +61,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 		</ul>
 		<div class="tab-content" style="height:calc(100% - 50px);overflow:auto;overflow-x: hidden;">
 			<div role="tabpanel" class="tab-pane active" id="eqlogictab">
-				<br/>
+				<br />
 				<div class="row">
 					<div class="col-sm-6">
 						<form class="form-horizontal">
@@ -70,11 +70,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									<label class="col-sm-4 control-label">{{Nom de l'équipement météo Netatmo}}</label>
 									<div class="col-sm-6">
 										<input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
-										<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement météo Netatmo}}"/>
+										<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement météo Netatmo}}" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-4 control-label" >{{Objet parent}}</label>
+									<label class="col-sm-4 control-label">{{Objet parent}}</label>
 									<div class="col-sm-6">
 										<select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
 											<option value="">{{Aucun}}</option>
@@ -91,8 +91,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<div class="form-group">
 									<label class="col-sm-4 control-label"></label>
 									<div class="col-sm-8">
-										<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
-										<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
+										<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked />{{Activer}}</label>
+										<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked />{{Visible}}</label>
 									</div>
 								</div>
 								<div class="form-group">
@@ -143,11 +143,13 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				</div>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="commandtab">
-				<legend><i class="fa fa-list-alt"></i>  {{Météo Netatmo}}</legend>
+				<legend><i class="fa fa-list-alt"></i> {{Météo Netatmo}}</legend>
 				<table id="table_cmd" class="table table-bordered table-condensed">
 					<thead>
 						<tr>
-							<th>{{Nom}}</th><th style="width: 300px;">{{Option}}</th><th>{{Action}}</th>
+							<th>{{Nom}}</th>
+							<th style="width: 300px;">{{Option}}</th>
+							<th>{{Action}}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -158,5 +160,5 @@ $eqLogics = eqLogic::byType($plugin->getId());
 	</div>
 </div>
 
-<?php include_file('desktop', 'netatmoWeather', 'js', 'netatmoWeather');?>
-<?php include_file('core', 'plugin.template', 'js');?>
+<?php include_file('desktop', 'netatmoWeather', 'js', 'netatmoWeather'); ?>
+<?php include_file('core', 'plugin.template', 'js'); ?>
