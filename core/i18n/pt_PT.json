@@ -43,6 +43,7 @@
         "Nom de l'équipement météo Netatmo": "Nome do equipamento meteorológico Netatmo",
         "Objet parent": "Objeto pai",
         "Aucun": "Nemhum",
+        "Catégorie": "Categoria",
         "Activer": "Ativar",
         "Visible": "Visivél",
         "Type": "Tipo",
@@ -57,6 +58,7 @@
         "Météo Netatmo": "Tempo Netatmo",
         "Nom": "Nome",
         "Option": "Opção",
+        "Etat": "Estado",
         "Action": "Ação"
     },
     "plugins\/netatmoWeather\/desktop\/js\/netatmoWeather.js": {
