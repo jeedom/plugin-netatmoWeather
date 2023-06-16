@@ -190,7 +190,7 @@ class netatmoWeather extends eqLogic {
 	/*     * *********************Methode d'instance************************* */
 
 	public function postSave() {
-		if ($this->getConfiguration('applyType') != $this->getConfiguration('type')) {
+		if (strtolower($this->getConfiguration('applyType')) != strtolower($this->getConfiguration('type'))) {
 			$this->applyType();
 		}
 		$cmd = $this->getCmd(null, 'refresh');
