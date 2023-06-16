@@ -23,14 +23,14 @@ if (!class_exists('netatmoApi')) {
 }
 class netatmoWeather extends eqLogic {
 	/*     * *************************Attributs****************************** */
-	
+
 	private static $_client = null;
 	private static $_globalConfig = null;
 	public static $_widgetPossibility = array('custom' => true);
-	public static $_encryptConfigKey = array('password','client_secret');
-	
+	public static $_encryptConfigKey = array('password', 'client_secret');
+
 	/*     * ***********************Methode static*************************** */
-	
+
 	public static function getClient() {
 		if (self::$_client == null) {
 			self::$_client = new netatmoApi(array(
@@ -43,38 +43,38 @@ class netatmoWeather extends eqLogic {
 		}
 		return self::$_client;
 	}
-	
-	public static function getGConfig($_key){
-		$keys = explode('::',$_key);
-		if(self::$_globalConfig == null){
-			self::$_globalConfig = json_decode(file_get_contents(__DIR__.'/../config/config.json'),true);
+
+	public static function getGConfig($_key) {
+		$keys = explode('::', $_key);
+		if (self::$_globalConfig == null) {
+			self::$_globalConfig = json_decode(file_get_contents(__DIR__ . '/../config/config.json'), true);
 		}
 		$return = self::$_globalConfig;
 		foreach ($keys as $key) {
-			if(!isset($return[$key])){
+			if (!isset($return[$key])) {
 				return '';
 			}
 			$return = $return[$key];
 		}
 		return $return;
 	}
-	
+
 	public static function getFromWelcome() {
 		$client_id = config::byKey('client_id', 'netatmoWelcome');
 		$client_secret = config::byKey('client_secret', 'netatmoWelcome');
 		$username = config::byKey('username', 'netatmoWelcome');
 		$password = config::byKey('password', 'netatmoWelcome');
-		return (array($client_id,$client_secret,$username,$password));
+		return (array($client_id, $client_secret, $username, $password));
 	}
-	
+
 	public static function getFromThermostat() {
 		$client_id = config::byKey('client_id', 'netatmoThermostat');
 		$client_secret = config::byKey('client_secret', 'netatmoThermostat');
 		$username = config::byKey('username', 'netatmoThermostat');
 		$password = config::byKey('password', 'netatmoThermostat');
-		return (array($client_id,$client_secret,$username,$password));
+		return (array($client_id, $client_secret, $username, $password));
 	}
-	
+
 	public static function syncWithNetatmo() {
 		$getFriends = config::byKey('getFriendsDevices', 'netatmoWeather', 0);
 		$devicelist = self::getClient()->api("devicelist", "POST", array("app_type" => 'app_station'));
@@ -84,7 +84,7 @@ class netatmoWeather extends eqLogic {
 			if (isset($device['read_only']) && $device['read_only'] === true && ($getFriends == '' || $getFriends == 0)) {
 				continue;
 			}
-			if(!isset($device['station_name']) || $device['station_name'] == ''){
+			if (!isset($device['station_name']) || $device['station_name'] == '') {
 				$device['station_name'] = $device['_id'];
 			}
 			if (!is_object($eqLogic)) {
@@ -101,7 +101,7 @@ class netatmoWeather extends eqLogic {
 		}
 		foreach ($devicelist['modules'] as &$module) {
 			$eqLogic = eqLogic::byLogicalId($module['_id'], 'netatmoWeather');
-			if(!isset($module['module_name']) || $module['module_name'] == ''){
+			if (!isset($module['module_name']) || $module['module_name'] == '') {
 				$module['module_name'] = $module['_id'];
 			}
 			if (!is_object($eqLogic)) {
@@ -111,14 +111,14 @@ class netatmoWeather extends eqLogic {
 				$eqLogic->setCategory('heating', 1);
 				$eqLogic->setIsVisible(1);
 			}
-			$eqLogic->setConfiguration('battery_type', self::getGConfig($module['type'].'::bat_type'));
+			$eqLogic->setConfiguration('battery_type', self::getGConfig($module['type'] . '::bat_type'));
 			$eqLogic->setEqType_name('netatmoWeather');
 			$eqLogic->setLogicalId($module['_id']);
 			$eqLogic->setConfiguration('type', $module['type']);
 			$eqLogic->save();
 		}
 	}
-	
+
 	public static function cron10() {
 		try {
 			try {
@@ -142,7 +142,7 @@ class netatmoWeather extends eqLogic {
 				$eqLogic->setConfiguration('firmware', $device['firmware']);
 				$eqLogic->setConfiguration('wifi_status', $device['wifi_status']);
 				$eqLogic->save(true);
-				if(isset($device['dashboard_data']) && count($device['dashboard_data']) > 0){
+				if (isset($device['dashboard_data']) && count($device['dashboard_data']) > 0) {
 					foreach ($device['dashboard_data'] as $key => $value) {
 						if ($key == 'max_temp') {
 							$collectDate = date('Y-m-d H:i:s', $device['dashboard_data']['date_max_temp']);
@@ -153,21 +153,21 @@ class netatmoWeather extends eqLogic {
 						} else {
 							$collectDate = date('Y-m-d H:i:s', $device['dashboard_data']['time_utc']);
 						}
-						$eqLogic->checkAndUpdateCmd(strtolower($key),$value,$collectDate);
+						$eqLogic->checkAndUpdateCmd(strtolower($key), $value, $collectDate);
 					}
 				}
 			}
-			if(isset($devicelist['modules']) &&  count($devicelist['modules']) > 0){
+			if (isset($devicelist['modules']) &&  count($devicelist['modules']) > 0) {
 				foreach ($devicelist['modules'] as $module) {
 					$eqLogic = eqLogic::byLogicalId($module["_id"], 'netatmoWeather');
-					if(!is_object($eqLogic)){
+					if (!is_object($eqLogic)) {
 						continue;
 					}
 					$eqLogic->setConfiguration('rf_status', $module['rf_status']);
 					$eqLogic->setConfiguration('firmware', $module['firmware']);
 					$eqLogic->save(true);
-					$eqLogic->batteryStatus(round(($module['battery_vp'] - self::getGConfig($module['type'].'::bat_min')) / (self::getGConfig($module['type'].'::bat_max') - self::getGConfig($module['type'].'::bat_min')) * 100, 0));
-					
+					$eqLogic->batteryStatus(round(($module['battery_vp'] - self::getGConfig($module['type'] . '::bat_min')) / (self::getGConfig($module['type'] . '::bat_max') - self::getGConfig($module['type'] . '::bat_min')) * 100, 0));
+
 					foreach ($module['dashboard_data'] as $key => $value) {
 						if ($key == 'max_temp') {
 							$collectDate = date('Y-m-d H:i:s', $module['dashboard_data']['date_max_temp']);
@@ -178,7 +178,7 @@ class netatmoWeather extends eqLogic {
 						} else {
 							$collectDate = date('Y-m-d H:i:s', $module['dashboard_data']['time_utc']);
 						}
-						$eqLogic->checkAndUpdateCmd(strtolower($key),$value,$collectDate);
+						$eqLogic->checkAndUpdateCmd(strtolower($key), $value, $collectDate);
 					}
 				}
 			}
@@ -186,9 +186,9 @@ class netatmoWeather extends eqLogic {
 			return '';
 		}
 	}
-	
+
 	/*     * *********************Methode d'instance************************* */
-	
+
 	public function postSave() {
 		if ($this->getConfiguration('applyType') != $this->getConfiguration('type')) {
 			$this->applyType();
@@ -204,13 +204,13 @@ class netatmoWeather extends eqLogic {
 		$cmd->setSubType('other');
 		$cmd->save();
 	}
-	
-	public function applyType(){
+
+	public function applyType() {
 		$this->setConfiguration('applyType', $this->getConfiguration('type'));
-		$supported_commands = self::getGConfig($this->getConfiguration('type').'::cmd');
+		$supported_commands = self::getGConfig($this->getConfiguration('type') . '::cmd');
 		$commands = array('commands');
 		foreach ($supported_commands as $supported_command) {
-			$commands['commands'][] = self::getGConfig('commands::'.$supported_command);
+			$commands['commands'][] = self::getGConfig('commands::' . $supported_command);
 		}
 		$this->import($commands);
 	}
@@ -218,23 +218,21 @@ class netatmoWeather extends eqLogic {
 
 class netatmoWeatherCmd extends cmd {
 	/*     * *************************Attributs****************************** */
-	
-	
+
+
 	/*     * ***********************Methode static*************************** */
-	
+
 	/*     * *********************Methode d'instance************************* */
-	
+
 	public function dontRemoveCmd() {
 		return true;
 	}
-	
+
 	public function execute($_options = array()) {
 		if ($this->getLogicalId() == 'refresh') {
 			netatmoWeather::cron10();
 		}
 	}
-	
+
 	/*     * **********************Getteur Setteur*************************** */
 }
-
-?>
