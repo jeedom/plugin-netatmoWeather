@@ -2,10 +2,11 @@
     "changelog.md": {
         "Changelog Netatmo Station": "Changelog Netatmo Station",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text",
-        "13\/06\/2023": "06\/13\/2023",
+        "16\/06\/2023": "06\/16\/2023",
         "Version minimum du core requise": "Minimum core version required",
         "Mise à jours liste des commandes pour Jeedom v4.3": "Updated list of commands for Jeedom v4.3",
         "Corrections & optimisations mineures dans l'écran de gestion des équipements": "Minor fixes & optimizations in the equipment management screen",
+        "Correction d'un bug qui écrasait les configurations des commandes lors de la mise à jour du plugin": "Fixed a bug that overwritten command configurations when updating the plugin",
         "04\/05\/2023": "04\/05\/2023",
         "Correction de bugs": "Bugfix",
         "02\/05\/2023": "02\/05\/2023",
